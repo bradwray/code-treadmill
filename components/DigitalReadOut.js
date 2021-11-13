@@ -25,8 +25,7 @@ const Label = styled.span`
 
 const Line = styled.hr`
    position: absolute;
-   width: 90px;
-
+   width: 110px;
    border: 0;
    transform: translateY(${(props) => props.bump}px);
    height: 2px;
@@ -35,7 +34,7 @@ const Line = styled.hr`
 `;
 
 const OuterOutline = styled.div`
-   height: 76px;
+   height: 50px;
    margin: 2px;
    width: 90px;
    border: 2px solid #aaa;

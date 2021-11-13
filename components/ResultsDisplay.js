@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const DisplayContainer = styled.div`
    width: 380px;
-   height: 136px;
+   height: 100px;
    border: 1px solid #666;
    border-radius: 10px;
    background-color: #111;

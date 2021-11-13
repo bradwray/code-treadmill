@@ -2,13 +2,10 @@ import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { Component, Fragment } from 'react';
 
 import CodePuzzle from './codePuzzle.js';
-import { Spring } from 'react-spring';
+import { Spring } from 'react-spring/';
 import styled from 'styled-components';
 
 // import babel from "Babel";
-
-
-
 
 const theme = {
    plain: {
@@ -18,7 +15,7 @@ const theme = {
 };
 
 const SlideContainer = styled.div`
-   border: 1px solid green;
+   border: 1px solid gray;
    position: absolute;
    height: 70%;
    width: 90%;
@@ -105,7 +102,7 @@ function Slide({ content, solveFor, offsetRadius, index, animationConfig, moveSl
                      solveFor={solveFor}
                      content={content}
                      moveSlide={moveSlide}
-                     offsetFromMiddle={offsetFromMiddle}
+                     offsetFromMiddle={0}
                   />
                </SlideCard>
             </SlideContainer>
