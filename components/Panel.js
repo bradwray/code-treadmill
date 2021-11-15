@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import ResultsDisplay from "./ResultsDisplay";
+import Dropdown from "./Dropdown";
+import { Context } from "./AppContext";
 
 const TopAligned = styled.div`
   position: absolute;
@@ -42,11 +44,21 @@ const Button = styled.button`
 export default function Panel() {
   const [leftAligned, setLeftAigned] = React.useState(false);
 
+  const [store, setStore] = useContext(Context);
+
+  const handleTheme = (themeChoice) => {
+    setStore({
+      ...store,
+      theme: themeChoice,
+    });
+  };
+
   const Surface = leftAligned ? LeftAligned : TopAligned;
   return (
-    <Surface onClick={() => setLeftAigned(!leftAligned)}>
-      <Button>side</Button>
+    <Surface>
+      <Button onClick={() => setLeftAigned(!leftAligned)}>side</Button>
       <ResultsDisplay />
+      <Dropdown onSelect={handleTheme} options={["VSDark", "nightOwl"]} />
       <ResultsDisplay />
     </Surface>
   );
