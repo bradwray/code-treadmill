@@ -1,7 +1,7 @@
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import React, { Component, Fragment } from 'react';
 
-import CodePuzzle from './codePuzzle.js';
+import CodeRead from './CodeRead.js';
 import { Spring } from 'react-spring/';
 import styled from 'styled-components';
 
@@ -98,7 +98,7 @@ function Slide({ content, solveFor, offsetRadius, index, animationConfig, moveSl
                   zIndex: Math.abs(Math.abs(offsetFromMiddle) - 2),
                }}>
                <SlideCard>
-                  <CodePuzzle
+                  <CodeRead
                      solveFor={solveFor}
                      content={content}
                      moveSlide={moveSlide}

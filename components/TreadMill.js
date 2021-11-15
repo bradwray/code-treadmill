@@ -40,7 +40,7 @@ export default function TreadMill({ updateStats }) {
    const [confettiKey, setConfettiKey] = React.useState(null);
    const [currIndex, setCurrIndex] = React.useState(0);
    const defaultProps = {
-      offsetRadius: 5,
+      offsetRadius: 2,
       animationConfig: { tension: 120, friction: 14 },
    };
 
