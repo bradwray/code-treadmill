@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import ResultsDisplay from "./ResultsDisplay";
-import Dropdown from "./Dropdown";
+import ThemeDropdown from "./ThemeDropdown";
 import { Context } from "./AppContext";
 
 const TopAligned = styled.div`
@@ -58,7 +58,7 @@ export default function Panel() {
     <Surface>
       <Button onClick={() => setLeftAigned(!leftAligned)}>side</Button>
       <ResultsDisplay />
-      <Dropdown onSelect={handleTheme} options={["VSDark", "nightOwl"]} />
+      <ThemeDropdown onSelect={handleTheme} options={["vsDark", "nightOwl"]} />
       <ResultsDisplay />
     </Surface>
   );

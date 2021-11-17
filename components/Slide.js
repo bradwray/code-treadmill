@@ -5,20 +5,13 @@ import CodeRead from "./CodeRead.js";
 import { Spring } from "react-spring/";
 import styled from "styled-components";
 
-// import babel from "Babel";
-
-const theme = {
-  plain: {
-    color: "#9CDCFE",
-    backgroundColor: "#1E1E1E",
-  },
-};
-
 const SlideContainer = styled.div`
   border: 1px solid gray;
   position: absolute;
   height: 70%;
   width: 90%;
+  color: ${(props) => props.theme.styles[5].style.color};
+  background-color: ${(props) => props.theme.plain.backgroundColor};
   max-width: 800px;
   top: 50%;
   display: flex;
@@ -105,7 +98,6 @@ function Slide({
             fontSize: 18,
             boxSizing: "border-box",
             fontFamily: '"Dank Mono", "Fira Code", monospace',
-            ...theme.plain,
             zIndex: Math.abs(Math.abs(offsetFromMiddle) - 2),
           }}
         >

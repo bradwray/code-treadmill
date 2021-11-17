@@ -116,11 +116,12 @@ function CodeRead({ content, solveFor, moveSlide, offsetFromMiddle }) {
     }
   };
   const { answered, correct, error, code, inputVal } = state;
+  console.log(store);
   return (
     <CodeReadContainer>
       <Editor
         value={code ? code : content}
-        highlight={CodeHighlight}
+        highlight={() => CodeHighlight(content, store.theme)}
         onValueChange={() => {}}
         padding={10}
         style={{
