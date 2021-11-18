@@ -6,12 +6,12 @@ import { Spring } from "react-spring/";
 import styled from "styled-components";
 
 const SlideContainer = styled.div`
-  border: 1px solid gray;
+  border: 1px solid ${(props) => props.theme.plain.color + "99"};
   position: absolute;
   height: 70%;
   width: 90%;
   color: ${(props) => props.theme.styles[5].style.color};
-  background-color: ${(props) => props.theme.plain.backgroundColor};
+  background: ${(props) => props.theme.plain.backgroundColor};
   max-width: 800px;
   top: 50%;
   display: flex;

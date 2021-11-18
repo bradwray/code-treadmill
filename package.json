@@ -18,7 +18,8 @@
       "react-simple-code-editor": "0.11.0",
       "react-spring": "^7.2.10",
       "react-spring-3d-carousel": "1.1.0",
-      "styled-components": "^5.3.3"
+      "styled-components": "^5.3.3",
+      "theme-cobalt2": "^2.1.6"
    },
    "devDependencies": {
       "eslint": "7.32.0",
