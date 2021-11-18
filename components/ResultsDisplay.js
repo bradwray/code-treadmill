@@ -6,7 +6,8 @@ const DisplayContainer = styled.div`
    height: 100px;
    border: 1px solid #666;
    border-radius: 10px;
-   background-color: #111;
+   color: ${(props) => props.theme.styles[5].style.color};
+   background-color: ${(props) => props.theme.plain.backgroundColor};
    padding-top: 32px;
    box-shadow: inset 0px 0px 2px 0px white;
 `;
@@ -21,8 +22,8 @@ const Label = styled.span`
    position: absolute;
    text-align: center;
    font-family: 'Orbitron', sans-serif;
-   background-color: #111;
-   color: #ddd;
+   background-color: ${(props) => props.theme.plain.backgroundColor};
+   color: ${(props) => props.theme.plain.color};
    z-index: 2000;
    font-size: 25px;
    transform: translateY(${(props) => props.bump}px) translateX(8px);
@@ -33,9 +34,8 @@ const Line = styled.hr`
    z-index: 0;
    transform: translateY(${(props) => props.bump}px);
    height: 3px;
-   color: #fff;
    border: 0;
-   background-color: #ddd;
+   background-color: ${(props) => props.theme.plain.color}; ;
 `;
 
 export default function ResultsDisplay() {
