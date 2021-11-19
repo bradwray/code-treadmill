@@ -7,8 +7,9 @@ import TreadMill from "../components/TreadMill";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  /* overflow: hidden; */
+  // overflow: hidden;
   height: 100vh;
+  border: 1px solid red;
   width: 100vw;
   margin: -20px;
   background: ${(props) => props.theme.plain.backgroundColor + "bb"};

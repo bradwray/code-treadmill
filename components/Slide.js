@@ -79,7 +79,7 @@ function Slide({
   } else if (offsetFromMiddle < 0) {
     translateY -= translateYoffset;
   }
-
+  console.log(offsetFromMiddle);
   return (
     <Spring
       to={{
@@ -87,7 +87,7 @@ function Slide({
         top: `${
           offsetRadius === 0 ? 60 : 60 + (offsetFromMiddle * 50) / offsetRadius
         }%`,
-        opacity: distanceFactor * distanceFactor * distanceFactor,
+        opacity: distanceFactor * distanceFactor,
       }}
       config={animationConfig}
     >
@@ -106,7 +106,7 @@ function Slide({
               solveFor={solveFor}
               content={content}
               moveSlide={moveSlide}
-              offsetFromMiddle={0}
+              offsetFromMiddle={offsetFromMiddle}
             />
           </SlideCard>
         </SlideContainer>

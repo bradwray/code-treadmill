@@ -115,6 +115,7 @@ function CodeRead({ content, solveFor, moveSlide, offsetFromMiddle }) {
       });
     }
   };
+  console.log(offsetFromMiddle);
   const { answered, correct, error, code, inputVal } = state;
   const theCode = code ? code : content;
   return (
@@ -136,12 +137,12 @@ function CodeRead({ content, solveFor, moveSlide, offsetFromMiddle }) {
       />
 
       <BottomContainer>
-        {offsetFromMiddle == 0 && code ? (
+        {offsetFromMiddle === 0 ? (
           <div>
             <SolvingFor>{solveFor} =</SolvingFor>
             <InputBox
               value={inputVal}
-              // autoFocus
+              autoFocus
               onChange={handleChange}
               onKeyDown={handleChange}
             />

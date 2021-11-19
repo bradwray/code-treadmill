@@ -9,22 +9,24 @@ const TopAligned = styled.div`
   position: absolute;
   /* transform: translateX(-10px) translateY(-10px); */
   display: flex;
-  padding: 10px;
-  padding-top: 20px;
+  height: 165px;
   color: ${(props) => props.theme.styles[5].style.color};
   background: ${(props) => props.theme.plain.backgroundColor};
   justify-content: space-around;
+  align-items: center;
   width: 100vw;
   z-index: 1000;
   border: 1px solid ${(props) => props.theme.plain.color + "99"};
+  // border: 1px solid red;
 `;
 
 const LeftAligned = styled.div`
-  transform: translateX(-10px) translateY(-10px);
+  transform: translateX(15px);
   padding-top: 50px;
   display: flex;
   padding: 10px;
   flex-direction: column;
+  border: 1px solid ${(props) => props.theme.plain.color + "99"};
   justify-content: space-around;
   width: 400px;
   height: 100vh;
@@ -34,15 +36,16 @@ const LeftAligned = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: #222;
+  color: ${(props) => props.theme.styles[5].style.color};
+  background-color: ${(props) => props.theme.plain.backgroundColor};
   position: absolute;
   top: 0;
   left: 0;
-  margin: 5px;
+  margin: 10px;
   color: #aaa;
   width: 30px;
   height: 30px;
-  border: 1px solid #666;
+  border: 1px solid ${(props) => props.theme.plain.color + "99"};
 `;
 
 export default function Panel() {
@@ -60,7 +63,9 @@ export default function Panel() {
   const Surface = leftAligned ? LeftAligned : TopAligned;
   return (
     <Surface>
-      <Button onClick={() => setLeftAigned(!leftAligned)}>side</Button>
+      <Button onClick={() => setLeftAigned(!leftAligned)}>
+        {!leftAligned ? `⤵` : `⤴`}
+      </Button>
 
       <ThemeDropdown />
       <ResultsDisplay />
