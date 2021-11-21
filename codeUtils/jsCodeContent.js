@@ -1,12 +1,12 @@
 export var slides = [
    {
-      content: `  var count = ##;
-  var howMany = "a few";
-
-  if(count > ##){
-    howMany = "So many!"
+      content: `  var widgets = ##;
+  var gadgets = ##;
+  
+  if(widgets > gadgets){
+    widgets = widgets - gadgets;
   }`,
-      solveFor: 'howMany',
+      solveFor: 'widgets',
    },
    {
       content: `  var count = ##;
@@ -202,6 +202,7 @@ export var slides = [
 ].map((item, i) => {
    return {
       ...item,
+      // diff,
       key: i,
    };
 });

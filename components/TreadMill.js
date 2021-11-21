@@ -9,29 +9,9 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
    position: relative;
    display: flex;
-   overflow: hidden;
    justify-content: center;
    width: 100%;
    height: 100%;
-`;
-
-const NavigationButtons = styled.div`
-   position: relative;
-   display: flex;
-
-   height: 60px;
-   margin: 0 auto;
-   width: 20%;
-   margin-top: 1rem;
-   justify-content: space-between;
-   z-index: 1000;
-`;
-
-const NavBtn = styled.div`
-   background: white;
-   padding: 15px;
-   margin-bottom: 10px;
-   border-radius: 3px;
 `;
 
 function mod(a, b) {
@@ -50,12 +30,9 @@ export default function TreadMill({ updateStats }) {
       return mod(index, slides.length);
    };
 
-   const moveSlide = (direction) => {
-      if (direction === 1) {
-         setConfettiKey(Date.now());
-         updateStats();
-      }
-      setCurrIndex(modBySlidesLength(currIndex + direction));
+   const moveSlide = () => {
+      setConfettiKey(Date.now());
+      setCurrIndex(modBySlidesLength(currIndex + 1));
    };
 
    const clampOffsetRadius = (offsetRadius) => {
@@ -79,7 +56,7 @@ export default function TreadMill({ updateStats }) {
          presentableSlides.push(slides[modBySlidesLength(currIndex + i)]);
       }
 
-      return presentableSlides;
+      return presentableSlides.reverse();
    };
 
    const { animationConfig, offsetRadius } = defaultProps;
