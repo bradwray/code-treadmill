@@ -94,6 +94,7 @@ function Dropdown() {
       <Label>Theme</Label>
       <Select
         value={store.themeName}
+        autoFocus={false}
         onChange={(e) => handleChange(e.target.value)}
       >
         {options.map((item, i) => (
