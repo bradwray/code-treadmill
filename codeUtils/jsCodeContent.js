@@ -1,3 +1,5 @@
+import determineDifficulty from './determineDifficulty';
+
 export var slides = [
    {
       content: `  var widgets = ##;
@@ -186,10 +188,8 @@ export var slides = [
     var canRideBike = **;
     var bigKid = age > 10 && canRideBike;
     var answer = "No";
-
-    if(bigKid){
-      answer = "Yes";
-    }`,
+ 
+    `,
       solveFor: 'answer',
    },
    {
@@ -202,7 +202,7 @@ export var slides = [
 ].map((item, i) => {
    return {
       ...item,
-      // diff,
+      difficulty: determineDifficulty(item.content + ' '),
       key: i,
    };
 });

@@ -29,7 +29,7 @@ export default function TreadMill({ updateStats }) {
    const modBySlidesLength = (index) => {
       return mod(index, slides.length);
    };
-
+   console.log(slides);
    const moveSlide = () => {
       setConfettiKey(Date.now());
       setCurrIndex(modBySlidesLength(currIndex + 1));
@@ -108,6 +108,7 @@ export default function TreadMill({ updateStats }) {
                      key={slide.key}
                      solveFor={slide.solveFor}
                      content={slide.content}
+                     difficulty={slide.difficulty}
                      moveSlide={moveSlide}
                      offsetRadius={clampOffsetRadius(offsetRadius)}
                      index={presentableIndex}

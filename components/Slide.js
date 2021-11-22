@@ -49,7 +49,7 @@ const FeedBack = styled.div`
    text-align: center;
 `;
 
-function Slide({ content, solveFor, offsetRadius, index, animationConfig, moveSlide }) {
+function Slide({ content, solveFor, difficulty, offsetRadius, index, animationConfig, moveSlide }) {
    const offsetFromMiddle = index - offsetRadius;
    const totalPresentables = 2 * offsetRadius + 1;
    const distanceFactor = 1 - Math.abs(offsetFromMiddle / (offsetRadius + 1));
@@ -92,6 +92,7 @@ function Slide({ content, solveFor, offsetRadius, index, animationConfig, moveSl
                   <CodeRead
                      solveFor={solveFor}
                      content={content}
+                     difficulty={difficulty}
                      moveSlide={moveSlide}
                      offsetFromMiddle={offsetFromMiddle}
                   />

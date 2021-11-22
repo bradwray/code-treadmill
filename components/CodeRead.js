@@ -40,7 +40,7 @@ const SolvingFor = styled.span`
    margin-left: 5px;
 `;
 
-function CodeRead({ content, solveFor, moveSlide, offsetFromMiddle }) {
+function CodeRead({ content, solveFor, difficulty, moveSlide, offsetFromMiddle }) {
    const [state, setState] = React.useState({
       code: null,
       answered: false,
@@ -108,17 +108,6 @@ function CodeRead({ content, solveFor, moveSlide, offsetFromMiddle }) {
             evalCode(state.code).toLowerCase() === e.target.value.toLowerCase().trim() &&
             !state.answered
          ) {
-            //figure this out
-            const t0 = performance.now();
-            console.log(item.content);
-            var wholeEval = new Function(item.content);
-
-            wholeEval();
-
-            const t1 = performance.now();
-
-            let diff = t1 - t0;
-
             setTimeout(() => {
                setState({
                   ...state,
