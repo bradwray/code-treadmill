@@ -4,6 +4,7 @@ import { Context } from "./AppContext";
 import ResultsDisplay from "./ResultsDisplay";
 import ThemeDropdown from "./ThemeDropdown";
 import styled from "styled-components";
+import ProgressChart from "./ProgressChart";
 
 const TopAligned = styled.div`
   position: absolute;
@@ -69,6 +70,7 @@ export default function Panel() {
 
       <ThemeDropdown />
       <ResultsDisplay />
+      <ProgressChart />
     </Surface>
   );
 }
