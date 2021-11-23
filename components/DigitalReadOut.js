@@ -48,16 +48,15 @@ const OuterOutline = styled.div`
    display: flex;
    justify-content: center;
 `;
-export default function DigitalReadOut({ label, measure }) {
+export default function DigitalReadOut({ value, label, measure }) {
    const [store, setStore] = useContext(Context);
-   console.log(store);
    return (
       <OuterOutline>
          <Line bump={-10} />
          <Label bump={-10}>{label}</Label>
 
          <DigitBox light={store.themeName.toLowerCase().includes('light') ? true : false}>
-            {store.rpm}
+            {value}
          </DigitBox>
          <Line bump={44} />
          <Label bump={44}>{measure}</Label>

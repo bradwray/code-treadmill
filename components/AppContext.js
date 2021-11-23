@@ -8,7 +8,8 @@ export const Context = createContext();
 export function AppContext(props) {
    const [store, setStore] = React.useState({
       readStats: [],
-      rpm: '00',
+      rpm: 0,
+      avgDifficulty: 0,
       theme: cobalt2,
       themeName: 'cobalt2',
    });

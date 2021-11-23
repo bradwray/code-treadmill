@@ -1,7 +1,8 @@
-import Highlight, { defaultProps } from "prism-react-renderer";
-import React, { Fragment } from "react";
-import styled from "styled-components";
-import mdnAble from "../codeUtils/mdnAble";
+import Highlight, { defaultProps } from 'prism-react-renderer';
+import React, { Fragment } from 'react';
+
+import mdnAble from '../codeUtils/mdnAble';
+import styled from 'styled-components';
 
 // const LineNum = styled.span`
 //   position: absolute;
@@ -12,41 +13,32 @@ import mdnAble from "../codeUtils/mdnAble";
 // `;
 
 const ClickableToken = styled.a`
-  pointer-events: all;
-  cursor: pointer;
-  display: inline-block;
-  transform: scale(1);
-  :hover {
-    transform: scale(1.5);
-  }
+   pointer-events: all;
+   cursor: pointer;
+   display: inline-block;
+   transform: scale(1);
+   :hover {
+      transform: scale(1.5);
+   }
 `;
 
 function CodeHighlight(code, t) {
-  // console.log(t);
-  return (
-    <Highlight {...defaultProps} theme={t} code={code} language="javascript">
-      {({ tokens, getLineProps, getTokenProps }) => (
-        <Fragment>
-          {console.log(tokens)}
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line, key: i })}>
-              {line.map((token, key) => {
-                console.log(token);
-                return mdnAble(token.content) ? (
-                  <ClickableToken
-                    key={key}
-                    {...getTokenProps({ token, key })}
-                  />
-                ) : (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                );
-              })}
-            </div>
-          ))}
-        </Fragment>
-      )}
-    </Highlight>
-  );
+   // console.log(t);
+   return (
+      <Highlight {...defaultProps} theme={t} code={code} language='javascript'>
+         {({ tokens, getLineProps, getTokenProps }) => (
+            <Fragment>
+               {tokens.map((line, i) => (
+                  <div key={i} {...getLineProps({ line, key: i })}>
+                     {line.map((token, key) => (
+                        <span key={key} {...getTokenProps({ token, key })} />
+                     ))}
+                  </div>
+               ))}
+            </Fragment>
+         )}
+      </Highlight>
+   );
 }
 
 export default CodeHighlight;
