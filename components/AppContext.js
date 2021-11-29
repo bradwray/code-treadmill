@@ -13,7 +13,7 @@ export function AppContext(props) {
       theme: cobalt2,
       themeName: 'cobalt2',
    });
-   //  console.log(store);
+   console.log(store.theme);
    return (
       <ThemeProvider theme={store.theme}>
          <Context.Provider value={[store, setStore]}>{props.children}</Context.Provider>
