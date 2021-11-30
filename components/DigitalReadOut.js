@@ -3,6 +3,7 @@ import '@fontsource/orbitron';
 import React, { useContext } from 'react';
 
 import { Context } from './AppContext';
+import makeDimmer from '../codeUtils/makeDimmer';
 import styled from 'styled-components';
 
 const DigitBox = styled.span`
@@ -16,7 +17,8 @@ const DigitBox = styled.span`
    height: 38px;
    text-align: center;
    color: ${(props) => props.theme.styles[2].style.color};
-   background-color: ${(props) => (props.light ? 'white' : 'rgba(40, 20, 20, 1)')};
+   background-color: ${(props) =>
+      props.light ? 'white' : makeDimmer(props.theme.styles[2].style.color, 0.18)};
    font-size: 30px;
    transform: translateY(6px);
 `;

@@ -1,20 +1,26 @@
-import { styles } from "./cobalt.cjs";
-import rgba2hex from "./rgbToHex";
+import rgba2hex from './rgbToHex';
 
 export default function hexThemeColors(theme) {
-  return {
-    ...theme,
-    styles: styles.map(({ style, types }) => {
-      return {
-        style: {
-          ...style,
-          color: style.color.includes("(")
-            ? rgba2hex(style.color)
-            : style.color,
-          original: style.color,
-        },
-        types: types,
-      };
-    }),
-  };
+   const newStyle = theme.styles.map(({ style, types }) => {
+      if (style.color) {
+         return {
+            style: {
+               ...style,
+               color: style.color.includes('(') ? rgba2hex(style.color) : style.color,
+            },
+            types: types,
+         };
+      } else {
+         return {
+            style,
+            types,
+         };
+      }
+   });
+   var newTheme = {
+      ...theme,
+      styles: newStyle,
+   };
+   console.log(newTheme);
+   return newTheme;
 }
