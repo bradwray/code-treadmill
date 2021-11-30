@@ -47,10 +47,11 @@ const SolvingFor = styled.span`
 function CodeRead({
   content,
   solveFor,
-  difficulty,
+  complexity,
   tagsUsed,
   moveSlide,
   offsetFromMiddle,
+  index,
 }) {
   const [state, setState] = React.useState({
     code: null,
@@ -93,9 +94,9 @@ function CodeRead({
 
   const updateStats = (correct) => {
     let tempFlips = store.readStats;
-    tempFlips[tempFlips.length] = { correct, difficulty, time: Date.now() };
+    tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
     if (correct) {
-      let rpm =
+      const rpm =
         60 /
         (tempFlips
           .map((item, i) => {
@@ -107,16 +108,21 @@ function CodeRead({
       rpm = Number.isFinite(rpm) ? rpm.toFixed(2) : 1.0;
 
       rpm = rpm.toString().length > 3 ? Number(rpm).toFixed(1) : rpm;
-      let avgDifficulty =
+      const avgcomplexity =
         tempFlips
-          .map((item) => item.difficulty)
+          .map((item) => item.complexity)
           .reduce((sum, value) => {
             return sum + value;
           }, 0) / tempFlips.length;
+      const tempSlides = store.slides;
+      tempSlides[store.currentIndex].done = true;
+
       setStore({
         ...store,
+        slides: tempSlides,
+        currentIndex: store.currentIndex + 1,
         readStats: tempFlips,
-        avgDifficulty: Number(avgDifficulty).toFixed(1),
+        avgcomplexity: Number(avgcomplexity).toFixed(1),
         rpm,
       });
     }
@@ -165,7 +171,7 @@ function CodeRead({
 
   return (
     <CodeReadContainer>
-      <CodeReadInfo tagsUsed={tagsUsed} difficulty={difficulty} />
+      <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} />
       <Editor
         value={theCode}
         highlight={() => CodeHighlight(theCode, store.theme)}

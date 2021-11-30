@@ -39,7 +39,7 @@ const Display = styled.span`
 `;
 
 const Bar = styled.div`
-  height: ${(props) => props.height}px;
+  height: ${(props) => props.height}%;
   width: ${(props) => props.width}px;
   margin-right: 1px;
   background-color: ${(props) =>
@@ -47,7 +47,7 @@ const Bar = styled.div`
   border: 1px solid ${(props) => props.theme.styles[2].style.color};
   color: ${(props) => props.theme.plain.backgroundColor};
   box-shadow: 0px 0px 20px 0px
-    ${(props) => props.theme.styles[2].style.color + "77"};
+    ${(props) => props.theme.styles[2].style.color + "44"};
   font-size: 6px;
   display: flex;
   align-items: flex-end;
@@ -67,8 +67,10 @@ const Label = styled.span`
   background: ${(props) => props.theme.plain.backgroundColor};
   color: ${(props) => props.theme.plain.color};
   z-index: 2000;
-  font-size: 25px;
-  transform: translateY(${(props) => props.bump}px) translateX(8px);
+  font-size: ${(props) => (props.fontSize ? props.fontSize : 25)}px;
+  transform: translateY(${(props) => props.bumpY}px)
+    translateX(${(props) => (props.bumpX ? props.bumpX : 0)}px)
+    rotate(${(props) => (props.rotate ? props.rotate : 0)}deg);
 `;
 
 const Line = styled.hr`
@@ -80,23 +82,33 @@ const Line = styled.hr`
   background-color: ${(props) => props.theme.plain.color}; ;
 `;
 
+function scale(number, inMin, inMax, outMin, outMax) {
+  return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
+}
+
 export default function ProgressChart() {
   const [store, setStore] = useContext(Context);
   const { slides } = store;
+  const maxcomplexity = Math.max(...slides.map(({ complexity }) => complexity));
   return (
     <div>
       <DisplayContainer>
         <div style={{ position: "absolute" }}>
-          <Label bump={-59}>Progress</Label>
+          <Label bumpY={-59} bumpX={8}>
+            Progress
+          </Label>
           <Line bump={-55} />
         </div>
+        <Label bumpY={10} bumpX={-180} rotate={270} fontSize={10}>
+          Complexity
+        </Label>
         <Display
           light={store.themeName.toLowerCase().includes("light") ? true : false}
         >
-          {slides.map((item) => (
+          {slides.map(({ complexity, done }) => (
             <Bar
-              done={false}
-              height={item.difficulty}
+              done={done}
+              height={scale(complexity, 0, maxcomplexity, 0, 90)}
               width={300 / slides.length}
             ></Bar>
           ))}

@@ -8,13 +8,15 @@ export const Context = createContext();
 
 export function AppContext(props) {
   const [store, setStore] = React.useState({
+    currentIndex: 0,
+    readStats: [],
     slides: slides,
     rpm: 0,
-    avgDifficulty: 0,
+    avgcomplexity: 0,
     theme: cobalt2,
     themeName: "cobalt2",
   });
-  // console.log(store.theme);
+  console.log(store);
   return (
     <ThemeProvider theme={store.theme}>
       <Context.Provider value={[store, setStore]}>

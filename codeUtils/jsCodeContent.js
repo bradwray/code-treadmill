@@ -200,10 +200,10 @@ export var slides = [
     solveFor: "yay",
   },
 ].map((item, i) => {
-  const { difficulty, tagsUsed } = tagAndWeightCode(item.content);
+  const { complexity, tagsUsed } = tagAndWeightCode(item.content);
   return {
     ...item,
-    difficulty,
+    complexity,
     tagsUsed,
     key: i,
   };

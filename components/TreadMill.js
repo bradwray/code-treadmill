@@ -108,7 +108,7 @@ export default function TreadMill({ updateStats }) {
               key={slide.key}
               solveFor={slide.solveFor}
               content={slide.content}
-              difficulty={slide.difficulty}
+              complexity={slide.complexity}
               tagsUsed={slide.tagsUsed}
               slide={slide}
               moveSlide={moveSlide}
