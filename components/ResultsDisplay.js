@@ -61,7 +61,7 @@ export default function ResultsDisplay() {
         <DigitalReadOut
           value={Math.round(store.rpm * store.avgcomplexity)}
           label={"score"}
-          measure={"rpm * avg diff"}
+          measure={"rpm * complex"}
         />
       </Readouts>
     </DisplayContainer>
