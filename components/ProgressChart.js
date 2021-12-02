@@ -16,6 +16,9 @@ const DisplayContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   @media (max-width: 768px) {
+      transform: scale(0.5) translateY(-50px) translateX(210px);
+   }
 `;
 
 const Display = styled.span`
