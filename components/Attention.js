@@ -1,30 +1,54 @@
-import React, { useContext } from "react";
-import styled from "styled-components";
+import React, { useContext } from 'react';
+import styled, { keyframes } from 'styled-components';
 
 const Point = styled.div`
-  display: inline-block;
-  width: 0;
-  height: 0;
-  transform: translateY(5px);
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 10px solid ${(props) => props.theme.plain.color};
+   display: inline-block;
+   width: 0;
+   height: 0;
+   transform: translateY(5px);
+   border-top: 10px solid transparent;
+   border-bottom: 10px solid transparent;
+   border-right: 10px solid ${(props) => props.theme.plain.color};
 `;
 
 const Tail = styled.div`
-  display: inline-block;
-  background-color: ${(props) => props.theme.plain.color};
-  width: 60px;
-  height: 10px;
+   display: inline-block;
+   background-color: ${(props) => props.theme.plain.color};
+   width: 30px;
+   height: 10px;
 `;
 
-const Attention = () => {
-  return (
-    <div>
-      <Point />
-      <Tail />
-    </div>
-  );
+const bounce = keyframes`
+   0% {
+      transform: translateX(0px);
+   }
+   50% {
+      transform: translateX(15px);
+   }
+   100% {
+      transform: translateX(0px);
+   }
+`;
+
+const Wrapper = styled.div`
+   display: inline-block;
+   font-size: 20px;
+   font-family: 'Dank Mono', 'Fira Code', monospace;
+   margin-left: 20px;
+   animation-name: ${bounce};
+   animation-duration: 1s;
+   animation-iteration-count: infinite;
+   animation-timing-function: ease-in-out;
+`;
+
+const Attention = ({ message }) => {
+   return (
+      <Wrapper>
+         <Point />
+         <Tail />
+         {message}
+      </Wrapper>
+   );
 };
 
 export default Attention;
