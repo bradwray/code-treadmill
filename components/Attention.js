@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import styled, { keyframes } from 'styled-components';
 
+import { codeTags } from '../codeUtils/codeTags';
+
 const Point = styled.div`
    display: inline-block;
    width: 0;
@@ -18,6 +20,17 @@ const Tail = styled.div`
    height: 10px;
 `;
 
+const MessageBox = styled.div`
+   display: inline-block;
+   color: ${(props) => props.theme.plain.backgroundColor};
+   background-color: ${(props) => props.theme.plain.color};
+   text-align: center;
+   transform: translateY(22px);
+   font-size: 18px;
+   font-family: 'Dank Mono', 'Fira Code', monospace;
+   width: 100px;
+`;
+
 const bounce = keyframes`
    0% {
       transform: translateX(0px);
@@ -32,8 +45,7 @@ const bounce = keyframes`
 
 const Wrapper = styled.div`
    display: inline-block;
-   font-size: 20px;
-   font-family: 'Dank Mono', 'Fira Code', monospace;
+
    margin-left: 20px;
    animation-name: ${bounce};
    animation-duration: 1s;
@@ -46,7 +58,7 @@ const Attention = ({ message }) => {
       <Wrapper>
          <Point />
          <Tail />
-         {message}
+         <MessageBox>{message}</MessageBox>
       </Wrapper>
    );
 };

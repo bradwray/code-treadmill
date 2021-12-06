@@ -157,7 +157,7 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, moveSlide, offsetFr
          });
       }
    };
-   //   console.log(offsetFromMiddle);
+
    const { answered, correct, error, code, inputVal } = state;
    const theCode = code ? code : content;
 
@@ -191,7 +191,7 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, moveSlide, offsetFr
                      onChange={handleChange}
                      onKeyDown={handleChange}
                   />
-                  <Attention message='enter your response' />
+                  {store.currentIndex == 0 ? <Attention message='enter your response' /> : null}
                </div>
             ) : null}{' '}
             <Feedback
