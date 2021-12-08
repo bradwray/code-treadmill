@@ -105,9 +105,7 @@ export default function ProgressChart() {
         <Label bumpY={10} bumpX={-180} rotate={270} fontSize={10}>
           Complexity
         </Label>
-        <Display
-          light={store.themeName.toLowerCase().includes("light") ? true : false}
-        >
+        <Display light={store.themeType === "light" ? true : false}>
           {slides.map(({ complexity, done }, i) => (
             <Bar
               key={i}
