@@ -15,6 +15,7 @@ export function AppContext(props) {
     avgcomplexity: 0,
     theme: cobalt2,
     themeName: "cobalt2",
+    themenum: 0,
   });
   useEffect(function () {
     console.log(window.localStorage);
