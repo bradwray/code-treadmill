@@ -9,8 +9,11 @@
    },
    "dependencies": {
       "@fontsource/orbitron": "4.5.1",
+      "@babel/parser": "^7.16.4",
+      "js-prettify": "^1.4.0",
       "next": "^12.0.3",
       "perf_hooks": "0.0.1",
+      "prettier": "^2.5.1",
       "prism-react-renderer": "1.2.1",
       "prismjs": "^1.25.0",
       "react": "^17.0.2",
@@ -23,6 +26,7 @@
       "theme-cobalt2": "^2.1.6"
    },
    "devDependencies": {
+      "@babel/parser": "^7.16.4",
       "eslint": "7.32.0",
       "eslint-config-next": "12.0.3"
    }

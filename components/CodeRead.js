@@ -6,7 +6,7 @@ import CodeReadInfo from './CodeReadInfo';
 import { Context } from './AppContext';
 import Editor from 'react-simple-code-editor';
 import Feedback from './Feedback.js';
-import fillIt from '../codeUtils/fillIt';
+import fillItAndPrettify from '../codeUtils/fillItAndPrettify';
 import styled from 'styled-components';
 
 const CodeReadContainer = styled.div`
@@ -47,7 +47,7 @@ const SolvingFor = styled.span`
 
 function CodeRead({ content, solveFor, complexity, tagsUsed, moveSlide, offsetFromMiddle, index }) {
    const [state, setState] = React.useState({
-      code: fillIt(content),
+      code: fillItAndPrettify(content),
       answered: false,
       correct: false,
       inputVal: '',
@@ -55,20 +55,13 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, moveSlide, offsetFr
 
    const [store, setStore] = useContext(Context);
 
-   // React.useEffect(() => {
-   //   setState({
-   //     ...state,
-   //     code: fillIt(content),
-   //   });
-   // }, [content]);
-
    const gotIt = () => {
       setState({
          ...state,
          answered: false,
          correct: false,
          error: '',
-         code: fillIt(content),
+         code: fillItAndPrettify(content),
          inputVal: '',
       });
    };
@@ -186,7 +179,7 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, moveSlide, offsetFr
                   <SolvingFor>{solveFor} ==</SolvingFor>
                   <InputBox
                      value={inputVal}
-                     w={evalCode(fillIt(theCode)).length > 10}
+                     w={evalCode(fillItAndPrettify(theCode)).length > 10}
                      autoFocus
                      onChange={handleChange}
                      onKeyDown={handleChange}

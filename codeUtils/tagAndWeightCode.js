@@ -1,5 +1,4 @@
 import { codeTags } from './codeTags';
-import fillIt from './fillIt';
 
 export default function tagAndWeightCode(code) {
    let complexity = 0;
