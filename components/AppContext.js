@@ -15,13 +15,9 @@ export function AppContext(props) {
       avgcomplexity: 0,
       theme: cobalt2,
       themeName: 'cobalt',
-      themenum: 0,
+      themeNum: 0,
    });
-   useEffect(function () {
-      console.log(window.localStorage);
-   }, []);
 
-   console.log(store);
    return (
       <ThemeProvider theme={store.theme}>
          <Context.Provider value={[store, setStore]}>{props.children}</Context.Provider>

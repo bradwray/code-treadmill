@@ -6,7 +6,7 @@ import CodeReadInfo from './CodeReadInfo';
 import { Context } from './AppContext';
 import Editor from 'react-simple-code-editor';
 import Feedback from './Feedback.js';
-import fillItAndPrettify from '../codeUtils/fillItAndPrettify';
+import fillItAndPrettify from '../utils/fillItAndPrettify';
 import styled from 'styled-components';
 
 const CodeReadContainer = styled.div`
