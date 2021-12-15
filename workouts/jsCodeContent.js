@@ -1,4 +1,4 @@
-import tagAndWeightCode from "../codeUtils/tagAndWeightCode";
+import tagAndWeightCode from "../utils/tagAndWeightCode";
 
 export var slides = [
   {

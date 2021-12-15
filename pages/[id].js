@@ -1,9 +1,10 @@
 import { AppContext } from "../components/AppContext";
 import Panel from "../components/Panel";
-import React from "react";
+import React, { useContext } from "react";
 import TreadMill from "../components/TreadMill";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -17,11 +18,17 @@ const Wrapper = styled.div`
 export default function App({}) {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
 
   if (id) {
     return (
-      <AppContext>
+      <AppContext route={id}>
+        <Head>
+          <title>code-rpm</title>
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width maximum-scale=1"
+          />
+        </Head>
         <Wrapper>
           <Panel />
           <TreadMill />

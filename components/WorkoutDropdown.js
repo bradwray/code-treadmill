@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Context } from "./AppContext";
-import hexThemeColors from "../codeUtils/hexThemeColors";
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 const Select = styled.select`
   width: 130px;
@@ -11,6 +11,7 @@ const Select = styled.select`
   border: 1px solid ${(props) => props.theme.plain.color + "99"};
   color: ${(props) => props.theme.plain.color};
   background: ${(props) => props.theme.plain.backgroundColor};
+  margin: 10px;
 `;
 
 const Label = styled.span`
@@ -21,18 +22,16 @@ const Label = styled.span`
   background: ${(props) => props.theme.plain.backgroundColor};
   z-index: 2000;
   font-size: 10px;
-  transform: translateY(-6px) translateX(8px);
+  transform: translateY(4px) translateX(15px);
 `;
 
-function Dropdown() {
+function WorkoutDropdown() {
   const [store, setStore] = useContext(Context);
-  const handleChange = async (i) => {
-    const newWorkout = (await import("../workouts/" + options[i])).default;
-    setStore({
-      ...store,
-      workout: options[i],
-      slides: newWorkout,
-    });
+
+  const router = useRouter();
+
+  const handleChange = (val) => {
+    router.push("/" + val);
   };
   const options = [
     "variables",
@@ -42,7 +41,7 @@ function Dropdown() {
     "loops",
     "traversals",
   ];
-  console.log(store);
+
   return (
     <div>
       <Label>Workout</Label>
@@ -62,4 +61,4 @@ function Dropdown() {
   );
 }
 
-export default Dropdown;
+export default WorkoutDropdown;
