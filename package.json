@@ -8,8 +8,8 @@
       "lint": "next lint"
    },
    "dependencies": {
-      "@fontsource/orbitron": "4.5.1",
       "@babel/parser": "^7.16.4",
+      "@fontsource/orbitron": "4.5.1",
       "js-prettify": "^1.4.0",
       "next": "^12.0.3",
       "perf_hooks": "0.0.1",
@@ -22,6 +22,8 @@
       "react-simple-code-editor": "0.11.0",
       "react-spring": "^7.2.10",
       "react-spring-3d-carousel": "1.1.0",
+      "socket.io": "^4.4.0",
+      "socket.io-client": "^4.4.0",
       "styled-components": "^5.3.3",
       "theme-cobalt2": "^2.1.6"
    },
