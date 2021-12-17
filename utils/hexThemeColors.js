@@ -21,6 +21,6 @@ export default function hexThemeColors(theme) {
       ...theme,
       styles: newStyle,
    };
-   console.log(newTheme);
+   // console.log(newTheme);
    return newTheme;
 }
