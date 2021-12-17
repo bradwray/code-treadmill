@@ -35,15 +35,12 @@ export default function TreadMill({ updateStats }) {
    useEffect(() => {
       fetch('/api/socketio').finally(() => {
          socket.on('updateRace', (raceStats) => {
+            console.log('client raceStats');
             console.log(raceStats);
+            setStore({ ...store, raceStats });
          });
 
          socket.on('a user connected', () => {
-            socket.on('joinRace', {
-               user: 'Brad' + Math.random(),
-               rpm: store.rpm,
-               avgComplexity: store.avgComplexity,
-            });
             console.log('a user connected?');
          });
       });
@@ -55,11 +52,12 @@ export default function TreadMill({ updateStats }) {
    };
    //   console.log(slides);
    const moveSlide = () => {
-      socket.emit('newResult', {
+      store.raceStats.push({
          user: 'Brad' + Math.random(),
          rpm: store.rpm,
          avgComplexity: store.avgComplexity,
       });
+      socket.emit('newResult', store.raceStats);
       setConfettiKey(Date.now());
       setCurrIndex(modBySlidesLength(currIndex + 1));
    };
