@@ -1,6 +1,6 @@
 import { AppContext } from "../components/AppContext";
 import Panel from "../components/Panel";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import TreadMill from "../components/TreadMill";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -18,6 +18,10 @@ const Wrapper = styled.div`
 export default function App({}) {
   const router = useRouter();
   const { id } = router.query;
+
+  // useEffect = (()=>{
+  //   setStore()
+  // }, [])
 
   if (id) {
     return (
