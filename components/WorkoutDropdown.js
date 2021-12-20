@@ -32,6 +32,15 @@ function WorkoutDropdown() {
 
   const handleChange = (val) => {
     router.push("/" + val);
+    setStore({
+      ...store,
+      currentIndex: 0,
+      readStats: [],
+      raceStats: [],
+      // workout: val,
+      rpm: 0,
+      avgComplexity: 0,
+    });
   };
   const options = [
     "variables",
@@ -52,9 +61,7 @@ function WorkoutDropdown() {
         onChange={(e) => handleChange(e.target.value)}
       >
         {options.map((item, i) => (
-          <option value={item} key={item}>
-            {item}
-          </option>
+          <option key={item}>{item}</option>
         ))}
       </Select>
     </div>

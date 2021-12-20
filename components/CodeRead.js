@@ -81,7 +81,7 @@ function CodeRead({
       return wholeEval().toString();
     } catch (error) {
       console.log(error.toString());
-      setState({ ...state, error: error.toString() });
+      // setState({ ...state, error: error.toString() });
       return error.toString();
     }
   };

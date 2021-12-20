@@ -16,30 +16,29 @@ export function AppContext(props) {
     readStats: [],
     raceStats: [],
     slides: slides,
-    route: props.route,
+    workout: "",
     rpm: 0,
     avgComplexity: 0,
     theme: cobalt2,
     themeName: "cobalt",
     themeNum: 0,
   });
-  console.log(store);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (props.route) {
-      if (props.route !== store.route) {
+      if (props.route !== store.workout) {
         console.log(props.route);
         loadSlides().then((slidesFromRoute) => {
           setStore({
             ...store,
-            route: props.route,
+            workout: props.route,
             slides: slidesFromRoute.slides,
           });
         });
       }
     }
   }, [props.route]);
-
+  console.log(store);
   return (
     <ThemeProvider theme={store.theme}>
       <Context.Provider value={[store, setStore]}>
