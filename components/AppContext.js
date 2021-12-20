@@ -1,21 +1,18 @@
 import React, { createContext, useEffect } from "react";
-
+import "@fontsource/orbitron";
 import { ThemeProvider } from "styled-components";
 import cobalt2 from "../themes/cobalt.cjs.js";
-import { slides } from "../workouts/conditionals";
+import slides from "../workouts/conditionals";
+import tagAndWeightCode from "../utils/tagAndWeightCode.js";
 
 export const Context = createContext();
 
 export function AppContext(props) {
-  const loadSlides = async () => {
-    return await import("../workouts/" + props.route);
-  };
-
   const [store, setStore] = React.useState({
     currentIndex: 0,
     readStats: [],
     raceStats: [],
-    slides: slides,
+    slides: tagAndWeightCode(slides),
     workout: "",
     rpm: 0,
     avgComplexity: 0,
@@ -24,20 +21,19 @@ export function AppContext(props) {
     themeNum: 0,
   });
 
-  useEffect(() => {
+  useEffect(async () => {
     if (props.route) {
       if (props.route !== store.workout) {
-        console.log(props.route);
-        loadSlides().then((slidesFromRoute) => {
-          setStore({
-            ...store,
-            workout: props.route,
-            slides: slidesFromRoute.slides,
-          });
+        const workoutExercises = await import("../workouts/" + props.route);
+        setStore({
+          ...store,
+          workout: props.route,
+          slides: tagAndWeightCode(workoutExercises.default),
         });
       }
     }
   }, [props.route]);
+
   console.log(store);
   return (
     <ThemeProvider theme={store.theme}>

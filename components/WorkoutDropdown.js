@@ -37,7 +37,6 @@ function WorkoutDropdown() {
       currentIndex: 0,
       readStats: [],
       raceStats: [],
-      // workout: val,
       rpm: 0,
       avgComplexity: 0,
     });
