@@ -114,7 +114,6 @@ function CodeRead({
       setStore({
         ...store,
         slides: tempSlides,
-        currentIndex: store.currentIndex + 1,
         readStats: tempFlips,
         avgComplexity: Number(avgComplexity).toFixed(1),
         rpm,
@@ -136,7 +135,7 @@ function CodeRead({
             correct: false,
             inputVal: "",
           });
-          moveSlide();
+          moveSlide(store);
         }, 1500);
         setState({
           ...state,

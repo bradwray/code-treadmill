@@ -1,7 +1,7 @@
 import { codeTags } from "./codeTags";
 
 export default function tagAndWeightCode(workout) {
-  console.log(workout);
+  // console.log(workout);
   return workout.map(({ content, solveFor }, i) => {
     let complexity = 0;
     const tagsUsed = codeTags.filter(({ tag }) => {
@@ -12,7 +12,7 @@ export default function tagAndWeightCode(workout) {
     return {
       content,
       solveFor,
-      complexity: Math.round(complexity / 4),
+      complexity: Math.round(complexity / 2.5),
       tagsUsed,
       key: i,
     };

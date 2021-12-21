@@ -18,7 +18,7 @@ export var codeTags = [
   { tag: "let ", path: "Statements/let", weight: 1 },
   { tag: "for", path: "Statements/for", weight: 3 },
   { tag: "while", path: "Statements/while", weight: 3 },
-  { tag: "function", path: "Statements/function", weight: 2 },
+  { tag: "function", path: "Statements/function", weight: 4 },
   { tag: "return", path: "Statements/return", weight: 2 },
   { tag: "{", path: "Statements/block", weight: 1 },
   { tag: "(", path: "Operators/Grouping", weight: 1 },

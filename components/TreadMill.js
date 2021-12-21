@@ -51,12 +51,16 @@ export default function TreadMill({ updateStats }) {
   };
   //   console.log(slides);
   const moveSlide = () => {
-    store.raceStats.push({
-      user: "Brad" + Math.random(),
-      rpm: store.rpm,
-      avgComplexity: store.avgComplexity,
+    // store.raceStats.push({
+    //   user: "Brad" + Math.random(),
+    //   rpm: store.rpm,
+    //   avgComplexity: store.avgComplexity,
+    // });
+    // socket.emit("newResult", store.raceStats);
+    setStore({
+      ...store,
+      currentIndex: store.currentIndex + 1,
     });
-    socket.emit("newResult", store.raceStats);
     setConfettiKey(Date.now());
   };
 
