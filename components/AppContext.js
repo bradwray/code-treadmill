@@ -1,5 +1,3 @@
-import "@fontsource/orbitron";
-
 import React, { createContext, useEffect } from "react";
 
 import { ThemeProvider } from "styled-components";

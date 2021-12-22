@@ -24,7 +24,6 @@ function mod(a, b) {
 const socket = io();
 
 export default function TreadMill({ updateStats }) {
-  const [confettiKey, setConfettiKey] = React.useState(null);
   const [store, setStore] = useContext(Context);
   const defaultProps = {
     offsetRadius: 2,
@@ -50,19 +49,14 @@ export default function TreadMill({ updateStats }) {
     return mod(index, slides.length);
   };
   //   console.log(slides);
-  const moveSlide = () => {
-    // store.raceStats.push({
-    //   user: "Brad" + Math.random(),
-    //   rpm: store.rpm,
-    //   avgComplexity: store.avgComplexity,
-    // });
-    // socket.emit("newResult", store.raceStats);
-    setStore({
-      ...store,
-      currentIndex: store.currentIndex + 1,
-    });
-    setConfettiKey(Date.now());
-  };
+  // const moveSlide = () => {
+  //   // store.raceStats.push({
+  //   //   user: "Brad" + Math.random(),
+  //   //   rpm: store.rpm,
+  //   //   avgComplexity: store.avgComplexity,
+  //   // });
+  //   // socket.emit("newResult", store.raceStats);
+  // };
 
   const clampOffsetRadius = (offsetRadius) => {
     const upperBound = Math.floor((slides.length - 1) / 2);
@@ -92,10 +86,10 @@ export default function TreadMill({ updateStats }) {
 
   return (
     <React.Fragment>
-      {confettiKey ? (
+      {store.confettiKey ? (
         <div>
           <Confetti
-            key={confettiKey}
+            key={store.confettiKey}
             confettiSource={{
               x: window.innerWidth / 2,
               y: window.innerHeight / 2,
@@ -111,7 +105,7 @@ export default function TreadMill({ updateStats }) {
             recycle={false}
           />
           <Confetti
-            key={confettiKey + 1}
+            key={store.confettiKey + 1}
             confettiSource={{
               x: window.innerWidth / 2 - 200,
               y: window.innerHeight / 2,
@@ -140,7 +134,6 @@ export default function TreadMill({ updateStats }) {
               complexity={slide.complexity}
               tagsUsed={slide.tagsUsed}
               slide={slide}
-              moveSlide={moveSlide}
               offsetRadius={clampOffsetRadius(offsetRadius)}
               index={presentableIndex}
               animationConfig={animationConfig}

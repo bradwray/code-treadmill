@@ -84,7 +84,7 @@ export default [
    subtractFive()
    
    `,
-    solveFor: "b",
+    solveFor: "num",
   },
   {
     content: `  var num1 = ##;

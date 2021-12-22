@@ -5,6 +5,7 @@ import TreadMill from "../components/TreadMill";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Head from "next/head";
+// import "@fontsource/orbitron";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -23,7 +24,7 @@ export default function App({}) {
     return (
       <AppContext route={id}>
         <Head>
-          <title>code-rpm</title>
+          <title>codeRPM</title>
           <meta
             name="viewport"
             content="initial-scale=1.0, width=device-width maximum-scale=1"
