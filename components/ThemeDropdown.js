@@ -40,6 +40,7 @@ function Dropdown() {
   const setTheme = async (i) => {
     const newTheme = (await import("../themes/" + options[i].name + ".cjs.js"))
       .default;
+    console.log(options[i].name);
     setStore({
       ...store,
       theme: hexThemeColors(newTheme),

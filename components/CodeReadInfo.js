@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-
+import { Context } from "./AppContext";
 import styled from "styled-components";
 
 const InfoBar = styled.div`
@@ -11,6 +11,11 @@ const InfoBar = styled.div`
   color: ${(props) => props.theme.plain.color + "66"};
   display: flex;
   justify-content: space-between;
+`;
+
+const TooltipBox = styled.span`
+  position: absolute;
+  visibility: hidden;
 `;
 
 const Tag = styled.a`
@@ -28,10 +33,21 @@ const Tag = styled.a`
   :hover {
     background-color: ${(props) => props.theme.plain.color};
     color: ${(props) => props.theme.plain.backgroundColor};
+    ${TooltipBox} {
+      visibility: visible;
+      background-color: ${(props) => props.theme.plain.color};
+      color: ${(props) => props.theme.plain.backgroundColor};
+      text-align: center;
+      width: 200px;
+      padding: 8px 8px;
+      border-radius: 4px;
+      transform: translateY(-42px) translateX(-30px);
+    }
   }
 `;
 
 function CodeReadInfo({ tagsUsed, complexity }) {
+  const [store, setStore] = useContext(Context);
   return (
     <InfoBar>
       <div>
@@ -49,6 +65,18 @@ function CodeReadInfo({ tagsUsed, complexity }) {
               }
             >
               {trimTag}
+              <TooltipBox>
+                How does{" "}
+                <b
+                  style={{
+                    color: store.theme.styles[6].style.color,
+                    fontSize: "18px",
+                  }}
+                >
+                  {trimTag}
+                </b>{" "}
+                work?
+              </TooltipBox>
             </Tag>
           );
         })}

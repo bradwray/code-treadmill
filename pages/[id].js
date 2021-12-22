@@ -5,7 +5,6 @@ import TreadMill from "../components/TreadMill";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 import Head from "next/head";
-// import "@fontsource/orbitron";
 
 const Wrapper = styled.div`
   overflow: hidden;
