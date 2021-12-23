@@ -14,7 +14,7 @@ const DisplayContainer = styled.div`
   padding-top: 32px;
   box-shadow: inset 0px 0px 2px 0px white;
   @media (max-width: 768px) {
-    transform: scale(0.54) translateY(193px) translateX(-185px);
+    transform: scale(0.54) translateY(38px);
   }
 `;
 

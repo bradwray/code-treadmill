@@ -11,6 +11,9 @@ const InfoBar = styled.div`
   color: ${(props) => props.theme.plain.color + "66"};
   display: flex;
   justify-content: space-between;
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const TooltipBox = styled.span`
@@ -30,6 +33,10 @@ const Tag = styled.a`
   margin: 10px;
   margin-right: 5px;
   margin-left: 5px;
+  @media (max-width: 768px) {
+    font-size: 10px;
+    margin: 2px;
+  }
   :hover {
     background-color: ${(props) => props.theme.plain.color};
     color: ${(props) => props.theme.plain.backgroundColor};

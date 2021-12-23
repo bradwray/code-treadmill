@@ -56,6 +56,16 @@ const Button = styled.button`
   }
 `;
 
+const DropdownContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: 768px) {
+    flex-direction: row;
+    transform: scale(0.9) translateY(64px);
+  }
+`;
+
 export default function Panel() {
   const [leftAligned, setLeftAigned] = React.useState(false);
 
@@ -74,10 +84,10 @@ export default function Panel() {
       <Button onClick={() => setLeftAigned(!leftAligned)}>
         {!leftAligned ? `⤵` : `⤴`}
       </Button>
-      <div>
+      <DropdownContainer>
         <WorkoutDropdown />
         <ThemeDropdown />
-      </div>
+      </DropdownContainer>
       <ResultsDisplay />
       <ProgressChart />
     </Surface>
