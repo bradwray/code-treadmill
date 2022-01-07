@@ -90,7 +90,9 @@ function scale(number, inMin, inMax, outMin, outMax) {
 export default function ProgressChart() {
    const [store, setStore] = useContext(Context);
    const { slides } = store;
-   const maxcomplexity = Math.max(...slides.map(({ complexity }) => complexity));
+   const maxcomplexity = Math.max(
+      ...slides.filter(({ complexity }) => complexity).map(({ complexity }) => complexity)
+   );
    return (
       <div>
          <DisplayContainer>
@@ -104,13 +106,15 @@ export default function ProgressChart() {
                Complexity
             </Label>
             <Display light={store.themeType === 'light' ? true : false}>
-               {slides.map(({ complexity, done }, i) => (
-                  <Bar
-                     key={i}
-                     done={done}
-                     height={scale(complexity, 0, maxcomplexity, 0, 90)}
-                     width={300 / slides.length}></Bar>
-               ))}
+               {slides
+                  .filter(({ complexity }) => complexity)
+                  .map(({ complexity, done }, i) => (
+                     <Bar
+                        key={i}
+                        done={done}
+                        height={scale(complexity, 0, maxcomplexity, 0, 90)}
+                        width={300 / (slides.length - 1)}></Bar>
+                  ))}
             </Display>
          </DisplayContainer>
       </div>

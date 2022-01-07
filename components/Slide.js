@@ -2,6 +2,7 @@ import CodeRead from './CodeRead.js';
 import { Context } from './AppContext';
 import React from 'react';
 import { Spring } from 'react-spring/';
+import WorkoutsMenu from './WorkoutsMenu.js';
 import styled from 'styled-components';
 
 const SlideContainer = styled.div`
@@ -33,10 +34,7 @@ const SlideCard = styled.div`
 `;
 
 function Slide({
-   content,
-   solveFor,
-   complexity,
-   tagsUsed,
+   slide: { type, content, solveFor, complexity, tagsUsed },
    offsetRadius,
    index,
    animationConfig,
@@ -81,15 +79,18 @@ function Slide({
                   zIndex: Math.abs(Math.abs(offsetFromMiddle) - 2),
                }}>
                <SlideCard>
-                  <CodeRead
-                     solveFor={solveFor}
-                     content={content}
-                     tagsUsed={tagsUsed}
-                     complexity={complexity}
-                     moveSlide={moveSlide}
-                     offsetFromMiddle={offsetFromMiddle}
-                     index={index}
-                  />
+                  {type === 'read' ? (
+                     <CodeRead
+                        solveFor={solveFor}
+                        content={content}
+                        tagsUsed={tagsUsed}
+                        complexity={complexity}
+                        moveSlide={moveSlide}
+                        offsetFromMiddle={offsetFromMiddle}
+                        index={index}
+                     />
+                  ) : null}
+                  {type === 'end' ? <WorkoutsMenu end={true} /> : null}
                </SlideCard>
             </SlideContainer>
          )}
