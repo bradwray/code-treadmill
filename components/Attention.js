@@ -9,6 +9,9 @@ const Point = styled.div`
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-right: 10px solid ${(props) => props.theme.plain.color};
+  @media (max-width: 768px) {
+    transform: scale(0.5) translateY(-85px) translateX(320px);
+  }
 `;
 
 const Tail = styled.div`
@@ -16,6 +19,9 @@ const Tail = styled.div`
   background-color: ${(props) => props.theme.plain.color};
   width: 30px;
   height: 10px;
+  @media (max-width: 768px) {
+    transform: scale(0.5) translateY(-95px) translateX(298px);
+  }
 `;
 
 const MessageBox = styled.div`
@@ -28,6 +34,9 @@ const MessageBox = styled.div`
   font-size: 16px;
   font-family: "Dank Mono", "Fira Code", monospace;
   width: 100px;
+  @media (max-width: 768px) {
+    transform: scale(0.7) translateY(-54px) translateX(180px);
+  }
 `;
 
 const bounce = keyframes`

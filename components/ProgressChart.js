@@ -17,7 +17,7 @@ const DisplayContainer = styled.div`
    justify-content: center;
    align-items: center;
    @media (max-width: 768px) {
-      transform: scale(0.5) translateY(-50px) translateX(210px);
+      transform: scale(0.54) translateY(-60px);
    }
 `;
 
