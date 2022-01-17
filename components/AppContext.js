@@ -2,8 +2,6 @@ import React, { createContext, useEffect } from 'react';
 
 import { ThemeProvider } from 'styled-components';
 import cobalt2 from '../themes/cobalt.cjs.js';
-import hexThemeColors from '../utils/hexThemeColors.js';
-import options from '../themes/themeOptions.js';
 import slides from '../workouts/conditionals';
 import tagAndWeightCode from '../utils/tagAndWeightCode.js';
 

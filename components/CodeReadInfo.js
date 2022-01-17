@@ -52,32 +52,35 @@ function CodeReadInfo({ tagsUsed, complexity }) {
    return (
       <InfoBar>
          <div>
-            {tagsUsed.map(({ tag, path }, i) => {
-               let trimTag = tag.trim();
-               if (trimTag == '{') trimTag += ' }';
-               if (trimTag == '(') trimTag += ' )';
-               return (
-                  <Tag
-                     key={i}
-                     target='_blank'
-                     href={
-                        'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/' + path
-                     }>
-                     {trimTag}
-                     <TooltipBox>
-                        How does{' '}
-                        <b
-                           style={{
-                              color: store.theme.styles[6].style.color,
-                              fontSize: '18px',
-                           }}>
-                           {trimTag}
-                        </b>{' '}
-                        work?
-                     </TooltipBox>
-                  </Tag>
-               );
-            })}
+            {tagsUsed
+               ? tagsUsed.map(({ tag, path }, i) => {
+                    let trimTag = tag.trim();
+                    if (trimTag == '{') trimTag += ' }';
+                    if (trimTag == '(') trimTag += ' )';
+                    return (
+                       <Tag
+                          key={i}
+                          target='_blank'
+                          href={
+                             'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/' +
+                             path
+                          }>
+                          {trimTag}
+                          <TooltipBox>
+                             How does{' '}
+                             <b
+                                style={{
+                                   color: store.theme.styles[6].style.color,
+                                   fontSize: '18px',
+                                }}>
+                                {trimTag}
+                             </b>{' '}
+                             work?
+                          </TooltipBox>
+                       </Tag>
+                    );
+                 })
+               : null}
          </div>
          <div>complexity {complexity}</div>
       </InfoBar>
