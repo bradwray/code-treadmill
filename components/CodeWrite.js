@@ -13,7 +13,7 @@ export default function CodeWriter({ handleSetCode, handleFocus, code }) {
          onValueChange={handleSetCode}
          onFocus={handleFocus}
          padding={10}
-         // autoFocus
+         autoFocus
          style={{
             fontSize: 18,
             width: '100%',

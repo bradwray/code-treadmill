@@ -88,6 +88,7 @@ function Slide({
                         moveSlide={moveSlide}
                         offsetFromMiddle={offsetFromMiddle}
                         index={index}
+                        maker={false}
                      />
                   ) : null}
                   {type === 'end' ? <WorkoutsMenu end={true} /> : null}

@@ -1,212 +1,204 @@
-import React, { useContext } from "react";
-import { Context } from "./AppContext";
-import Attention from "./Attention";
-import CodeHighlight from "./CodeHighlight";
-import CodeReadInfo from "./CodeReadInfo";
+import React, { useContext } from 'react';
 
-import Editor from "react-simple-code-editor";
-import Feedback from "./Feedback.js";
-import fillItAndPrettify from "../utils/fillItAndPrettify";
-import styled from "styled-components";
+import Attention from './Attention';
+import CodeHighlight from './CodeHighlight';
+import CodeReadInfo from './CodeReadInfo';
+import { Context } from './AppContext';
+import Editor from 'react-simple-code-editor';
+import Feedback from './Feedback.js';
+import fillItAndPrettify from '../utils/fillItAndPrettify';
+import styled from 'styled-components';
 
 const CodeReadContainer = styled.div`
-  width: 100%;
-  max-width: 1400px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  font-size: 18;
-  box-sizing: "border-box";
-  font-family: '"Dank Mono", "Fira Code", monospace';
+   width: 100%;
+   max-width: 1400px;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   justify-content: center;
+   font-size: 18;
+   box-sizing: 'border-box';
+   font-family: '"Dank Mono", "Fira Code", monospace';
 `;
 
 const InputBox = styled.input`
-  bottom: 25px;
-  width: ${(props) => (props.w ? `200px` : `60px`)};
-  color: ${(props) => props.theme.plain.color};
-  background: ${(props) => props.theme.plain.backgroundColor};
-  height: 30px;
-  text-align: center;
+   bottom: 25px;
+   width: ${(props) => (props.w ? `200px` : `60px`)};
+   color: ${(props) => props.theme.plain.color};
+   background: ${(props) => props.theme.plain.backgroundColor};
+   height: 30px;
+   text-align: center;
 `;
 
 const BottomContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
 `;
 
 const SolvingFor = styled.span`
-  display: inline-block;
-  font-size: 18px;
-  font-family: "Dank Mono", "Fira Code", monospace;
-  margin-right: 14px;
-  margin-left: 5px;
-  color: ${(props) => props.theme.plain.color};
+   display: inline-block;
+   font-size: 18px;
+   font-family: 'Dank Mono', 'Fira Code', monospace;
+   margin-right: 14px;
+   margin-left: 5px;
+   color: ${(props) => props.theme.plain.color};
 `;
 
-function CodeRead({
-  content,
-  solveFor,
-  complexity,
-  tagsUsed,
-  offsetFromMiddle,
-  index,
-}) {
-  const [state, setState] = React.useState({
-    code: fillItAndPrettify(content),
-    answered: false,
-    correct: false,
-    inputVal: "",
-  });
-
-  const [store, setStore] = useContext(Context);
-
-  const gotIt = () => {
-    setState({
-      ...state,
+function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, index, maker }) {
+   const [state, setState] = React.useState({
+      code: fillItAndPrettify(content, maker),
       answered: false,
       correct: false,
-      error: "",
-      code: fillItAndPrettify(content),
-      inputVal: "",
-    });
-  };
+      inputVal: '',
+   });
 
-  const evalCode = (code) => {
-    var wholeEval = new Function(code + "\n" + "return " + solveFor);
+   const [store, setStore] = useContext(Context);
 
-    try {
-      return wholeEval().toString();
-    } catch (error) {
-      console.log(error.toString());
-      // setState({ ...state, error: error.toString() });
-      return error.toString();
-    }
-  };
-
-  const updateStats = (correct) => {
-    let tempFlips = store.readStats;
-    tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
-    if (correct) {
-      let rpm =
-        60 /
-        (tempFlips
-          .map((item, i) => {
-            return i > 0 ? item.time - tempFlips[i - 1].time : 0;
-          })
-          .reduce((a, b) => a + b) /
-          tempFlips.length /
-          1000);
-      rpm = Number.isFinite(rpm) ? rpm.toFixed(2) : 1.0;
-
-      rpm = rpm.toString().length > 3 ? Number(rpm).toFixed(1) : rpm;
-      const avgComplexity =
-        tempFlips
-          .map((item) => item.complexity)
-          .reduce((sum, value) => {
-            return sum + value;
-          }, 0) / tempFlips.length;
-      const tempSlides = store.slides;
-      tempSlides[store.currentIndex].done = true;
-
-      setStore({
-        ...store,
-        slides: tempSlides,
-        readStats: tempFlips,
-        confettiKey: Date.now(),
-        currentIndex: store.currentIndex + 1,
-        avgComplexity: Number(avgComplexity).toFixed(1),
-        rpm,
-      });
-    }
-  };
-
-  const handleChange = (e) => {
-    if (e.key === "Enter") {
-      if (
-        evalCode(state.code).toLowerCase() ===
-          e.target.value.toLowerCase().trim() &&
-        !state.answered
-      ) {
-        setTimeout(() => {
-          setState({
-            ...state,
-            answered: false,
-            correct: false,
-            inputVal: "",
-          });
-        }, 1500);
-        setState({
-          ...state,
-          answered: true,
-          correct: true,
-        });
-        updateStats(true);
-      } else {
-        setState({
-          ...state,
-          answered: true,
-          correct: false,
-        });
-        updateStats(false);
-      }
-    } else {
+   const gotIt = () => {
       setState({
-        ...state,
-        inputVal: e.target.value,
+         ...state,
+         answered: false,
+         correct: false,
+         error: '',
+         code: fillItAndPrettify(content, maker),
+         inputVal: '',
       });
-    }
-  };
+   };
 
-  const { answered, correct, error, code, inputVal } = state;
-  const theCode = code ? code : content;
+   const evalCode = (code) => {
+      var wholeEval = new Function(code + '\n' + 'return ' + solveFor);
 
-  return (
-    <CodeReadContainer>
-      <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} />
-      <Editor
-        value={theCode}
-        highlight={() => CodeHighlight(theCode, store.theme)}
-        onValueChange={() => {}}
-        padding={10}
-        style={{
-          fontSize: 18,
-          width: "100%",
-          maxWidth: "1200px",
-          border: "1px solid #555",
-          boxSizing: "border-box",
-          fontFamily: '"Dank Mono", "Fira Code", monospace',
-          ...store.theme.plain,
-        }}
-      />
+      try {
+         return wholeEval().toString();
+      } catch (error) {
+         console.log(error.toString());
+         // setState({ ...state, error: error.toString() });
+         return error.toString();
+      }
+   };
 
-      <BottomContainer>
-        {offsetFromMiddle === 0 ? (
-          <div>
-            <SolvingFor>{solveFor} ==</SolvingFor>
-            <InputBox
-              value={inputVal}
-              w={evalCode(fillItAndPrettify(theCode)).length > 10}
-              autoFocus
-              onChange={handleChange}
-              onKeyDown={handleChange}
+   const updateStats = (correct) => {
+      let tempFlips = store.readStats;
+      tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
+      if (correct) {
+         let rpm =
+            60 /
+            (tempFlips
+               .map((item, i) => {
+                  return i > 0 ? item.time - tempFlips[i - 1].time : 0;
+               })
+               .reduce((a, b) => a + b) /
+               tempFlips.length /
+               1000);
+         rpm = Number.isFinite(rpm) ? rpm.toFixed(2) : 1.0;
+
+         rpm = rpm.toString().length > 3 ? Number(rpm).toFixed(1) : rpm;
+         const avgComplexity =
+            tempFlips
+               .map((item) => item.complexity)
+               .reduce((sum, value) => {
+                  return sum + value;
+               }, 0) / tempFlips.length;
+         const tempSlides = store.slides;
+         tempSlides[store.currentIndex].done = true;
+
+         setStore({
+            ...store,
+            slides: tempSlides,
+            readStats: tempFlips,
+            confettiKey: Date.now(),
+            currentIndex: store.currentIndex + 1,
+            avgComplexity: Number(avgComplexity).toFixed(1),
+            rpm,
+         });
+      }
+   };
+
+   const handleChange = (e) => {
+      if (e.key === 'Enter') {
+         if (
+            evalCode(state.code).toLowerCase() === e.target.value.toLowerCase().trim() &&
+            !state.answered
+         ) {
+            setTimeout(() => {
+               setState({
+                  ...state,
+                  answered: false,
+                  correct: false,
+                  inputVal: '',
+               });
+            }, 1500);
+            setState({
+               ...state,
+               answered: true,
+               correct: true,
+            });
+            updateStats(true);
+         } else {
+            setState({
+               ...state,
+               answered: true,
+               correct: false,
+            });
+            updateStats(false);
+         }
+      } else {
+         setState({
+            ...state,
+            inputVal: e.target.value,
+         });
+      }
+   };
+
+   const { answered, correct, error, code, inputVal } = state;
+   const theCode = code ? code : content;
+
+   return (
+      <CodeReadContainer>
+         <Editor
+            value={theCode}
+            highlight={() => CodeHighlight(theCode, store.theme)}
+            onValueChange={() => {}}
+            padding={10}
+            style={{
+               fontSize: 18,
+               width: '100%',
+               maxWidth: '1200px',
+               border: '1px solid #555',
+               boxSizing: 'border-box',
+               fontFamily: '"Dank Mono", "Fira Code", monospace',
+               ...store.theme.plain,
+            }}
+         />
+
+         <BottomContainer>
+            {offsetFromMiddle === 0 ? (
+               <div>
+                  <SolvingFor>{solveFor} ==</SolvingFor>
+                  <InputBox
+                     value={inputVal}
+                     w={evalCode(fillItAndPrettify(theCode, maker)).length > 10}
+                     autoFocus={!maker}
+                     onChange={handleChange}
+                     onKeyDown={handleChange}
+                  />
+                  {store.currentIndex == 0 && !maker ? (
+                     <Attention message='enter your response' />
+                  ) : null}
+               </div>
+            ) : null}{' '}
+            <Feedback
+               answered={answered}
+               correct={correct}
+               error={error}
+               gotIt={gotIt}
+               answer={() => evalCode(code)}
             />
-            {store.currentIndex == 0 ? (
-              <Attention message="enter your response" />
-            ) : null}
-          </div>
-        ) : null}{" "}
-        <Feedback
-          answered={answered}
-          correct={correct}
-          error={error}
-          gotIt={gotIt}
-          answer={() => evalCode(code)}
-        />
-      </BottomContainer>
-    </CodeReadContainer>
-  );
+         </BottomContainer>
+         <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} maker={maker} />
+      </CodeReadContainer>
+   );
 }
 
 export default CodeRead;

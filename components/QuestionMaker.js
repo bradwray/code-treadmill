@@ -62,14 +62,25 @@ const InputBox = styled.input`
    width: 100px;
    height: 30px;
    text-align: center;
+   background-color: ${(props) => props.theme.plain.backgroundColor};
+   border-color: ${(props) => props.theme.plain.color};
+   border-radius: 2px;
+   color: ${(props) => props.theme.plain.color};
 `;
 
 const Submit = styled.button`
-   width: 125px;
    height: 50px;
+   padding-right: 10px;
+   padding-left: 10px;
    font-size: 25px;
    transform: translateY(40px) translateX(460px);
    font-family: 'Dank Mono', 'Fira Code', monospace;
+   border: 1px dashed ${(props) => props.theme.plain.backgroundColor + 'bb'};
+   color: ${(props) => props.theme.plain.backgroundColor};
+   background-color: ${(props) => props.theme.plain.color};
+   :hover {
+      transform: translateY(40px) translateX(460px) scale(1.05);
+   }
 `;
 
 function QuestionMaker() {
@@ -109,6 +120,7 @@ function QuestionMaker() {
                content={code === `//write your code here` ? '' : code}
                moveSlide={handleGoodTest}
                offsetFromMiddle={0}
+               maker={true}
             />
             {passedTest ? <Submit>Submit</Submit> : null}
          </Section>

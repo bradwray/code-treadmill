@@ -4,7 +4,8 @@ import { Context } from './AppContext';
 import styled from 'styled-components';
 
 const InfoBar = styled.div`
-   width: 100%;
+   width: ${(props) => (props.maker ? '35%' : '100%')};
+   max-width: 750px;
    position: absolute;
    bottom: 10px;
    font-size: 16px;
@@ -47,10 +48,10 @@ const Tag = styled.a`
    }
 `;
 
-function CodeReadInfo({ tagsUsed, complexity }) {
+function CodeReadInfo({ tagsUsed, complexity, maker }) {
    const [store, setStore] = useContext(Context);
    return (
-      <InfoBar>
+      <InfoBar maker={maker}>
          <div>
             {tagsUsed
                ? tagsUsed.map(({ tag, path }, i) => {
