@@ -16,6 +16,7 @@ const DisplayContainer = styled.div`
    display: flex;
    justify-content: center;
    align-items: center;
+   margin: 10px;
    @media (max-width: 768px) {
       transform: scale(0.54) translateY(-60px);
    }

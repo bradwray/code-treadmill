@@ -38,7 +38,6 @@ export function AppContext(props) {
       }
    }, [props.route]);
 
-   console.log(store);
    return (
       <ThemeProvider theme={store.theme}>
          <Context.Provider value={[store, setStore]}>{props.children}</Context.Provider>

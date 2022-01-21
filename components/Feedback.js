@@ -1,55 +1,67 @@
+import Button from './Button';
 import React from 'react';
+import evalCode from '../utils/evalCode';
 import styled from 'styled-components';
 
-const FeedBackRight = styled.div`
+const FeedBack = styled.div`
+   display: flex;
+   justify-content: space-between;
    font-size: 16px;
    padding-left: 10px;
    width: 100%;
    max-width: 1400px;
-   text-align: center;
    color: #c0deed;
    border: 1px solid #c0deed;
    font-family: 'Dank Mono', 'Fira Code', monospace;
    margin-top: 15px;
    border-radius: 4px;
-   bottom: 30px;
-   min-height: 50px;
+   min-height: 45px;
    height: 100%;
 `;
 
-const FeedBackWrong = styled.div`
-   display: flex;
-   justify-content: space-between;
-   font-size: 16px;
-   font-family: 'Dank Mono', 'Fira Code', monospace;
-   margin-top: 15px;
-   padding-left: 10px;
-   width: 100%;
-   max-width: 1400px;
-   bottom: 30px;
-   border: 1px solid #ff628c;
-   border-radius: 4px;
-   color: #ff628c;
-   /* width: 60px; */
-   min-height: 50px;
-   height: 100%;
+const FeedBackRight = styled(FeedBack)`
+   color: ${(props) => props.theme.styles[4].style.color};
+   border: 1px solid ${(props) => props.theme.styles[4].style.color};
+`;
+const FeedBackWrong = styled(FeedBack)`
+   color: ${(props) => props.theme.styles[6].style.color};
+   border: 1px solid ${(props) => props.theme.styles[6].style.color};
 `;
 
-const Button = styled.button`
-   background-color: #ff628c;
-   color: #193549;
-   :hover {
-      background-color: #c0deed;
-      border: 3px solid #c0deed;
-   }
-`;
+const congrats = [
+   'Nice!',
+   'Way to go!',
+   'Awesome!',
+   'Great!',
+   'Heck yeah!',
+   'Sweet!',
+   'Fantastic!',
+   'Oh yeah!',
+];
+const sorry = [
+   'Sorry...',
+   'Not quite...',
+   'Woops...',
+   'Shoot...',
+   'Incorrect...',
+   'Wrong...',
+   `¯\\_(ツ)_/¯`,
+   'Uh oh...',
+];
 
-export default function showFeedBack({ answered, correct, error, gotIt, answer }) {
+const randomPick = (list) => {
+   return list[Math.floor(Math.random() * list.length)];
+};
+
+export default function showFeedBack({ answered, correct, error, gotIt, code, solveFor }) {
    if (answered) {
+      const answer = evalCode(code, solveFor);
       if (correct) {
          return (
             <FeedBackRight>
-               <div style={{ transform: 'translateY(13px)' }}>Right! Answer: {answer()}</div>
+               <div style={{ transform: 'translateY(13px)' }}>
+                  {randomPick(congrats)} Answer: {answer}
+               </div>
             </FeedBackRight>
          );
       } else if (error) {
@@ -62,8 +74,10 @@ export default function showFeedBack({ answered, correct, error, gotIt, answer }
       } else {
          return (
             <FeedBackWrong>
-               <div>answer: {answer()}</div>
-               <Button onClick={() => gotIt()}>Got it</Button>
+               <div>
+                  {randomPick(sorry)} Answer: {answer}
+               </div>
+               <Button onClick={() => gotIt()}>Try Again</Button>
             </FeedBackWrong>
          );
       }

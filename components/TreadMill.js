@@ -100,7 +100,7 @@ export default function TreadMill({ updateStats }) {
                   gravity={2}
                   initialVelocityY={70}
                   initialVelocityX={50}
-                  numberOfPieces={500}
+                  numberOfPieces={1000}
                   recycle={false}
                />
                <Confetti
@@ -116,7 +116,7 @@ export default function TreadMill({ updateStats }) {
                   initialVelocityX={-50}
                   gravity={2}
                   height={window.innerHeight}
-                  numberOfPieces={500}
+                  numberOfPieces={1000}
                   recycle={false}
                />
             </div>

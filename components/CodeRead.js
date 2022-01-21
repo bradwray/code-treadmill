@@ -6,12 +6,14 @@ import CodeReadInfo from './CodeReadInfo';
 import { Context } from './AppContext';
 import Editor from 'react-simple-code-editor';
 import Feedback from './Feedback.js';
+import evalCode from '../utils/evalCode';
 import fillItAndPrettify from '../utils/fillItAndPrettify';
 import styled from 'styled-components';
 
 const CodeReadContainer = styled.div`
    width: 100%;
    max-width: 1400px;
+
    display: flex;
    flex-direction: column;
    align-items: flex-start;
@@ -24,8 +26,11 @@ const CodeReadContainer = styled.div`
 const InputBox = styled.input`
    bottom: 25px;
    width: ${(props) => (props.w ? `200px` : `60px`)};
+   background-color: ${(props) => props.theme.plain.backgroundColor};
+   border-color: ${(props) => props.theme.plain.color + '66'};
+   border-radius: 2px;
+   filter: brightness(130%);
    color: ${(props) => props.theme.plain.color};
-   background: ${(props) => props.theme.plain.backgroundColor};
    height: 30px;
    text-align: center;
 `;
@@ -45,14 +50,24 @@ const SolvingFor = styled.span`
    color: ${(props) => props.theme.plain.color};
 `;
 
-function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, index, maker }) {
+function CodeRead({
+   questionData: { content, solveFor, complexity, tagsUsed, answerLength, answerType },
+   offsetFromMiddle,
+   index,
+   maker,
+}) {
    const [state, setState] = React.useState({
       code: fillItAndPrettify(content, maker),
       answered: false,
       correct: false,
       inputVal: '',
    });
-
+   React.useEffect(() => {
+      setState({
+         ...state,
+         code: fillItAndPrettify(content, maker),
+      });
+   }, [content]);
    const [store, setStore] = useContext(Context);
 
    const gotIt = () => {
@@ -65,19 +80,7 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, i
          inputVal: '',
       });
    };
-
-   const evalCode = (code) => {
-      var wholeEval = new Function(code + '\n' + 'return ' + solveFor);
-
-      try {
-         return wholeEval().toString();
-      } catch (error) {
-         console.log(error.toString());
-         // setState({ ...state, error: error.toString() });
-         return error.toString();
-      }
-   };
-
+   console.log(answerType);
    const updateStats = (correct) => {
       let tempFlips = store.readStats;
       tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
@@ -108,17 +111,18 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, i
             slides: tempSlides,
             readStats: tempFlips,
             confettiKey: Date.now(),
-            currentIndex: store.currentIndex + 1,
+
             avgComplexity: Number(avgComplexity).toFixed(1),
             rpm,
          });
+         setTimeout(() => setStore({ ...store, currentIndex: store.currentIndex + 1 }), 1500);
       }
    };
 
    const handleChange = (e) => {
       if (e.key === 'Enter') {
          if (
-            evalCode(state.code).toLowerCase() === e.target.value.toLowerCase().trim() &&
+            evalCode(state.code, solveFor).toLowerCase() === e.target.value.toLowerCase().trim() &&
             !state.answered
          ) {
             setTimeout(() => {
@@ -152,13 +156,12 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, i
    };
 
    const { answered, correct, error, code, inputVal } = state;
-   const theCode = code ? code : content;
 
    return (
       <CodeReadContainer>
          <Editor
-            value={theCode}
-            highlight={() => CodeHighlight(theCode, store.theme)}
+            value={code}
+            highlight={() => CodeHighlight(code, store.theme)}
             onValueChange={() => {}}
             padding={10}
             style={{
@@ -178,10 +181,11 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, i
                   <SolvingFor>{solveFor} ==</SolvingFor>
                   <InputBox
                      value={inputVal}
-                     w={evalCode(fillItAndPrettify(theCode, maker)).length > 10}
+                     w={answerLength > 10}
                      autoFocus={!maker}
                      onChange={handleChange}
                      onKeyDown={handleChange}
+                     type={answerType}
                   />
                   {store.currentIndex == 0 && !maker ? (
                      <Attention message='enter your response' />
@@ -193,7 +197,8 @@ function CodeRead({ content, solveFor, complexity, tagsUsed, offsetFromMiddle, i
                correct={correct}
                error={error}
                gotIt={gotIt}
-               answer={() => evalCode(code)}
+               code={code}
+               solveFor={solveFor}
             />
          </BottomContainer>
          <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} maker={maker} />

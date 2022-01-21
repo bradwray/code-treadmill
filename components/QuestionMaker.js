@@ -63,8 +63,9 @@ const InputBox = styled.input`
    height: 30px;
    text-align: center;
    background-color: ${(props) => props.theme.plain.backgroundColor};
-   border-color: ${(props) => props.theme.plain.color};
+   border-color: ${(props) => props.theme.plain.color + '66'};
    border-radius: 2px;
+   filter: brightness(130%);
    color: ${(props) => props.theme.plain.color};
 `;
 
@@ -84,21 +85,24 @@ const Submit = styled.button`
 `;
 
 function QuestionMaker() {
-   const [code, setCode] = React.useState(`//write your code here`);
+   const [state, setState] = React.useState({ content: `//write your code here`, solveFor: '' });
    const [solveFor, setSolveFor] = React.useState('');
    const [passedTest, setPassedTest] = React.useState(true);
 
    const handleFocus = () => {
-      if (code === `//write your code here`) {
-         let tempCode = code.replace(`//write your code here`, '');
-         setCode(tempCode);
+      if (state.content === `//write your code here`) {
+         let tempCode = state.content.replace(`//write your code here`, '');
+         setState({ ...state, content: tempCode });
       }
+   };
+
+   const handleCoding = (val) => {
+      setState({ ...state, content: val });
    };
 
    const handleGoodTest = () => {
       setPassedTest(true);
    };
-
    return (
       <CardContainer>
          <Section>
@@ -106,9 +110,14 @@ function QuestionMaker() {
             <SpecialChars />
 
             <div>
-               <CodeWrite handleSetCode={setCode} handleFocus={handleFocus} code={code} />
+               <CodeWrite
+                  handleSetCode={handleCoding}
+                  handleFocus={handleFocus}
+                  code={state.content}
+               />
                <Table>
-                  Solving for: <InputBox onChange={(e) => setSolveFor(e.target.value)} />
+                  Solving for:{' '}
+                  <InputBox onChange={(e) => setState({ ...state, solveFor: e.target.value })} />
                </Table>
             </div>
          </Section>
@@ -116,8 +125,7 @@ function QuestionMaker() {
          <Section>
             <Title>Test It</Title>
             <CodeRead
-               solveFor={solveFor}
-               content={code === `//write your code here` ? '' : code}
+               questionData={state}
                moveSlide={handleGoodTest}
                offsetFromMiddle={0}
                maker={true}

@@ -7,13 +7,17 @@ import ThemeDropdown from './ThemeDropdown';
 import WorkoutDropdown from './WorkoutDropdown';
 import styled from 'styled-components';
 
-const TopAligned = styled.div`
-   position: absolute;
-   /* transform: translateX(-10px) translateY(-10px); */
+const ControlPanel = styled.div`
    display: flex;
-   height: 165px;
    color: ${(props) => props.theme.styles[5].style.color};
    background: ${(props) => props.theme.plain.backgroundColor};
+   z-index: 1000;
+`;
+
+const TopAligned = styled(ControlPanel)`
+   position: absolute;
+   /* transform: translateX(-10px) translateY(-10px); */
+   height: 165px;
    justify-content: space-around;
    align-items: center;
    width: 100%;
@@ -25,19 +29,17 @@ const TopAligned = styled.div`
    }
 `;
 
-const LeftAligned = styled.div`
+const LeftAligned = styled(ControlPanel)`
    transform: translateX(15px);
-   padding-top: 50px;
+
    display: flex;
    padding: 10px;
+   padding-top: 50px;
    flex-direction: column;
    border: 1px solid ${(props) => props.theme.plain.color + '99'};
-   justify-content: space-around;
+   justify-content: flex-start;
    width: 400px;
    height: 100vh;
-   color: ${(props) => props.theme.styles[5].style.color};
-   background-color: ${(props) => props.theme.plain.backgroundColor};
-   z-index: 1000;
 `;
 
 const Button = styled.button`
@@ -67,21 +69,14 @@ const DropdownContainer = styled.div`
 `;
 
 export default function Panel() {
-   const [leftAligned, setLeftAigned] = React.useState(false);
-
    const [store, setStore] = useContext(Context);
 
-   const handleTheme = (themeChoice) => {
-      setStore({
-         ...store,
-         theme: themeChoice,
-      });
-   };
-
-   const Surface = leftAligned ? LeftAligned : TopAligned;
+   const Surface = store.leftAligned ? LeftAligned : TopAligned;
    return (
       <Surface>
-         <Button onClick={() => setLeftAigned(!leftAligned)}>{!leftAligned ? `⤵` : `⤴`}</Button>
+         <Button onClick={() => setStore({ ...store, leftAligned: !store.leftAligned })}>
+            {!store.leftAligned ? `⤵` : `⤴`}
+         </Button>
          <DropdownContainer>
             <WorkoutDropdown />
             <ThemeDropdown />

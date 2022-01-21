@@ -22,8 +22,8 @@ const fillItAndPrettify = (codeString, maker) => {
       newCodeString = newCodeString.replace('**', `${Math.random() > 0.5 ? true : false}`);
       newCodeString = newCodeString.replace('@@', `"${randomAnimals()}"`);
    }
-   //   console.log("filled with", newCodeString);
-   if (maker) {
+
+   if (!maker) {
       return newCodeString;
    } else {
       return prettier.format(newCodeString, {

@@ -1,6 +1,7 @@
+import React, { useContext } from 'react';
+
 import CodeRead from './CodeRead.js';
 import { Context } from './AppContext';
-import React from 'react';
 import { Spring } from 'react-spring/';
 import WorkoutsMenu from './WorkoutsMenu.js';
 import styled from 'styled-components';
@@ -13,11 +14,9 @@ const SlideContainer = styled.div`
    color: ${(props) => props.theme.styles[5].style.color};
    background: ${(props) => props.theme.plain.backgroundColor};
    max-width: 800px;
-   top: 50%;
    display: flex;
    align-items: center;
    justify-content: center;
-   transform-origin: 50% 50%;
 `;
 
 const SlideCard = styled.div`
@@ -25,27 +24,23 @@ const SlideCard = styled.div`
    max-width: 1400px;
    width: 90%;
    height: 100%;
+
    font-size: 35px;
    display: flex;
    flex-direction: column;
    align-items: right;
    justify-content: center;
-   transform-origin: 30% 50%;
 `;
 
-function Slide({
-   slide: { type, content, solveFor, complexity, tagsUsed },
-   offsetRadius,
-   index,
-   animationConfig,
-   moveSlide,
-}) {
+function Slide({ slide, offsetRadius, index, animationConfig, moveSlide }) {
+   const [store, setStore] = useContext(Context);
+
    const offsetFromMiddle = index - offsetRadius;
    const totalPresentables = 2 * offsetRadius + 1;
    const distanceFactor = 1 - Math.abs(offsetFromMiddle / (offsetRadius + 1));
 
    const translateYoffset = 50 * (Math.abs(offsetFromMiddle) / (offsetRadius + 1));
-   let translateY = -50;
+   let translateY = store.leftAligned ? -65 : -55;
 
    if (offsetRadius !== 0) {
       if (index === 0) {
@@ -65,7 +60,7 @@ function Slide({
       <Spring
          to={{
             transform: `translateX(0%) translateY(${translateY}%) scale(${distanceFactor})`,
-            top: `${offsetFromMiddle === 0 ? 60 : 60 + (offsetFromMiddle * 50) / offsetRadius}%`,
+            top: `${offsetFromMiddle === 0 ? 60 : 60 + (offsetFromMiddle * 40) / offsetRadius}%`,
             opacity: distanceFactor * distanceFactor,
          }}
          config={animationConfig}>
@@ -79,19 +74,16 @@ function Slide({
                   zIndex: Math.abs(Math.abs(offsetFromMiddle) - 2),
                }}>
                <SlideCard>
-                  {type === 'read' ? (
+                  {slide.type === 'read' ? (
                      <CodeRead
-                        solveFor={solveFor}
-                        content={content}
-                        tagsUsed={tagsUsed}
-                        complexity={complexity}
+                        questionData={slide}
                         moveSlide={moveSlide}
                         offsetFromMiddle={offsetFromMiddle}
                         index={index}
                         maker={false}
                      />
                   ) : null}
-                  {type === 'end' ? <WorkoutsMenu end={true} /> : null}
+                  {slide.type === 'end' ? <WorkoutsMenu end={true} /> : null}
                </SlideCard>
             </SlideContainer>
          )}

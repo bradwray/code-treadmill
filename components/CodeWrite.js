@@ -3,13 +3,14 @@ import React, { Component, Fragment, useContext } from 'react';
 import CodeHighlight from './CodeHighlight.js';
 import { Context } from './AppContext';
 import Editor from 'react-simple-code-editor';
-import theme from 'prism-react-renderer/themes/nightOwl';
 
 export default function CodeWriter({ handleSetCode, handleFocus, code }) {
+   const [store, setStore] = useContext(Context);
+
    return (
       <Editor
          value={code}
-         highlight={CodeHighlight}
+         highlight={() => CodeHighlight(code, store.theme)}
          onValueChange={handleSetCode}
          onFocus={handleFocus}
          padding={10}
@@ -22,7 +23,7 @@ export default function CodeWriter({ handleSetCode, handleFocus, code }) {
             border: '1px solid #555',
             boxSizing: 'border-box',
             fontFamily: '"Dank Mono", "Fira Code", monospace',
-            ...theme.plain,
+            ...store.theme.plain,
          }}
       />
    );
