@@ -1,6 +1,7 @@
 import { AppContext, Context } from '../components/AppContext';
 import React, { useContext, useEffect, useState } from 'react';
 
+import Button from '../components/Button';
 import Head from 'next/head';
 import Panel from '../components/Panel';
 import QuestionMaker from '../components/QuestionMaker';
@@ -25,19 +26,8 @@ const Toptions = styled.div`
    border-bottom: 1px solid ${(props) => props.theme.plain.color + '99'};
 `;
 
-const AddNew = styled.button`
+const AddNew = styled(Button)`
    margin-bottom: 80px;
-   height: 50px;
-   padding-right: 10px;
-   padding-left: 10px;
-   font-size: 25px;
-   font-family: 'Dank Mono', 'Fira Code', monospace;
-   border: 1px dashed ${(props) => props.theme.plain.backgroundColor + 'bb'};
-   background-color: ${(props) => props.theme.plain.color};
-   color: ${(props) => props.theme.plain.backgroundColor};
-   :hover {
-      transform: scale(1.05);
-   }
 `;
 
 const WorkoutMaker = ({}) => {

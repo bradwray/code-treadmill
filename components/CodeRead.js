@@ -58,6 +58,7 @@ function CodeRead({
 }) {
    const [state, setState] = React.useState({
       code: fillItAndPrettify(content, maker),
+      solvingFor: fillItAndPrettify(solveFor, true),
       answered: false,
       correct: false,
       inputVal: '',
@@ -66,8 +67,9 @@ function CodeRead({
       setState({
          ...state,
          code: fillItAndPrettify(content, maker),
+         solvingFor: fillItAndPrettify(solveFor, true),
       });
-   }, [content]);
+   }, [content, solveFor]);
    const [store, setStore] = useContext(Context);
 
    const gotIt = () => {
@@ -77,10 +79,10 @@ function CodeRead({
          correct: false,
          error: '',
          code: fillItAndPrettify(content, maker),
+         solvingFor: fillItAndPrettify(solveFor, true),
          inputVal: '',
       });
    };
-   console.log(answerType);
    const updateStats = (correct) => {
       let tempFlips = store.readStats;
       tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
@@ -119,10 +121,11 @@ function CodeRead({
       }
    };
 
-   const handleChange = (e) => {
+   const handleChange = (e, solvingFor) => {
       if (e.key === 'Enter') {
          if (
-            evalCode(state.code, solveFor).toLowerCase() === e.target.value.toLowerCase().trim() &&
+            evalCode(state.code, solvingFor).toLowerCase() ===
+               e.target.value.toLowerCase().trim() &&
             !state.answered
          ) {
             setTimeout(() => {
@@ -156,7 +159,6 @@ function CodeRead({
    };
 
    const { answered, correct, error, code, inputVal } = state;
-
    return (
       <CodeReadContainer>
          <Editor
@@ -178,13 +180,13 @@ function CodeRead({
          <BottomContainer>
             {offsetFromMiddle === 0 ? (
                <div>
-                  <SolvingFor>{solveFor} ==</SolvingFor>
+                  <SolvingFor>{state.solvingFor} ==</SolvingFor>
                   <InputBox
                      value={inputVal}
                      w={answerLength > 10}
                      autoFocus={!maker}
-                     onChange={handleChange}
-                     onKeyDown={handleChange}
+                     onChange={(e) => handleChange(e, state.solvingFor)}
+                     onKeyDown={(e) => handleChange(e, state.solvingFor)}
                      type={answerType}
                   />
                   {store.currentIndex == 0 && !maker ? (
@@ -198,10 +200,12 @@ function CodeRead({
                error={error}
                gotIt={gotIt}
                code={code}
-               solveFor={solveFor}
+               solveFor={state.solvingFor}
             />
          </BottomContainer>
-         <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} maker={maker} />
+         {complexity ? (
+            <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} maker={maker} />
+         ) : null}
       </CodeReadContainer>
    );
 }

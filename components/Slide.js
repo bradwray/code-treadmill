@@ -24,7 +24,6 @@ const SlideCard = styled.div`
    max-width: 1400px;
    width: 90%;
    height: 100%;
-
    font-size: 35px;
    display: flex;
    flex-direction: column;

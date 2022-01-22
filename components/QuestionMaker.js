@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react';
 
+import Button from './Button.js';
 import CodeRead from './CodeRead.js';
 import CodeWrite from './CodeWrite.js';
 import SpecialChars from './SpecialChars.js';
 import styled from 'styled-components';
+import tagAndWeightExercise from '../utils/tagAndWeightExercise.js';
 
 const CardContainer = styled.div`
    border: 1px solid #ddd;
@@ -23,7 +25,7 @@ const CardContainer = styled.div`
 `;
 
 const Section = styled.div`
-   border: 1px solid #aaa6;
+   border: 1px solid ${(props) => props.theme.plain.color + '66'};
    padding: 30px;
    margin: 25px;
    width: 100%;
@@ -69,19 +71,12 @@ const InputBox = styled.input`
    color: ${(props) => props.theme.plain.color};
 `;
 
-const Submit = styled.button`
-   height: 50px;
-   padding-right: 10px;
-   padding-left: 10px;
-   font-size: 25px;
-   transform: translateY(40px) translateX(460px);
-   font-family: 'Dank Mono', 'Fira Code', monospace;
-   border: 1px dashed ${(props) => props.theme.plain.backgroundColor + 'bb'};
-   color: ${(props) => props.theme.plain.backgroundColor};
-   background-color: ${(props) => props.theme.plain.color};
-   :hover {
-      transform: translateY(40px) translateX(460px) scale(1.05);
-   }
+const ButtonContainer = styled.div`
+   width: 100%;
+   display: flex;
+   height: 25%;
+   align-items: flex-end;
+   justify-content: flex-end;
 `;
 
 function QuestionMaker() {
@@ -97,7 +92,7 @@ function QuestionMaker() {
    };
 
    const handleCoding = (val) => {
-      setState({ ...state, content: val });
+      setState(tagAndWeightExercise(val, state.solveFor, true));
    };
 
    const handleGoodTest = () => {
@@ -130,7 +125,7 @@ function QuestionMaker() {
                offsetFromMiddle={0}
                maker={true}
             />
-            {passedTest ? <Submit>Submit</Submit> : null}
+            <ButtonContainer>{passedTest ? <Button>Submit</Button> : null}</ButtonContainer>
          </Section>
       </CardContainer>
    );

@@ -3,7 +3,7 @@ import { randomAdj, randomAnimals, randomName } from './randomStringGenerator.js
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier';
 
-const fillItAndPrettify = (codeString, maker) => {
+const fillItAndPrettify = (codeString, dontPrettify) => {
    var newCodeString = codeString;
    while (
       newCodeString.indexOf('##') >= 0 ||
@@ -23,7 +23,7 @@ const fillItAndPrettify = (codeString, maker) => {
       newCodeString = newCodeString.replace('@@', `"${randomAnimals()}"`);
    }
 
-   if (!maker) {
+   if (dontPrettify) {
       return newCodeString;
    } else {
       return prettier.format(newCodeString, {

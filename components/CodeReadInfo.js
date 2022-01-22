@@ -4,9 +4,12 @@ import { Context } from './AppContext';
 import styled from 'styled-components';
 
 const InfoBar = styled.div`
-   width: ${(props) => (props.maker ? '35%' : '100%')};
+   width: ${(props) => (props.maker ? '100%' : '100%')};
+
    max-width: 750px;
-   position: absolute;
+   position: ${(props) => (props.maker ? 'relative' : 'absolute')};
+   transform: ${(props) => (props.maker ? 'translateY(40px)' : 'null')};
+   border: ${(props) => (props.maker ? '1px solid ' + props.theme.plain.color + '66' : 'null')};
    bottom: 10px;
    font-size: 16px;
    font-family: 'Dank Mono', 'Fira Code', monospace;
@@ -23,13 +26,14 @@ const TooltipBox = styled.span`
 const Tag = styled.a`
    border: 1px solid ${(props) => props.theme.plain.color + '99'};
    border-radius: 3px;
+   display: inline-block;
    background: ${(props) => props.theme.plain.backgroundColor};
    color: ${(props) => props.theme.plain.color + '66'};
    font-size: 16px;
    font-family: 'Dank Mono', 'Fira Code', monospace;
    text-decoration: none;
    padding: 3px;
-   margin: 10px;
+   margin: 4px;
    margin-right: 5px;
    margin-left: 5px;
    :hover {

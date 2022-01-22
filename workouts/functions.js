@@ -1,28 +1,28 @@
 /* eslint-disable import/no-anonymous-default-export */
 export default [
-  {
-    content: `  var num = ##;
+   {
+      content: `  
 
-       function doThisThing(){
-          num += ##
+       function doThisThing(num){
+          return num * num
        }
        
-       doThisThing()
+       
        `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num = ##;
+      solveFor: 'doThisThing(##)',
+   },
+   {
+      content: `  var num = ##;
 
     function doThisThing(){
        num += ##
     }
     
     `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num = ##;
+      solveFor: 'num',
+   },
+   {
+      content: `  var num = ##;
 
    function doThisThing(){
       num += ##
@@ -32,10 +32,10 @@ export default [
    doThisThing()
    
    `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num = ##;
+      solveFor: 'num',
+   },
+   {
+      content: `  var num = ##;
 
    function doSomething(){
       num += ##
@@ -50,10 +50,10 @@ export default [
    doSomething()
    
    `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num = ##;
+      solveFor: 'num',
+   },
+   {
+      content: `  var num = ##;
 
    function addTen(){
       num += 10
@@ -67,10 +67,10 @@ export default [
    addTen()
    
    `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num = ##;
+      solveFor: 'num',
+   },
+   {
+      content: `  var num = ##;
 
    function addTen(){
       num += 10
@@ -84,31 +84,31 @@ export default [
    subtractFive()
    
    `,
-    solveFor: "num",
-  },
-  {
-    content: `  var num1 = ##;
+      solveFor: 'num',
+   },
+   {
+      content: `  var num1 = ##;
           var num2 = ##
           num1 = num2
           `,
-    solveFor: "num1",
-  },
-  {
-    content: `  var i = ##;
+      solveFor: 'num1',
+   },
+   {
+      content: `  var i = ##;
           var j = ##
           i = i + j
           `,
-    solveFor: "i",
-  },
-  {
-    content: `  var x = ##;
+      solveFor: 'i',
+   },
+   {
+      content: `  var x = ##;
           var y = ##
           x += y
           `,
-    solveFor: "x",
-  },
-  {
-    content: `  var a = ##;
+      solveFor: 'x',
+   },
+   {
+      content: `  var a = ##;
           var b = ##
           var c;
  
@@ -116,10 +116,10 @@ export default [
           a = b
           b = c
           `,
-    solveFor: "c",
-  },
-  {
-    content: `  var a = ##;
+      solveFor: 'c',
+   },
+   {
+      content: `  var a = ##;
           var b = ##
           var c;
  
@@ -127,10 +127,10 @@ export default [
           a = b
           b = c
           `,
-    solveFor: "a",
-  },
-  {
-    content: `  var a = ##;
+      solveFor: 'a',
+   },
+   {
+      content: `  var a = ##;
           var b = ##
           var c;
           
@@ -138,6 +138,6 @@ export default [
           a = b
           b = c
           `,
-    solveFor: "b",
-  },
+      solveFor: 'b',
+   },
 ];
