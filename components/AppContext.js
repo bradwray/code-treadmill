@@ -1,7 +1,7 @@
 import React, { createContext, useEffect } from 'react';
 
 import { ThemeProvider } from 'styled-components';
-import cobalt2 from '../themes/cobalt.cjs.js';
+import nightOwl from '../themes/nightOwl.cjs.js';
 import slides from '../workouts/conditionals';
 import tagAndWeightCode from '../utils/tagAndWeightCode.js';
 
@@ -16,8 +16,8 @@ export function AppContext(props) {
       workout: '',
       rpm: 0,
       avgComplexity: 0,
-      theme: cobalt2,
-      themeName: 'cobalt',
+      theme: nightOwl,
+      themeName: 'nightOwl',
       themeNum: 0,
    });
 

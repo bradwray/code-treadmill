@@ -16,22 +16,23 @@ const ControlPanel = styled.div`
 
 const TopAligned = styled(ControlPanel)`
    position: absolute;
-   /* transform: translateX(-10px) translateY(-10px); */
    height: 165px;
-   justify-content: space-around;
+   justify-content: center;
    align-items: center;
    width: 100%;
    z-index: 1000;
    border-bottom: 1px solid ${(props) => props.theme.plain.color + '99'};
-   @media (max-width: 768px) {
-      flex-direction: column;
+   @media (max-width: 1470px) {
+      align-items: flex-end;
       height: 200px;
+   }
+   @media (max-width: 768px) {
+      height: 180px;
    }
 `;
 
 const LeftAligned = styled(ControlPanel)`
    transform: translateX(15px);
-
    display: flex;
    padding: 10px;
    padding-top: 50px;
@@ -42,12 +43,21 @@ const LeftAligned = styled(ControlPanel)`
    height: 100vh;
 `;
 
-const Button = styled.button`
-   color: ${(props) => props.theme.styles[5].style.color};
-   background-color: ${(props) => props.theme.plain.backgroundColor};
+const ControlsContainer = styled.div`
+   display: flex;
    position: absolute;
    top: 0;
    left: 0;
+   width: 380px;
+   @media (max-width: 768px) {
+      position: absolute;
+      transform: translateX(32px) translateY(-52px);
+   }
+`;
+
+const FlipButton = styled.button`
+   color: ${(props) => props.theme.styles[5].style.color};
+   background-color: ${(props) => props.theme.plain.backgroundColor};
    margin: 10px;
    color: #aaa;
    width: 30px;
@@ -60,11 +70,9 @@ const Button = styled.button`
 
 const DropdownContainer = styled.div`
    display: flex;
-   flex-direction: column;
-
+   justify-content: space-around;
    @media (max-width: 768px) {
-      flex-direction: row;
-      transform: scale(0.9) translateY(64px);
+      transform: scale(0.95) translateY(64px) translateX(-25px);
    }
 `;
 
@@ -74,13 +82,16 @@ export default function Panel() {
    const Surface = store.leftAligned ? LeftAligned : TopAligned;
    return (
       <Surface>
-         <Button onClick={() => setStore({ ...store, leftAligned: !store.leftAligned })}>
-            {!store.leftAligned ? `⤵` : `⤴`}
-         </Button>
-         <DropdownContainer>
-            <WorkoutDropdown />
-            <ThemeDropdown />
-         </DropdownContainer>
+         <ControlsContainer>
+            <FlipButton onClick={() => setStore({ ...store, leftAligned: !store.leftAligned })}>
+               {!store.leftAligned ? `⤵` : `⤴`}
+            </FlipButton>
+            <DropdownContainer>
+               <WorkoutDropdown />
+               <ThemeDropdown />
+            </DropdownContainer>
+         </ControlsContainer>
+
          <ResultsDisplay />
          <ProgressChart />
       </Surface>

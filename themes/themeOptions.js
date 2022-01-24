@@ -1,7 +1,7 @@
 const options = [
+   { name: 'nightOwl', type: 'dark' },
    { name: 'cobalt', type: 'dark' },
    { name: 'vsDark', type: 'dark' },
-   { name: 'nightOwl', type: 'dark' },
    { name: 'nightOwlLight', type: 'light' },
    { name: 'dracula', type: 'dark' },
    { name: 'duotoneDark', type: 'dark' },
