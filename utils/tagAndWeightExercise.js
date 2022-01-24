@@ -8,15 +8,15 @@ export default function tagAndWeightExercise(content, solveFor, maker) {
       complexity += content.split(tag).length - 1;
       return content.indexOf(tag) > 0;
    });
-   //    let ans = evalCode(fillItAndPrettify(content, maker), solveFor);
-   //    let answerType = Number.isInteger(parseInt(ans.substring(0, 1), 10)) ? 'number' : 'text';
+   let ans = evalCode(fillItAndPrettify(content, maker), solveFor);
+   let answerType = Number.isInteger(parseInt(ans.substring(0, 1), 10)) ? 'number' : 'text';
    return {
       type: 'read',
       content,
       solveFor,
       complexity: Math.round(complexity / 2.5),
       tagsUsed,
-      //   answerType,
-      //   answerLength: ans.toString().length,
+      answerType,
+      answerLength: ans.toString().length,
    };
 }
