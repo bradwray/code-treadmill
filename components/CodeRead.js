@@ -180,7 +180,7 @@ function CodeRead({
          <BottomContainer>
             {offsetFromMiddle === 0 ? (
                <div>
-                  <SolvingFor>{state.solvingFor} ==</SolvingFor>
+                  <SolvingFor>{state.solvingFor.replace(';', '')} ==</SolvingFor>
                   <InputBox
                      value={inputVal}
                      w={answerLength > 10}

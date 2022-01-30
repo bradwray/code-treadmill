@@ -29,7 +29,7 @@ function SpecialChars() {
          </tr>
          <tr>
             <Cell>#-#</Cell>
-            <Cell>number 7-16</Cell>
+            <Cell>number 8-16</Cell>
          </tr>
          <tr>
             <Cell>#.#</Cell>

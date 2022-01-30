@@ -10,10 +10,11 @@ export default function tagAndWeightExercise(content, solveFor, maker) {
    });
    let ans = evalCode(fillItAndPrettify(content, maker), solveFor);
    let answerType = Number.isInteger(parseInt(ans.substring(0, 1), 10)) ? 'number' : 'text';
+   // console.log(content);
    return {
       type: 'read',
       content,
-      solveFor,
+      solveFor: fillItAndPrettify(solveFor, maker),
       complexity: Math.round(complexity / 2.5),
       tagsUsed,
       answerType,

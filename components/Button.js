@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Button = styled.button`
-   height: 45px;
+   min-height: 45px;
    padding-right: 10px;
    padding-left: 10px;
    font-size: 22px;
