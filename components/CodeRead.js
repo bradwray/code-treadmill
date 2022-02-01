@@ -114,18 +114,22 @@ function CodeRead({
           }, 0) / tempFlips.length;
       const tempSlides = store.slides;
       tempSlides[store.currentIndex].done = true;
-
       setStore({
         ...store,
         slides: tempSlides,
         readStats: tempFlips,
         confettiKey: Date.now(),
-
         avgComplexity: Number(avgComplexity).toFixed(1),
         rpm,
       });
       setTimeout(
-        () => setStore({ ...store, currentIndex: store.currentIndex + 1 }),
+        () =>
+          setStore({
+            ...store,
+            currentIndex: store.currentIndex + 1,
+            avgComplexity: Number(avgComplexity).toFixed(1),
+            rpm,
+          }),
         1500
       );
     }
