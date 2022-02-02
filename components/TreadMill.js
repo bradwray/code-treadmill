@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from 'react';
 import Confetti from 'react-confetti';
 import { Context } from './AppContext';
 import Slide from './Slide';
-import io from 'socket.io-client';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -21,8 +20,6 @@ function mod(a, b) {
    return ((a % b) + b) % b;
 }
 
-const socket = io();
-
 export default function TreadMill({ updateStats }) {
    const [store, setStore] = useContext(Context);
    const defaultProps = {
@@ -30,33 +27,10 @@ export default function TreadMill({ updateStats }) {
       animationConfig: { tension: 120, friction: 14 },
    };
 
-   useEffect(() => {
-      fetch('/api/socketio').finally(() => {
-         socket.on('updateRace', (raceStats) => {
-            console.log('client raceStats');
-            console.log(raceStats);
-            setStore({ ...store, raceStats });
-         });
-
-         socket.on('a user connected', () => {
-            console.log('a user connected?');
-         });
-      });
-   }, []);
-
    const { slides } = store;
    const modBySlidesLength = (index) => {
       return mod(index, slides.length);
    };
-   //   console.log(slides);
-   // const moveSlide = () => {
-   //   // store.raceStats.push({
-   //   //   user: "Brad" + Math.random(),
-   //   //   rpm: store.rpm,
-   //   //   avgComplexity: store.avgComplexity,
-   //   // });
-   //   // socket.emit("newResult", store.raceStats);
-   // };
 
    const clampOffsetRadius = (offsetRadius) => {
       const upperBound = Math.floor((slides.length - 1) / 2);
