@@ -90,6 +90,14 @@ function CodeRead({
       inputVal: "",
     });
   };
+
+  const fitDigits = (num) => {
+    const digits = num.toString();
+    return digits.includes(".")
+      ? digits.substring(0, 4)
+      : digits.substring(0, 3);
+  };
+
   const updateStats = (correct) => {
     let tempFlips = store.readStats;
     tempFlips[tempFlips.length] = { correct, complexity, time: Date.now() };
@@ -105,7 +113,6 @@ function CodeRead({
           1000);
       rpm = Number.isFinite(rpm) ? rpm.toFixed(2) : 1.0;
 
-      rpm = rpm.toString().length > 3 ? Number(rpm).toFixed(1) : rpm;
       const avgComplexity =
         tempFlips
           .map((item) => item.complexity)
@@ -114,21 +121,24 @@ function CodeRead({
           }, 0) / tempFlips.length;
       const tempSlides = store.slides;
       tempSlides[store.currentIndex].done = true;
+
       setStore({
         ...store,
         slides: tempSlides,
         readStats: tempFlips,
         confettiKey: Date.now(),
-        avgComplexity: Number(avgComplexity).toFixed(1),
-        rpm,
+        avgComplexity: fitDigits(avgComplexity),
+        rpm: fitDigits(rpm),
+        score: fitDigits(fitDigits(rpm) * fitDigits(avgComplexity)),
       });
       setTimeout(
         () =>
           setStore({
             ...store,
             currentIndex: store.currentIndex + 1,
-            avgComplexity: Number(avgComplexity).toFixed(1),
-            rpm,
+            avgComplexity: fitDigits(avgComplexity),
+            rpm: fitDigits(rpm),
+            score: fitDigits(fitDigits(rpm) * fitDigits(avgComplexity)),
           }),
         1500
       );
