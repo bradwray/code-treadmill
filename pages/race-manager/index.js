@@ -7,6 +7,9 @@ import Panel from "../../components/Panel";
 import QuestionMaker from "../../components/QuestionMaker";
 import ThemeDropdown from "../../components/ThemeDropdown";
 import styled from "styled-components";
+import CardContainer from "../../components/CardContainer";
+import LeaderBoard from "../../components/LeaderBoard";
+import Title from "../../components/Title";
 
 const Wrapper = styled.div`
   display: flex;
@@ -26,21 +29,33 @@ const Toptions = styled.div`
   border-bottom: 1px solid ${(props) => props.theme.plain.color + "99"};
 `;
 
-const AddNew = styled(Button)`
+const Section = styled.div`
+  border: 1px solid ${(props) => props.theme.plain.color + "66"};
+  padding: 30px;
+  margin: 25px;
+  width: 100%;
+  max-width: 750px;
+  min-height: 450px;
+`;
+
+const Table = styled.table`
+  border: 1px solid #aaa6;
+  padding: 10px;
+  padding-left: 90px;
+  padding-right: 90px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 100%;
+  font-size: 15px;
+`;
+
+const Btn = styled(Button)`
   margin-bottom: 80px;
 `;
 
-const WorkoutMaker = ({}) => {
+const RaceManager = ({}) => {
   const [state, setState] = useState({ items: [""] });
   useEffect(() => {}, []);
-
-  const handleSave = () => {};
-
-  const handleNew = () => {
-    setState({
-      items: [...state.items, ""],
-    });
-  };
 
   return (
     <AppContext>
@@ -51,9 +66,18 @@ const WorkoutMaker = ({}) => {
       <Toptions>
         <ThemeDropdown />
       </Toptions>
-      <Wrapper>Manage Race</Wrapper>
+      <Wrapper>
+        <CardContainer>
+          <Section>
+            <Title>Manage a Race</Title>
+            <Btn>Start</Btn>
+          </Section>
+
+          <LeaderBoard />
+        </CardContainer>
+      </Wrapper>
     </AppContext>
   );
 };
 
-export default WorkoutMaker;
+export default RaceManager;
