@@ -31,17 +31,23 @@ const AddNew = styled(Button)`
 `;
 
 const WorkoutMaker = ({}) => {
-  const [state, setState] = useState({ items: [""] });
-  useEffect(() => {}, []);
+  const [state, setState] = useState({ items: [{}] });
 
-  const handleSave = () => {};
+  const handleSave = ({ solveFor, content }, index) => {
+    const items = [...state.items];
+    items[index] = {
+      solveFor,
+      content,
+    };
+    setState({ items });
+  };
 
   const handleNew = () => {
     setState({
-      items: [...state.items, ""],
+      items: [...state.items, {}],
     });
   };
-
+  console.log(state.items);
   return (
     <AppContext>
       <Head>
@@ -53,7 +59,7 @@ const WorkoutMaker = ({}) => {
       </Toptions>
       <Wrapper>
         {state.items.map((item, index) => (
-          <QuestionMaker key={index} />
+          <QuestionMaker key={index} i={index} submit={handleSave} />
         ))}
         <AddNew onClick={() => handleNew()}> Add New Item</AddNew>
       </Wrapper>
