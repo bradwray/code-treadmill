@@ -98,7 +98,7 @@ export default function Panel() {
 
          <ResultsDisplay />
          <ProgressChart />
-         <LeaderBoard />
+         {/* <LeaderBoard /> */}
       </Surface>
    );
 }
