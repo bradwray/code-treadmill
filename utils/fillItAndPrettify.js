@@ -1,4 +1,4 @@
-import { randomAdj, randomAnimals, randomName } from './randomStringGenerator.js';
+import { randomAdj, randomAnimals, randomChar, randomName } from './randomStringGenerator.js';
 
 import parserBabel from 'prettier/parser-babel';
 import prettier from 'prettier';
@@ -12,7 +12,8 @@ const fillItAndPrettify = (codeString, dontPrettify) => {
       newCodeString.indexOf('@@') >= 0 ||
       newCodeString.indexOf('^^') >= 0 ||
       newCodeString.indexOf('**') >= 0 ||
-      newCodeString.indexOf('$$') >= 0
+      newCodeString.indexOf('$$') >= 0 ||
+      newCodeString.indexOf('~~') >= 0
    ) {
       newCodeString = newCodeString.replace('#-#', Math.floor(Math.random() * 9) + 8);
       newCodeString = newCodeString.replace('#.#', Math.random().toFixed(2));
@@ -21,6 +22,7 @@ const fillItAndPrettify = (codeString, dontPrettify) => {
       newCodeString = newCodeString.replace('^^', `"${randomName()}"`);
       newCodeString = newCodeString.replace('**', `${Math.random() > 0.5 ? true : false}`);
       newCodeString = newCodeString.replace('@@', `"${randomAnimals()}"`);
+      newCodeString = newCodeString.replace('~~', `"${randomChar()}"`);
    }
 
    if (dontPrettify) {
