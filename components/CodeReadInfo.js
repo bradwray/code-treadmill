@@ -60,8 +60,9 @@ function CodeReadInfo({ tagsUsed, complexity, maker }) {
             {tagsUsed
                ? tagsUsed.map(({ tag, path }, i) => {
                     let trimTag = tag.trim();
-                    if (trimTag == '{') trimTag += ' }';
-                    if (trimTag == '(') trimTag += ' )';
+                    if (trimTag == '{') trimTag += '}';
+                    if (trimTag == '[') trimTag += ']';
+                    if (trimTag.substring(trimTag.length - 1) == '(') trimTag += ')';
                     return (
                        <Tag
                           key={i}

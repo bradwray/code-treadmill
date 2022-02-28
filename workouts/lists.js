@@ -1,233 +1,249 @@
 /* eslint-disable import/no-anonymous-default-export */
+
 export default [
    {
       content: `
-         var names = [^^, ^^, ^^]
+               var names = [^^, ^^, ^^]
 
-         `,
+               `,
       solveFor: 'names.length',
    },
    {
       content: `
-   // zero is actually the first number
+         // zero is actually the first number
 
-         var ages = [##, ##, ##]
+               var ages = [##, ##, ##]
 
-         `,
+               `,
       solveFor: 'ages[0]',
    },
    {
       content: `
 
-            var letters = [~~, ~~, ~~]
+                  var letters = [~~, ~~, ~~]
 
-            `,
+                  `,
       solveFor: 'letters[1]',
    },
    {
       content: `
-         var weights = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
+               var weights = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
 
-         `,
+               `,
       solveFor: 'weights[##]',
-   },
-   {
-      content: `
-         var names = [^^, ^^, ^^]
-
-         `,
-      solveFor: 'names[0].length',
-   },
-   {
-      content: `
-            var votes = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
-
-            var result = votes[0] + votes[1]
-
-            `,
-      solveFor: 'result',
    },
    {
       content: `
                var names = [^^, ^^, ^^]
 
                `,
+      solveFor: 'names[0].length',
+   },
+   {
+      content: `
+                  var votes = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
+
+                  var result = votes[0] + votes[1]
+
+                  `,
+      solveFor: 'result',
+   },
+   {
+      content: `
+                     var names = [^^, ^^, ^^]
+
+                     `,
       solveFor: 'names[names.length - 1]',
    },
    {
       content: `
-   // sometimes .length means different things
+         // sometimes .length means different things
 
-            var names = [^^, ^^, ^^]
+                  var names = [^^, ^^, ^^]
 
-            `,
+                  `,
       solveFor: 'names[names.length - 1].length',
    },
    {
       content: `
-            var wildBeasts = [@@, @@, @@]
-            var gentlePets = [@@, @@, @@]
+                  var wildBeasts = [@@, @@, @@]
+                  var gentlePets = [@@, @@, @@]
 
-            var temp = wildBeasts[1]
-            wildBeasts[1] = gentlePets[2]
-            gentlePets[2] = temp
+                  var temp = wildBeasts[1]
+                  wildBeasts[1] = gentlePets[2]
+                  gentlePets[2] = temp
 
-            `,
+                  `,
       solveFor: 'wildBeasts[1]',
    },
    {
       content: `
 
-               var descriptions = [$$, $$, $$]
-               descriptions[descriptions.length] = $$
+                     var descriptions = [$$, $$, $$]
+                     descriptions[descriptions.length] = $$
 
-               `,
+                     `,
+      solveFor: 'descriptions[3]',
+   },
+   {
+      content: `
+                  var votes = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#,#-#, #-#, #-#]
+
+                  `,
+      solveFor: 'votes.indexOf(#-#)',
+   },
+   {
+      content: `
+
+                     var descriptions = [$$, $$, $$]
+                     descriptions.push($$)
+
+                     `,
       solveFor: 'descriptions[3]',
    },
    {
       content: `
 
-               var descriptions = [$$, $$, $$]
-               descriptions.push($$)
+                     var descriptions = [$$, $$, $$, $$]
+                     descriptions.push($$)
 
-               `,
-      solveFor: 'descriptions[3]',
-   },
-   {
-      content: `
-
-               var descriptions = [$$, $$, $$, $$]
-               descriptions.push($$)
-
-               `,
+                     `,
       solveFor: 'descriptions.length',
    },
    {
       content: `
-            var scores = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
-            var result = Math.max(...scores)
-
-            `,
-      solveFor: 'result',
-   },
-   {
-      content: `
-               var scores = [#-#, #-#, #-#, #-#, #-#, #-#, #-#]
-               var result = Math.min(...scores)
-
-               `,
-      solveFor: 'result',
-   },
-   {
-      content: `
-                  var veterinaryWaitingRoom = [@@, @@, @@, @@, @@, @@]
-                  veterinaryWaitingRoom.pop()
+                  var scores = [#-#, #-#, #-#, #-#, #-#, #-#, #-#, #-#]
+                  var result = Math.max(...scores)
 
                   `,
+      solveFor: 'result',
+   },
+   {
+      content: `
+                  var scores = [#-#, #-#, #-#, #-#, #-#, #-#, #-#]
+                  var result = Math.min(...scores)
+
+                  `,
+      solveFor: 'scores.indexOf(result)',
+   },
+   {
+      content: `
+                     var veterinaryWaitingRoom = [@@, @@, @@, @@, @@, @@]
+                     veterinaryWaitingRoom.pop()
+
+                     `,
       solveFor: 'veterinaryWaitingRoom.length',
    },
    {
       content: `
-                  var stillWaiting = [@@, @@, @@, @@, @@, @@, @@]
-                  stillWaiting.pop()
+                     var stillWaiting = [@@, @@, @@, @@, @@, @@, @@]
+                     stillWaiting.pop()
 
-                  `,
+                     `,
       solveFor: 'stillWaiting[stillWaiting.length-1]',
    },
    {
       content: `
-               var naughtyList = [^^, ^^, ^^, ^^]
-               var hottyList = [^^, ^^, ^^]
-               var naughtyHottyList = naughtyList.concat(hottyList)
+                  var naughtyList = [^^, ^^, ^^, ^^]
+                  var hottyList = [^^, ^^, ^^]
+                  var naughtyHottyList = naughtyList.concat(hottyList)
 
-               `,
+                  `,
       solveFor: 'naughtyHottyList[naughtyHottyList.length-1]',
    },
    {
       content: `
-               var deadly = [@@, @@, @@, @@ ]
-               var cuddly = [@@, @@, @@, @@, @@, @@]
-               deadly.pop()
+                  var deadly = [@@, @@, @@, @@ ]
+                  var cuddly = [@@, @@, @@, @@, @@, @@]
+                  deadly.pop()
 
-               cuddly = cuddly.concat(deadly)
+                  cuddly = cuddly.concat(deadly)
 
-               `,
+                  `,
       solveFor: 'cuddly[##]',
    },
    {
       content: `
-               var deadly = [@@, @@, @@, @@ ]
-               var cuddly = [@@, @@, @@, @@, @@, @@]
-               deadly.pop()
+                  var deadly = [@@, @@, @@, @@ ]
+                  var cuddly = [@@, @@, @@, @@, @@, @@]
+                  deadly.pop()
 
-               cuddly = deadly.concat(cuddly)
+                  cuddly = deadly.concat(cuddly)
 
-               `,
+                  `,
       solveFor: 'cuddly[##]',
    },
    {
       content: `
 
-            var letters = [~~, ~~, ~~]
-            var andNow = letters.join("")
-            `,
+               var letters = [~~, ~~, ~~]
+               var andNow = letters.join("")
+               `,
       solveFor: 'andNow',
    },
    {
       content: `
 
-            var letters = [~~, ~~, ~~]
-            var butHere = letters.join("-")
-            `,
+               var letters = [~~, ~~, ~~]
+               var butHere = letters.join("-")
+               `,
       solveFor: 'butHere',
    },
    {
       content: `
 
-            var letters = [~~, ~~, ~~]
-            var maybeAlso = letters.join(~~)
-            `,
+               var letters = [~~, ~~, ~~]
+               var maybeAlso = letters.join(~~)
+               `,
       solveFor: 'maybeAlso',
    },
    {
       content: `
 
-            var letters = [~~, ~~, ~~]
-            var butUsually = letters.join()
-            `,
+               var letters = [~~, ~~, ~~]
+               var butUsually = letters.join()
+               `,
       solveFor: 'butUsually',
    },
    {
       content: `
 
-            var name = "Genevieve"
-            var splitUp = name.split('e')
-            `,
+               var name = "Genevieve"
+               var splitUp = name.split('e')
+               `,
       solveFor: 'splitUp[0]',
    },
    {
       content: `
 
-            var name = "Genevieve"
-            var splitUp = name.split('v')
-            `,
+               var name = "Genevieve"
+               var splitUp = name.split('v')
+               `,
       solveFor: 'splitUp[0]',
    },
    {
       content: `
 
-            var name = "Genevieve"
-            var splitUp = name.split('ev')
-            `,
+               var name = "Genevieve"
+               var splitUp = name.split('ev')
+               `,
       solveFor: 'splitUp[1]',
    },
    {
       content: `
 
-            var someStuff = "First Name, Last Name, Age, Height, Weight, Eye Color, DOB, Address, Organ Donor"
-            var likeThis = someStuff.split(', ')
-            `,
+               var someStuff = "First Name, Last Name, Age, Height, Weight, Eye Color, DOB, Address, Organ Donor"
+               var likeThis = someStuff.split(', ')
+               `,
       solveFor: 'likeThis[##]',
+   },
+   {
+      content: `
+
+               var aSentence = !!
+               var orThis = aSentence.split(' ')
+               `,
+      solveFor: 'orThis[2]',
    },
    {
       content: `
