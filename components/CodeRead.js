@@ -194,7 +194,7 @@ function CodeRead({
   };
 
   const { answered, correct, error, code, inputVal } = state;
-  console.log(jsToPseudoCode(code));
+  // console.log(jsToPseudoCode(code));
   return (
     <CodeReadContainer>
       <Editor

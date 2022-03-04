@@ -9,60 +9,20 @@ export default jsToPseudoCode;
 const simpleCoversions = (code) => {
   return code
     .replace(/var /g, "")
-    .replace(/ != /g, "≠")
-    .replace(/ >= /g, "≥")
-    .replace(/ <= /g, "≤")
-    .replace(/ === /g, "=")
-    .replace(/ == /g, "=")
+    .replace(/ != /g, " ≠ ")
+    .replace(/ >= /g, " ≥ ")
+    .replace(/ <= /g, " ≤ ")
+    .replace(/ === /g, " = ")
+    .replace(/ == /g, " = ")
     .replace(/ % /g, " MOD ")
     .replace(/ !/g, " NOT")
     .replace(/ &&/g, " AND")
     .replace(/ [|][|]/g, " OR")
-    .replace(/==/g, "=")
+    .replace(/;/g, "")
     .replace(/if /g, "IF")
     .replace(/else /g, "ELSE")
-    .replace(/else if /g, "ELSE IF");
-};
-
-const forToRepeat = (code) => {
-  return code
-    .split("\n")
-    .map((line) => {
-      if (line.includes("for")) {
-        let forStart = line.indexOf("for");
-        let forLine = line.substring(forStart, line.indexOf(")", forStart));
-        let indent = line.substring(0, forStart);
-
-        let count = forLine.substring(
-          forLine.indexOf("<") + 2,
-          forLine.indexOf(";", forLine.indexOf("<"))
-        );
-        return indent + "REPEAT " + count + " TIMES ";
-      } else {
-        return line;
-      }
-    })
-    .join("\n");
-};
-
-const whileToRepeatUntil = (code) => {
-  //switches the assignment operator so the inverted conditions work
-  let newCode = code.replace(/ = /g, " ← ");
-  return code
-    .split("\n")
-    .map((line) => {
-      if (line.includes("while")) {
-        let whileStart = line.indexOf("while");
-        let conditions = line.substring(whileStart + 5, line.length - 1);
-        let indent = line.substring(0, whileStart);
-        console.log(conditions);
-        conditions = invertConditions(conditions);
-        return indent + "REPEAT UNTIL " + conditions;
-      } else {
-        return line;
-      }
-    })
-    .join("\n");
+    .replace(/else if /g, "ELSE IF")
+    .replace(/function/g, "PROCEDURE");
 };
 
 const bracketIndent = (code) => {
@@ -125,6 +85,8 @@ const convert = (code) => {
         );
         count = simpleCoversions(count);
         return indent + "REPEAT " + count + " TIMES ";
+      } else if (line.includes("return")) {
+        return line.replace("return ", "RETURN(").replace(";", ")");
       } else {
         return simpleCoversions(line);
       }

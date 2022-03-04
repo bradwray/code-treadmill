@@ -2,14 +2,12 @@
 export default [
   {
     content: `  // nothing here yet
-      var num = 4;
-            while(num >= 0 && num <= 10) {
-              num = num - 1;
-            }
-
-      
-      
-      
+     function doThis(num){
+       if(num === 1){
+        num = num + 3;
+       }
+       return num * 2
+     }      
       `,
     solveFor: "num",
   },
