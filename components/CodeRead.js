@@ -11,6 +11,7 @@ import fillItAndPrettify from '../utils/fillItAndPrettify';
 import io from 'socket.io-client';
 import jsToPseudoCode from '../utils/jsToPseudoCode';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const CodeReadContainer = styled.div`
    width: 100%;
@@ -75,6 +76,9 @@ function CodeRead({
       });
    }, [content, solveFor]);
    const [store, setStore] = useContext(Context);
+
+   const router = useRouter();
+   const { id } = router.query;
 
    const gotIt = () => {
       setState({
@@ -182,12 +186,18 @@ function CodeRead({
    };
 
    const { answered, correct, error, code, inputVal } = state;
-   console.log(jsToPseudoCode(code));
+
+   let shownCode = code;
+   let pseudo = id.includes('pseudo');
+   if (pseudo) {
+      shownCode = jsToPseudoCode(code);
+   }
+
    return (
       <CodeReadContainer>
          <Editor
-            value={code}
-            highlight={() => CodeHighlight(code, store.theme)}
+            value={shownCode}
+            highlight={() => CodeHighlight(shownCode, store.theme)}
             onValueChange={() => {}}
             padding={10}
             style={{
@@ -204,7 +214,9 @@ function CodeRead({
          <BottomContainer>
             {offsetFromMiddle === 0 ? (
                <div>
-                  <SolvingFor>{state.solvingFor.replace(';', '')} ==</SolvingFor>
+                  <SolvingFor>
+                     {state.solvingFor.replace(';', '')} {pseudo ? `=` : `==`}
+                  </SolvingFor>
                   <InputBox
                      value={inputVal}
                      w={answerLength > 10}
@@ -228,7 +240,12 @@ function CodeRead({
             />
          </BottomContainer>
          {complexity ? (
-            <CodeReadInfo tagsUsed={tagsUsed} complexity={complexity} maker={maker} />
+            <CodeReadInfo
+               tagsUsed={tagsUsed}
+               complexity={complexity}
+               maker={maker}
+               pseudo={pseudo}
+            />
          ) : null}
       </CodeReadContainer>
    );

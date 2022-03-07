@@ -3,7 +3,7 @@ import React, { createContext, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import io from 'socket.io-client';
 import nightOwl from '../themes/nightOwl.cjs.js';
-import slides from '../workouts/variables';
+import slides from '../workouts/js-variables';
 import tagAndWeightCode from '../utils/tagAndWeightCode.js';
 
 const socket = io();

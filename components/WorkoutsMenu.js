@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import Link from "next/link";
-import { Context } from "./AppContext";
-import styled from "styled-components";
-import { useRouter } from "next/router";
-import workouts from "../workouts/workoutsOptions";
+import React, { useContext, useEffect, useState } from 'react';
+
+import { Context } from './AppContext';
+import Link from 'next/link';
+import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import workouts from '../workouts/workoutsOptions';
 
 const ListItem = styled.div`
 
    list-style: none;
-   border: 1px solid ${(props) => props.theme.plain.color + "99"};
+   border: 1px solid ${(props) => props.theme.plain.color + '99'};
    border-radius: 3px;
    background-color: ${(props) => props.theme.plain.color};
       color: ${(props) => props.theme.plain.backgroundColor};
@@ -30,41 +31,41 @@ const ListItem = styled.div`
 `;
 
 const WorkoutsMenu = ({ end }) => {
-  const [store, setStore] = useContext(Context);
-  const router = useRouter();
+   const [store, setStore] = useContext(Context);
+   const router = useRouter();
 
-  const handleClick = (workout) => {
-    setStore({
-      ...store,
-      currentIndex: 0,
-      readStats: [],
-      raceStats: [],
-      rpm: 0,
-      avgComplexity: 0,
-    });
-    router.push("/" + workout);
-  };
-  return (
-    <div>
-      {end ? (
-        <div>
-          <div>Great work! </div> <div>Now try one of these workouts</div>
-        </div>
-      ) : (
-        <div>
-          <div>Welcome </div> <div>Try out one of these coding workouts</div>
-        </div>
-      )}
+   const handleClick = (workout) => {
+      setStore({
+         ...store,
+         currentIndex: 0,
+         readStats: [],
+         raceStats: [],
+         rpm: 0,
+         avgComplexity: 0,
+      });
+      router.push('/' + workout);
+   };
+   return (
+      <div>
+         {end ? (
+            <div>
+               <div>Great work! </div> <div>Now try one of these workouts</div>
+            </div>
+         ) : (
+            <div>
+               <div>Welcome </div> <div>Try out one of these coding workouts</div>
+            </div>
+         )}
 
-      {workouts.map((workout, key) => (
-        <ListItem key={key} onClick={() => handleClick(workout)}>
-          <a href={"/" + workout} styled={{ color: "white" }}>
-            {workout}
-          </a>
-        </ListItem>
-      ))}
-    </div>
-  );
+         {workouts.map(({ workout }, key) => (
+            <ListItem key={key} onClick={() => handleClick(workout)}>
+               <a href={'/' + workout} styled={{ color: 'white' }}>
+                  {workout}
+               </a>
+            </ListItem>
+         ))}
+      </div>
+   );
 };
 
 export default WorkoutsMenu;
