@@ -188,7 +188,7 @@ function CodeRead({
    const { answered, correct, error, code, inputVal } = state;
 
    let shownCode = code;
-   let pseudo = id.includes('pseudo');
+   let pseudo = id ? id.includes('pseudo') : false;
    if (pseudo) {
       shownCode = jsToPseudoCode(code);
    }
