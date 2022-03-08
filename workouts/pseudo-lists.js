@@ -2,8 +2,8 @@
 export default [
   {
     content: `  // nothing here yet
-     
-      `,
-    solveFor: "umm",
+      var list = new PseudoArray([1,2,3])  
+       `,
+    solveFor: "list.getElem(1)",
   },
 ];
