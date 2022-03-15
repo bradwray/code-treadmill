@@ -7,10 +7,11 @@ const Button = styled.button`
   font-size: 22px;
   font-family: "Dank Mono", "Fira Code", monospace;
   border: 1px dashed ${(props) => props.theme.plain.backgroundColor + "bb"};
-  background-color: ${(props) => props.theme.plain.color};
+  background-color: ${(props) =>
+    props.disabled ? "gray" : props.theme.plain.color};
   color: ${(props) => props.theme.plain.backgroundColor};
   :hover {
-    transform: scale(1.05);
+    transform: ${(props) => (props.disabled ? null : `scale(1.1)`)};
   }
   :active {
     transform: scale(0.98);

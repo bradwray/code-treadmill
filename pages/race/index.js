@@ -48,7 +48,7 @@ const Btn = styled(Button)`
   margin-left: 80%;
 `;
 
-const RaceCode = styled.div`
+const Input = styled.input`
   display: block;
   width: 700px;
   text-align: center;
@@ -62,13 +62,23 @@ const RaceCode = styled.div`
 
 const RaceManager = ({}) => {
   const [state, setState] = useState({
-    began: false,
+    joined: false,
+    joinCode: "",
+    name: "",
     raceID: randomAnimals().toLowerCase(0) + Math.floor(Math.random() * 100),
   });
   useEffect(() => {}, []);
 
-  const handleStart = () => {
-    setState({ ...state, began: true });
+  const handleJoin = () => {
+    setState({ ...state, joined: true });
+  };
+
+  const handleTextEntry = (val, box) => {
+    if (box === "code") {
+      setState({ ...state, joinCode: val });
+    } else {
+      setState({ ...state, name: val });
+    }
   };
 
   return (
@@ -82,18 +92,35 @@ const RaceManager = ({}) => {
       </Toptions>
       <Wrapper>
         <CardContainer>
-          <Section>
-            <Title w="180px" xOffset="-39px">
-              Manage Race
-            </Title>
-            Participants should go to{" "}
-            <Link ownLine target="_blank" href="https://www.waytocode.dev/">
-              https://www.waytocode.dev/
-            </Link>
-            click join and enter this race code{" "}
-            <RaceCode>{state.raceID}</RaceCode>
-            <Btn onClick={() => handleStart()}>Start Race</Btn>
-          </Section>
+          {state.joined ? (
+            <Section>Wait for the race to begin. Stay on this page.</Section>
+          ) : (
+            <Section>
+              <Title w="180px" xOffset="-39px">
+                Join Race
+              </Title>
+              Enter your name and a join code.
+              <Input
+                onChange={(e) => handleTextEntry(e.target.value, "name")}
+                autoFocus
+                placeholder="your name"
+              />
+              <Input
+                onChange={(e) => handleTextEntry(e.target.value, "code")}
+                placeholder="join code"
+              />
+              <Btn
+                disabled={state.name == "" || state.joinCode == ""}
+                onClick={() => handleJoin()}
+              >
+                Join Race
+              </Btn>
+              Or...
+              <Link ownLine target="_blank" href="/race-manager">
+                Create your own race and invite others
+              </Link>
+            </Section>
+          )}
 
           <LeaderBoard />
         </CardContainer>
