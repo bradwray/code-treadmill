@@ -66,12 +66,12 @@ const makePseudoArray = (code) => {
    let newCodeString = code;
 
    while (
-      newCodeString.indexOf('.getElem') >= 0
-      /*newCodeString.indexOf('.setElem') >= 0 ||
+      newCodeString.indexOf('.getElem') >= 0 ||
+      newCodeString.indexOf('.LENGTH') >= 0 ||
+      newCodeString.indexOf('.setElem') >= 0 ||
       newCodeString.indexOf('.INSERT') >= 0 ||
       newCodeString.indexOf('.APPEND') >= 0 ||
-      newCodeString.indexOf('.REMOVE') >= 0 ||
-      newCodeString.indexOf('.LENGTH') >= 0 */
+      newCodeString.indexOf('.REMOVE') >= 0
    ) {
       if (newCodeString.indexOf('.getElem') >= 0) {
          let getStart = newCodeString.indexOf('.getElem(');
@@ -80,9 +80,33 @@ const makePseudoArray = (code) => {
          let val = newCodeString.substring(getOpeningParenthesis + 1, getClosingParenthesis);
          newCodeString = newCodeString.replace(
             newCodeString.substring(getStart, getClosingParenthesis + 1),
-            '[' + val + ']'
+            '[' + makePseudoArray(val) + ']'
          );
       }
+      //names.LENGTH(names
+      //names[names.LENGTH(names])
+      console.log(newCodeString);
+      let listNameIndex = Math.max(
+         newCodeString.indexOf('.LENGTH'),
+         newCodeString.indexOf('.INSERT'),
+         newCodeString.indexOf('.APPEND'),
+         newCodeString.indexOf('.REMOVE')
+      );
+      console.log(listNameIndex);
+      let listNameDot;
+      if (listNameIndex >= 0 && newCodeString.includes('.LENGTH')) {
+         // grabs the list name from the the param inside LENGTH
+         listNameDot =
+            newCodeString.substring(listNameIndex + 8, newCodeString.indexOf(')', listNameIndex)) +
+            '.';
+      } else {
+         // grabs the list name from the INSERT, APPEND, REMOVE by grabbing the first parameter
+         listNameDot =
+            newCodeString.substring(listNameIndex + 8, newCodeString.indexOf(',', listNameIndex)) +
+            '.';
+      }
+      console.log(listNameDot);
+      newCodeString = newCodeString.replace(listNameDot, '');
    }
    return newCodeString;
 };

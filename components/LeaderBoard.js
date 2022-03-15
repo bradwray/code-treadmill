@@ -80,7 +80,6 @@ const LeaderBoard = ({}) => {
       .sort((a, b) => b.score * b.progress - a.score * a.progress);
    return (
       <BoardContainer leftAligned={store.leftAligned}>
-         <JoinRace />
          <Row key={'header'} header>
             <Cell>#</Cell>
             <NameCell>name</NameCell>

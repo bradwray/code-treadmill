@@ -6,8 +6,11 @@ export default [
       var nums = new PseudoArray([##,##,##])  
       var names = new PseudoArray([^^,^^,^^]) 
       names.getElem(3)
-  names.LENGTH(names)
+      names.APPEND(names, "John")
+      names.REMOVE(names, names.LENGTH(names))
+      
+  
        `,
-      solveFor: 'list.getElem(1)',
+      solveFor: 'names.getElem(names.LENGTH(names))',
    },
 ];

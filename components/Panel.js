@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import Button from './Button';
 import { Context } from './AppContext';
 import LeaderBoard from './LeaderBoard';
 import ProgressChart from './ProgressChart';
@@ -39,14 +40,15 @@ const LeftAligned = styled(ControlPanel)`
    padding-top: 50px;
    flex-direction: column;
    border: 1px solid ${(props) => props.theme.plain.color + '99'};
-   justify-content: flex-start;
-   width: 400px;
+   align-items: center;
+   width: 530px;
    height: 100vh;
 `;
 
 const ControlsContainer = styled.div`
    display: flex;
    position: absolute;
+   margin: 10px;
    top: 0;
    left: 0;
    width: 380px;
@@ -64,9 +66,18 @@ const FlipButton = styled.button`
    width: 30px;
    height: 30px;
    border: 1px solid ${(props) => props.theme.plain.color + '99'};
+   transform: scale(0.7) translateX(10px) translateY(10px);
    @media (max-width: 768px) {
       display: none;
    }
+`;
+
+const JoinBtn = styled(Button)`
+   font-size: 14px;
+   /* width: 100px; */
+   height: 10px;
+   margin-left: 13px;
+   margin-top: 7px;
 `;
 
 const DropdownContainer = styled.div`
@@ -77,10 +88,20 @@ const DropdownContainer = styled.div`
    }
 `;
 
+const DisplaysContainerLeft = styled.div`
+   margin-top: 20px;
+`;
+
+const DisplaysContainerTop = styled.div`
+   display: flex;
+   justify-content: space-around;
+`;
+
 export default function Panel() {
    const [store, setStore] = useContext(Context);
 
    const Surface = store.leftAligned ? LeftAligned : TopAligned;
+   let DisplaysContainer = store.leftAligned ? DisplaysContainerLeft : DisplaysContainerTop;
 
    React.useEffect(() => {}, []);
 
@@ -94,11 +115,13 @@ export default function Panel() {
                <WorkoutDropdown />
                <ThemeDropdown />
             </DropdownContainer>
+            <JoinBtn>Wanna Race?</JoinBtn>
          </ControlsContainer>
-
-         <ResultsDisplay />
-         <ProgressChart />
-         {/* <LeaderBoard /> */}
+         <DisplaysContainer>
+            <ResultsDisplay />
+            <ProgressChart />
+            {/* <LeaderBoard /> */}
+         </DisplaysContainer>
       </Surface>
    );
 }
