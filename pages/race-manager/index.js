@@ -7,14 +7,15 @@ import CardContainer from '../../components/CardContainer';
 import Head from 'next/head';
 import LeaderBoard from '../../components/LeaderBoard';
 import Link from '../../components/Link';
-import Panel from '../../components/Panel';
-import QuestionMaker from '../../components/QuestionMaker';
 import ThemeDropdown from '../../components/ThemeDropdown';
 import Title from '../../components/Title';
 import WigglyPath from '../../components/WigglyPath';
 import WorkoutDropdown from '../../components/WorkoutDropdown';
+import io from 'socket.io-client';
 import { randomAnimals } from '../../utils/randomStringGenerator';
 import styled from 'styled-components';
+
+const socket = io();
 
 const Wrapper = styled.div`
    display: flex;
@@ -92,15 +93,24 @@ const RaceManager = ({}) => {
       raceWorkout: '',
       raceLang: 'javaScript',
    });
-   useEffect(() => {}, []);
+   //  const [store, setStore] = useContext(Context);
+   useEffect(() => {
+      fetch('/api/socketio').finally(() => {
+         socket.on('a user connected', () => {
+            console.log('a user connected?');
+         });
+      });
+   }, []);
 
    const handleStart = () => {
       setState({ ...state, began: true });
    };
 
    const handleRaceWorkout = (val) => {
+      const { raceWorkout, raceID, raceLang } = state;
       const lang = val.includes('pseudo') ? 'pseudocode' : 'javaScript';
-      //this is where a new race should be triggered on the socket, after they user has picked a workout
+      console.log(val);
+      socket.emit('setRace', val, raceID, raceLang);
       setState({ ...state, raceWorkout: val, raceLang: lang });
    };
 
@@ -145,7 +155,7 @@ const RaceManager = ({}) => {
                   ) : (
                      <InstructionsContainer>
                         Choose a workout for the race. A workout is like the race-course. Not sure
-                        which one. Try them out at...
+                        which one? Try them out at...
                         <Link ownLine target='_blank' href='https://www.waytocode.dev/'>
                            https://www.waytocode.dev/
                         </Link>

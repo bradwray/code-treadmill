@@ -127,7 +127,7 @@ export default function Panel() {
          <DisplaysContainer>
             <ResultsDisplay />
             <ProgressChart />
-            {/* <LeaderBoard /> */}
+            <LeaderBoard />
          </DisplaysContainer>
       </Surface>
    );

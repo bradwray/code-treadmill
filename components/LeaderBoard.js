@@ -63,7 +63,7 @@ const LeaderBoard = ({}) => {
       console.log(socket);
       if (!socket.connected && store.raceID) {
          fetch('/api/socketio').finally(() => {
-            socket.on('updateRace', (raceStats) => {
+            socket.on(store.raceID + '-updateRace', (raceStats) => {
                console.log('updateRace');
                setResults(raceStats);
             });
@@ -73,7 +73,7 @@ const LeaderBoard = ({}) => {
             });
          });
       }
-   }, [store.currentIndex]);
+   }, [store.currentIndex, store.raceID]);
 
    const resultsList = Object.keys(results)
       .map((competitorKey, i) => results[competitorKey])

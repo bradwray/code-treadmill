@@ -53,7 +53,7 @@ const WorkoutsMenu = ({ end }) => {
             </div>
          ) : (
             <div>
-               <div>Welcome </div> <div>Try out one of these coding workouts</div>
+               <div>Try out one of these coding workouts</div>
             </div>
          )}
 

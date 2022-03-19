@@ -1,6 +1,6 @@
 import PseudoArray from './PseudoArray';
 
-const evalCode = (code, solveFor) => {
+const evalCode = (code, solveFor, pseudo) => {
    //infinite loop protector
    if (code.includes('for(') || code.includes('while(')) {
       var startIndex = code.includes('for(') ? code.indexOf('for(') : code.indexOf('while(');
@@ -14,7 +14,7 @@ const evalCode = (code, solveFor) => {
    // seems like a good idea to disallow some things
    code = code.replace(/import/g, '').replace(/require/g, '');
    // add the PseudoArray class for realistic AP CSP PseudoCode arrays
-   code = PseudoArray + code;
+   code = pseudo ? PseudoArray + code : code;
    try {
       var wholeEval = new Function(code + '\n' + 'return ' + solveFor);
       return wholeEval().toString();

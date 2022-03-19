@@ -54,7 +54,6 @@ const bounce = keyframes`
 const Wrapper = styled.div`
    display: inline-block;
    ${(props) => {
-      console.log(props.xOffset);
       return props.xOffset
          ? `position: absolute; 
          left: ${props.xOffset}px;`
