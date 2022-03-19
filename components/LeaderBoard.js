@@ -61,7 +61,7 @@ const LeaderBoard = ({}) => {
 
    useEffect(() => {
       console.log(socket);
-      if (!socket.connected) {
+      if (!socket.connected && store.raceID) {
          fetch('/api/socketio').finally(() => {
             socket.on('updateRace', (raceStats) => {
                console.log('updateRace');

@@ -8,6 +8,7 @@ import ResultsDisplay from './ResultsDisplay';
 import ThemeDropdown from './ThemeDropdown';
 import WorkoutDropdown from './WorkoutDropdown';
 import styled from 'styled-components';
+import { useRouter } from 'next/router';
 
 const ControlPanel = styled.div`
    display: flex;
@@ -98,6 +99,7 @@ const DisplaysContainerTop = styled.div`
 `;
 
 export default function Panel() {
+   const router = useRouter();
    const [store, setStore] = useContext(Context);
 
    const Surface = store.leftAligned ? LeftAligned : TopAligned;
@@ -115,7 +117,12 @@ export default function Panel() {
                <WorkoutDropdown />
                <ThemeDropdown />
             </DropdownContainer>
-            <JoinBtn>Wanna Race?</JoinBtn>
+            <JoinBtn
+               onClick={() => {
+                  router.push('/race');
+               }}>
+               Wanna Race?
+            </JoinBtn>
          </ControlsContainer>
          <DisplaysContainer>
             <ResultsDisplay />

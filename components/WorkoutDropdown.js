@@ -27,22 +27,26 @@ const Label = styled.span`
    transform: translateY(4px) translateX(15px);
 `;
 
-function WorkoutDropdown() {
+function WorkoutDropdown({ isRace, setRaceWorkout }) {
    const [store, setStore] = useContext(Context);
 
    const router = useRouter();
    const { id } = router.query;
 
    const handleChange = (val) => {
-      router.push('/' + val);
-      setStore({
-         ...store,
-         currentIndex: 0,
-         readStats: [],
-         raceStats: [],
-         rpm: 0,
-         avgComplexity: 0,
-      });
+      if (isRace) {
+         setRaceWorkout(val);
+      } else {
+         router.push('/' + val);
+         setStore({
+            ...store,
+            currentIndex: 0,
+            readStats: [],
+            raceStats: [],
+            rpm: 0,
+            avgComplexity: 0,
+         });
+      }
    };
 
    return (

@@ -33,7 +33,7 @@ const MessageBox = styled.div`
    padding: 2px;
    font-size: 16px;
    font-family: 'Dank Mono', 'Fira Code', monospace;
-   width: 100px;
+   width: 110px;
    @media (max-width: 768px) {
       transform: scale(0.7) translateY(-54px) translateX(180px);
    }
@@ -53,20 +53,36 @@ const bounce = keyframes`
 
 const Wrapper = styled.div`
    display: inline-block;
-
-   margin-left: 20px;
+   ${(props) => {
+      console.log(props.xOffset);
+      return props.xOffset
+         ? `position: absolute; 
+         left: ${props.xOffset}px;`
+         : null;
+   }}
+   margin-left: 0px;
    animation-name: ${bounce};
    animation-duration: 1s;
    animation-iteration-count: infinite;
    animation-timing-function: ease-in-out;
 `;
 
-const Attention = ({ message }) => {
+const TailFlip = styled.div`
+   transform: rotate(180deg) translateY(23px) translateX(-39px);
+`;
+
+const Attention = ({ message, double, xOffset }) => {
    return (
-      <Wrapper>
+      <Wrapper xOffset={xOffset}>
          <Point />
          <Tail />
          <MessageBox>{message}</MessageBox>
+         {double ? (
+            <TailFlip>
+               <Point />
+               <Tail />
+            </TailFlip>
+         ) : null}
       </Wrapper>
    );
 };

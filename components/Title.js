@@ -2,6 +2,7 @@ import styled from 'styled-components';
 const Title = styled.div`
    transform-origin: center;
    text-align: center;
+   ${(props) => (props.big ? 'font-size: 40px;' : '')};
    transform: translateY(-50px) translateX(${(props) => props.xOffset}) rotate(-5deg);
    width: ${(props) => props.w};
    background-color: ${(props) => props.theme.plain.backgroundColor};
