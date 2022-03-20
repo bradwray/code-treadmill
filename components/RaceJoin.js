@@ -49,37 +49,49 @@ const RaceJoin = ({}) => {
       name: '',
    });
    useEffect(() => {
-      if (!socket.connected && store.raceID) {
+      console.log('in useEffect');
+      if (!socket.connected) {
          fetch('/api/socketio').finally(() => {
-            socket.on(store.raceID + '-raceStart', (raceRoute) => {
-               router.push(raceRoute);
-               setStore({ ...store, rpm: 0, score: 0, currentIndex: 0 });
-            });
-
-            socket.on(store.userName, (userName) => {
-               console.log(userName + ' joined the ' + store.raceID);
-               setState({ ...state, joined: true, message: null });
-            });
-
-            socket.on('woops' + store.raceID + '-' + store.userName, () => {
-               console.log(store.userName + ' nope nope ' + store.raceID);
-               setState({ ...state, joined: false, message: 'Invalid join code' });
-            });
+            // socket.on(store.raceID + '-raceStart', (raceRoute) => {
+            //    router.push(raceRoute);
+            //    setStore({ ...store, rpm: 0, score: 0, currentIndex: 0 });
+            // });
 
             socket.on('a user connected', () => {
                console.log('a user connected?');
             });
          });
+      } else {
+         socket.on('welcome', (userName) => {
+            if (userName === store.userName) {
+               setState({ ...state, joined: true, message: null });
+            }
+         });
+         socket.on('woops', (userName) => {
+            if (userName === store.userName) {
+               setState({ ...state, joined: false, message: 'Invalid join code' });
+            }
+         });
+         socket.on('race-began', (raceID, startTime, raceRoute) => {
+            console.log(raceID + ' began at ' + startTime);
+            if (store.raceID === raceID) {
+               setStore({ ...store, startTime, score: 0, currentIndex: 0, progress: 0 });
+               router.push('/' + raceRoute);
+            }
+         });
       }
-   }, [store.raceID, store.userName, state]);
+   }, [store.raceID, store.userName]);
 
    const handleJoin = () => {
       //this next line ensures unique results among same named competitors
-      const userName = state.name + '~~' + Math.random();
+      const userName = state.name + '~~' + Math.floor(Math.random() * 100).toString();
+      setState({ ...state, joining: true, message: 'Joining...' });
+      console.log('joining' + state.joinCode + ' ' + userName);
       setStore({ ...store, raceID: state.joinCode, userName: userName });
+
       socket.emit('joinRace', state.joinCode, userName);
    };
-
+   console.log(store);
    const handleTextEntry = (val, box) => {
       if (box === 'code') {
          setState({ ...state, joinCode: val });
@@ -109,7 +121,9 @@ const RaceJoin = ({}) => {
                />
                {state.message ? state.message : null}
                <Btn
-                  disabled={state.name == '' || state.joinCode == ''}
+                  disabled={
+                     state.name == '' || state.joinCode == '' || state.joining == 'Joining...'
+                  }
                   onClick={() => handleJoin()}>
                   Join Race
                </Btn>

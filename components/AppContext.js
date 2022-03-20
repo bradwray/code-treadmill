@@ -17,13 +17,6 @@ export function AppContext(props) {
       currentIndex: 0,
       readStats: [],
       raceID: false,
-      raceStats: [
-         {
-            user: 'Brad',
-            rpm: 2,
-            avgComplexity: 7,
-         },
-      ],
       slides: tagAndWeightCode(slides),
       workout: '',
       rpm: 0,

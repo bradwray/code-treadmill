@@ -1,6 +1,6 @@
-import { AppContext, Context } from '../../components/AppContext';
 import React, { useContext, useEffect, useState } from 'react';
 
+import { AppContext } from '../../components/AppContext';
 import Head from 'next/head';
 import RaceJoin from '../../components/RaceJoin';
 import ThemeDropdown from '../../components/ThemeDropdown';
@@ -26,7 +26,7 @@ const Toptions = styled.div`
 
 const Race = ({}) => {
    return (
-      <AppContext>
+      <div>
          <Head>
             <title>Way To Code!</title>
             {/* <meta name='viewport' content='initial-scale=1.0, width=device-width maximum-scale=1' /> */}
@@ -37,7 +37,7 @@ const Race = ({}) => {
          <Wrapper>
             <RaceJoin />
          </Wrapper>
-      </AppContext>
+      </div>
    );
 };
 

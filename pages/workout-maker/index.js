@@ -49,7 +49,7 @@ const WorkoutMaker = ({}) => {
   };
   console.log(state.items);
   return (
-    <AppContext>
+    <div>
       <Head>
         <title>Way To Code!</title>
         {/* <meta name='viewport' content='initial-scale=1.0, width=device-width maximum-scale=1' /> */}
@@ -63,7 +63,7 @@ const WorkoutMaker = ({}) => {
         ))}
         <AddNew onClick={() => handleNew()}> Add New Item</AddNew>
       </Wrapper>
-    </AppContext>
+    </div>
   );
 };
 

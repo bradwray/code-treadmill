@@ -61,16 +61,15 @@ const LeaderBoard = ({}) => {
 
    useEffect(() => {
       console.log(socket);
-      if (!socket.connected && store.raceID) {
+      if (!socket.connected) {
          fetch('/api/socketio').finally(() => {
-            socket.on(store.raceID + '-updateRace', (raceStats) => {
-               console.log('updateRace');
-               setResults(raceStats);
-            });
-
             socket.on('a user connected', () => {
                console.log('a user connected?');
             });
+         });
+      } else {
+         socket.on(store.raceID + '-updateRace', (raceStats) => {
+            setResults(raceStats);
          });
       }
    }, [store.currentIndex, store.raceID]);
@@ -90,7 +89,9 @@ const LeaderBoard = ({}) => {
             return (
                <Row key={i} you={competitor.name == store.userName}>
                   <Cell>{i + 1 + ': '}</Cell>
-                  <NameCell>{competitor.name.substring(0, 18)}</NameCell>
+                  <NameCell>
+                     {competitor.name.substring(0, 18).substring(0, competitor.name.indexOf('~~'))}
+                  </NameCell>
                   <Cell>{competitor.score}</Cell>
                   <Cell>{competitor.progress}%</Cell>
                </Row>

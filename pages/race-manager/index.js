@@ -1,9 +1,9 @@
-import { AppContext, Context } from '../../components/AppContext';
 import React, { useContext, useEffect, useState } from 'react';
 
 import Attention from '../../components/Attention';
 import Button from '../../components/Button';
 import CardContainer from '../../components/CardContainer';
+import { Context } from '../../components/AppContext';
 import Head from 'next/head';
 import LeaderBoard from '../../components/LeaderBoard';
 import Link from '../../components/Link';
@@ -87,9 +87,10 @@ const InstructionsContainer = styled.div`
 `;
 
 const RaceManager = ({}) => {
+   const [store, setStore] = useContext(Context);
    const [state, setState] = useState({
       began: false,
-      raceID: randomAnimals().toLowerCase(0) + Math.floor(Math.random() * 100),
+      raceID: (randomAnimals().toLowerCase(0) + Math.floor(Math.random() * 100)).replace(' ', ''),
       raceWorkout: '',
       raceLang: 'javaScript',
    });
@@ -103,6 +104,7 @@ const RaceManager = ({}) => {
    }, []);
 
    const handleStart = () => {
+      socket.emit('raceStart', state.raceID, Date.now());
       setState({ ...state, began: true });
    };
 
@@ -112,10 +114,11 @@ const RaceManager = ({}) => {
       console.log(val);
       socket.emit('setRace', val, raceID, raceLang);
       setState({ ...state, raceWorkout: val, raceLang: lang });
+      setStore({ ...store, raceID: raceID, raceWorkout: val, raceLang: lang });
    };
 
    return (
-      <AppContext>
+      <div>
          <Head>
             <title>Way To Code!</title>
             {/* <meta name='viewport' content='initial-scale=1.0, width=device-width maximum-scale=1' /> */}
@@ -166,7 +169,7 @@ const RaceManager = ({}) => {
                <LeaderBoard />
             </CardContainer>
          </Wrapper>
-      </AppContext>
+      </div>
    );
 };
 

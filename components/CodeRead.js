@@ -132,7 +132,7 @@ function CodeRead({
             score,
          });
          if (store.raceID) {
-            socket.emit('newResult', {
+            socket.emit('newResult', store.raceID, store.userName, {
                name: store.userName,
                score: score,
                progress: (((store.currentIndex + 1) / store.slides.length) * 100).toFixed(0),

@@ -16,22 +16,26 @@ const ioHandler = (req, res) => {
             console.log(raceID + ' is now a race');
          });
 
+         socket.on('raceStart', (raceID, startTime) => {
+            races[raceID].began = startTime;
+            console.log(races[raceID].raceWorkout);
+            socket.broadcast.emit('race-began', raceID, startTime, races[raceID].raceWorkout);
+         });
+
          socket.on('joinRace', (raceID, userName) => {
             console.log(races);
             if (races.hasOwnProperty(raceID)) {
-               races[raceID].participants[userName] = { score: 0, progress: 0 };
-               console.log(userName + ' has joined ' + raceID);
-               socket.emit(userName, userName);
+               socket.emit('welcome', userName);
+               races[raceID].participants[userName] = { name: userName, score: 0, progress: 0 };
+               socket.broadcast.emit(raceID + '-updateRace', races[raceID].participants);
             } else {
-               console.log(raceID + ' is not a race id');
-               socket.emit('woops' + raceID + '-' + userName);
+               socket.emit('woops', userName);
             }
          });
 
-         socket.on('newResult', (newResult) => {
-            raceStats[newResult.name] = newResult;
-            console.log(raceStats);
-            socket.broadcast.emit('updateRace', raceStats);
+         socket.on('newResult', (raceID, userName, newResult) => {
+            races[raceID].participants[userName] = newResult;
+            socket.broadcast.emit(raceID + '-updateRace', races[raceID].participants);
          });
       });
 
