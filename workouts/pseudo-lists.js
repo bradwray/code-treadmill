@@ -2,15 +2,17 @@
 export default [
    {
       content: `  
-      var list = new PseudoArray([1,2,3])  
-      var nums = new PseudoArray([##,##,##])  
-      var names = new PseudoArray([^^,^^,^^]) 
-      names.getElem(3)
-      names.APPEND(names, "John")
-      names.REMOVE(names, names.LENGTH(names))
+      //nothing here yet
       
   
        `,
-      solveFor: 'names.getElem(names.LENGTH(names))',
+      solveFor: 'comingSoon',
    },
 ];
+
+// var list = new PseudoArray([1,2,3])
+//       var nums = new PseudoArray([##,##,##])
+//       var names = new PseudoArray([^^,^^,^^])
+//       names.getElem(3)
+//       names.APPEND(names, "John")
+//       names.REMOVE(names, names.LENGTH(names))

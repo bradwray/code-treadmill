@@ -67,6 +67,7 @@ const DropDownContainer = styled.div`
    /* position: absolute; */
    display: flex;
    justify-content: space-between;
+   font-size: 22px;
    width: 550px;
    border: 1px solid red;
    background-color: ${(props) => props.theme.plain.backgroundColor};
@@ -104,8 +105,15 @@ const RaceManager = ({}) => {
    }, []);
 
    const handleStart = () => {
-      socket.emit('raceStart', state.raceID, Date.now());
+      const d = new Date();
+      socket.emit('raceStart', state.raceID, d.toLocaleString());
       setState({ ...state, began: true });
+   };
+
+   const handleEnd = () => {
+      const d = new Date();
+      socket.emit('raceEnd', state.raceID, d.toLocaleString());
+      setState({ ...state, finished: true });
    };
 
    const handleRaceWorkout = (val) => {
@@ -133,10 +141,19 @@ const RaceManager = ({}) => {
                      Manage Race
                   </Title>
                   <DropDownContainer>
-                     <WorkoutDropdown isRace setRaceWorkout={handleRaceWorkout} />
+                     {state.began ? (
+                        <div style={{ padding: '15px' }}>
+                           {store.raceWorkout.substring(
+                              store.raceWorkout.indexOf('-') + 1,
+                              store.raceWorkout.length
+                           )}
+                        </div>
+                     ) : (
+                        <WorkoutDropdown isRace setRaceWorkout={handleRaceWorkout} />
+                     )}
                      <Attention
                         double
-                        xOffset={160}
+                        xOffset={170}
                         message={
                            state.raceWorkout === '' ? 'pick a workout' : 'racing this workout'
                         }></Attention>
@@ -153,7 +170,11 @@ const RaceManager = ({}) => {
                         </InstructionsContainer>
 
                         <RaceCode>{state.raceID}</RaceCode>
-                        <Btn onClick={() => handleStart()}>Start Race</Btn>
+                        {!state.began ? (
+                           <Btn onClick={() => handleStart()}>Start Race</Btn>
+                        ) : state.finished ? null : (
+                           <Btn onClick={() => handleEnd()}>End Race</Btn>
+                        )}
                      </div>
                   ) : (
                      <InstructionsContainer>
@@ -165,7 +186,6 @@ const RaceManager = ({}) => {
                      </InstructionsContainer>
                   )}
                </Section>
-
                <LeaderBoard />
             </CardContainer>
          </Wrapper>

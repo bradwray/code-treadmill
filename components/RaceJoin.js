@@ -72,10 +72,17 @@ const RaceJoin = ({}) => {
                setState({ ...state, joined: false, message: 'Invalid join code' });
             }
          });
-         socket.on('race-began', (raceID, startTime, raceRoute) => {
+         socket.on('raceBegan', (raceID, startTime, raceRoute) => {
             console.log(raceID + ' began at ' + startTime);
             if (store.raceID === raceID) {
-               setStore({ ...store, startTime, score: 0, currentIndex: 0, progress: 0 });
+               setStore({
+                  ...store,
+                  startTime,
+                  raceWorkout: raceRoute,
+                  score: 0,
+                  currentIndex: 0,
+                  progress: 0,
+               });
                router.push('/' + raceRoute);
             }
          });

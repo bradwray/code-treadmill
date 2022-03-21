@@ -9,25 +9,25 @@ import slides from '../workouts/js-variables';
 import tagAndWeightCode from '../utils/tagAndWeightCode.js';
 
 const socket = io();
-
+let persistedStore = {
+   currentIndex: 0,
+   readStats: [],
+   raceID: false,
+   slides: tagAndWeightCode(slides),
+   workout: '',
+   rpm: 0,
+   avgComplexity: 0,
+   theme: nightOwl,
+   themeName: 'nightOwl',
+   themeNum: 0,
+   leftAligned: true,
+   score: 0,
+};
 export const Context = createContext();
 
 export function AppContext(props) {
-   const [store, setStore] = React.useState({
-      currentIndex: 0,
-      readStats: [],
-      raceID: false,
-      slides: tagAndWeightCode(slides),
-      workout: '',
-      rpm: 0,
-      avgComplexity: 0,
-      theme: nightOwl,
-      themeName: 'nightOwl',
-      themeNum: 0,
-      leftAligned: true,
-      score: 0,
-   });
-   //   console.log(store);
+   const [store, setStore] = React.useState(persistedStore);
+   persistedStore = store;
    useEffect(() => {
       //the linter told me to import dynamic routes this way
       async function importWorkout() {

@@ -131,7 +131,7 @@ function CodeRead({
             rpm: fitDigits(rpm),
             score,
          });
-         if (store.raceID) {
+         if (store.raceID && store.raceWorkout == store.workout) {
             socket.emit('newResult', store.raceID, store.userName, {
                name: store.userName,
                score: score,

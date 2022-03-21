@@ -127,7 +127,7 @@ export default function Panel() {
          <DisplaysContainer>
             <ResultsDisplay />
             <ProgressChart />
-            <LeaderBoard />
+            {store.raceWorkout == store.workout ? <LeaderBoard /> : null}
          </DisplaysContainer>
       </Surface>
    );

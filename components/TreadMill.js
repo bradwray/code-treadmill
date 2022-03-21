@@ -56,7 +56,7 @@ export default function TreadMill({ updateStats }) {
    };
 
    const { animationConfig, offsetRadius } = defaultProps;
-
+   console.log(store);
    return (
       <React.Fragment>
          {store.confettiKey ? (

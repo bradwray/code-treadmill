@@ -67,9 +67,12 @@ const LeaderBoard = ({}) => {
                console.log('a user connected?');
             });
          });
-      } else {
+      } else if (store.raceID != null) {
          socket.on(store.raceID + '-updateRace', (raceStats) => {
             setResults(raceStats);
+         });
+         socket.on(store.raceID + '-raceEnded', (endTime) => {
+            setStore({ ...store, raceID: null, endTime });
          });
       }
    }, [store.currentIndex, store.raceID]);
@@ -79,6 +82,7 @@ const LeaderBoard = ({}) => {
       .sort((a, b) => b.score * b.progress - a.score * a.progress);
    return (
       <BoardContainer leftAligned={store.leftAligned}>
+         {store.raceID == null && store.endTime ? 'Race ended at ' + store.endTime : null}
          <Row key={'header'} header>
             <Cell>#</Cell>
             <NameCell>name</NameCell>

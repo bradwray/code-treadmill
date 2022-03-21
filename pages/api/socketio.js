@@ -12,19 +12,23 @@ const ioHandler = (req, res) => {
          socket.broadcast.emit('a user connected');
 
          socket.on('setRace', (raceWorkout, raceID, raceLang) => {
-            races[raceID] = { raceWorkout, raceLang, participants: {} };
+            races[raceID] = { raceWorkout, raceLang, participants: {}, ended: false };
             console.log(raceID + ' is now a race');
          });
 
          socket.on('raceStart', (raceID, startTime) => {
             races[raceID].began = startTime;
             console.log(races[raceID].raceWorkout);
-            socket.broadcast.emit('race-began', raceID, startTime, races[raceID].raceWorkout);
+            socket.broadcast.emit('raceBegan', raceID, startTime, races[raceID].raceWorkout);
+         });
+
+         socket.on('raceEnd', (raceID, endTime) => {
+            races[raceID].ended = endTime;
+            socket.broadcast.emit(raceID + '-raceEnded', endTime);
          });
 
          socket.on('joinRace', (raceID, userName) => {
-            console.log(races);
-            if (races.hasOwnProperty(raceID)) {
+            if (races.hasOwnProperty(raceID) && !races[raceID].ended) {
                socket.emit('welcome', userName);
                races[raceID].participants[userName] = { name: userName, score: 0, progress: 0 };
                socket.broadcast.emit(raceID + '-updateRace', races[raceID].participants);
