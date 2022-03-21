@@ -9,7 +9,6 @@ import LeaderBoard from '../../components/LeaderBoard';
 import Link from '../../components/Link';
 import ThemeDropdown from '../../components/ThemeDropdown';
 import Title from '../../components/Title';
-import WigglyPath from '../../components/WigglyPath';
 import WorkoutDropdown from '../../components/WorkoutDropdown';
 import io from 'socket.io-client';
 import { randomAnimals } from '../../utils/randomStringGenerator';
