@@ -1,13 +1,9 @@
-import '../public/styles.css';
+import "../public/styles.css";
 
-import { AppContext } from '../components/AppContext';
+// import { AppContext } from '../components/AppContext';
 
 function MyApp({ Component, pageProps }) {
-   return (
-      <AppContext>
-         <Component {...pageProps} />
-      </AppContext>
-   );
+  return <Component {...pageProps} />;
 }
 
 export default MyApp;
