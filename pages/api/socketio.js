@@ -20,7 +20,7 @@ const ioHandler = (req, res) => {
         };
         console.log(raceID + " is now a race");
       });
-      //hello
+
       socket.on("raceStart", (raceID, startTime) => {
         races[raceID].began = startTime;
         console.log(races[raceID].raceWorkout);
