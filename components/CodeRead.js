@@ -145,7 +145,7 @@ function CodeRead({
           name: store.userName,
           score: score,
           progress: (
-            ((store.currentIndex + 1) / store.slides.length - 1) *
+            ((store.currentIndex + 1) / (store.slides.length - 1)) *
             100
           ).toFixed(0),
         });

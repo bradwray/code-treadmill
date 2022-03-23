@@ -128,21 +128,6 @@ export default [
   },
   {
     content: `
-      var speedBoost = #.# + #-#
-      speedBoost--
-         `,
-    solveFor: "speedBoost",
-  },
-  {
-    content: `
-       var youAreDoing = ##
-      var aGreatJob = youAreDoing + #.#
-      aGreatJob++
-         `,
-    solveFor: "aGreatJob",
-  },
-  {
-    content: `
        var result = $$ + " " + @@
          `,
     solveFor: "result",
