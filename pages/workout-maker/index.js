@@ -47,7 +47,6 @@ const WorkoutMaker = ({}) => {
       items: [...state.items, {}],
     });
   };
-  console.log(state.items);
   return (
     <div>
       <Head>

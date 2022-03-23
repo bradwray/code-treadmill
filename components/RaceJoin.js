@@ -49,7 +49,6 @@ const RaceJoin = ({}) => {
       name: '',
    });
    useEffect(() => {
-      console.log('in useEffect');
       if (!socket.connected) {
          fetch('/api/socketio').finally(() => {
             // socket.on(store.raceID + '-raceStart', (raceRoute) => {
@@ -73,7 +72,6 @@ const RaceJoin = ({}) => {
             }
          });
          socket.on('raceBegan', (raceID, startTime, raceRoute) => {
-            console.log(raceID + ' began at ' + startTime);
             if (store.raceID === raceID) {
                setStore({
                   ...store,
@@ -83,7 +81,7 @@ const RaceJoin = ({}) => {
                   currentIndex: 0,
                   progress: 0,
                });
-               router.push('/' + raceRoute);
+               router.push('/' + raceRoute + '?raceID=' + raceID + '&uName=' + store.userName);
             }
          });
       }
@@ -93,12 +91,10 @@ const RaceJoin = ({}) => {
       //this next line ensures unique results among same named competitors
       const userName = state.name + '~~' + Math.floor(Math.random() * 100).toString();
       setState({ ...state, joining: true, message: 'Joining...' });
-      console.log('joining' + state.joinCode + ' ' + userName);
       setStore({ ...store, raceID: state.joinCode, userName: userName });
 
       socket.emit('joinRace', state.joinCode, userName);
    };
-   console.log(store);
    const handleTextEntry = (val, box) => {
       if (box === 'code') {
          setState({ ...state, joinCode: val });

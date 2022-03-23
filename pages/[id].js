@@ -18,11 +18,10 @@ const Wrapper = styled.div`
 
 export default function App({}) {
    const router = useRouter();
-   const { id } = router.query;
-
+   const { id, raceID, uName } = router.query;
    if (id) {
       return (
-         <AppContext route={id}>
+         <AppContext route={id} raceID={raceID} uName={uName}>
             <Head>
                <title>Way-To-Code {id}</title>
                <meta

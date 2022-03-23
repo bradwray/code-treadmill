@@ -60,7 +60,6 @@ const LeaderBoard = ({}) => {
    const [results, setResults] = useState({});
 
    useEffect(() => {
-      console.log(socket);
       if (!socket.connected) {
          fetch('/api/socketio').finally(() => {
             socket.on('a user connected', () => {

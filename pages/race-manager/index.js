@@ -118,7 +118,6 @@ const RaceManager = ({}) => {
    const handleRaceWorkout = (val) => {
       const { raceWorkout, raceID, raceLang } = state;
       const lang = val.includes('pseudo') ? 'pseudocode' : 'javaScript';
-      console.log(val);
       socket.emit('setRace', val, raceID, raceLang);
       setState({ ...state, raceWorkout: val, raceLang: lang });
       setStore({ ...store, raceID: raceID, raceWorkout: val, raceLang: lang });
