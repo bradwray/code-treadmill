@@ -56,7 +56,6 @@ export default function TreadMill({ updateStats }) {
    };
 
    const { animationConfig, offsetRadius } = defaultProps;
-   console.log(store);
    return (
       <React.Fragment>
          {store.confettiKey ? (
@@ -64,7 +63,7 @@ export default function TreadMill({ updateStats }) {
                <Confetti
                   key={store.confettiKey}
                   confettiSource={{
-                     x: window.innerWidth / 2,
+                     x: window.innerWidth * 0.4,
                      y: window.innerHeight / 2,
                      w: 200,
                      h: 100,
@@ -80,7 +79,7 @@ export default function TreadMill({ updateStats }) {
                <Confetti
                   key={store.confettiKey + 1}
                   confettiSource={{
-                     x: window.innerWidth / 2 - 200,
+                     x: window.innerWidth * 0.7,
                      y: window.innerHeight / 2,
                      w: 200,
                      h: 0,
