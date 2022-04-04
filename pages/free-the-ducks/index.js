@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import babyDucks from "../../public/FTD-Assets/babyDucks.gif";
-import DoorOne from "../../components/FreeTheDucks/DoorOne.js";
-import DoorTwo from "../../components/FreeTheDucks/DoorTwo.js";
+import SecondDoor from "../../components/FreeTheDucks/SecondDoor.js";
+import ThirdDoor from "../../components/FreeTheDucks/ThirdDoor.js";
 import FirstDoor from "../../components/FreeTheDucks/FirstDoor.js";
 import DecToBinary from "../../components/FreeTheDucks/DecToBinary.js";
 import HexQuiz from "../../components/FreeTheDucks/HexQuiz";
@@ -63,8 +63,8 @@ class App extends React.Component {
           layout="responsive"
         />
         <FirstDoor openTime={this.state.door[0].time} />
-        <DoorOne openTime={this.state.door[1].time} />
-        <DoorTwo openTime={this.state.door[2].time} />
+        <SecondDoor openTime={this.state.door[1].time} />
+        <ThirdDoor openTime={this.state.door[2].time} />
       </div>
     );
   };

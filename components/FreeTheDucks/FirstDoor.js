@@ -77,8 +77,4 @@ class FirstDoor extends React.Component {
   }
 }
 
-DoorOne.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(DoorOne);
+export default withStyles(styles)(FirstDoor);

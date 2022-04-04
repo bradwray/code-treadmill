@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
@@ -40,7 +39,7 @@ function Transition(props) {
   return <Slide timeout={times} direction={directions[pic]} {...props} />;
 }
 
-class DoorOne extends React.Component {
+class SecondDoor extends React.Component {
   state = {
     open: false,
   };
@@ -82,8 +81,4 @@ class DoorOne extends React.Component {
   }
 }
 
-DoorOne.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(DoorOne);
+export default withStyles(styles)(SecondDoor);

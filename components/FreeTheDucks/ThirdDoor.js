@@ -30,7 +30,7 @@ function Transition(props) {
   return <Slide direction={directions[pic]} {...props} />;
 }
 
-class DoorTwo extends React.Component {
+class ThirdDoor extends React.Component {
   state = {
     open: false,
   };
@@ -70,8 +70,4 @@ class DoorTwo extends React.Component {
   }
 }
 
-DoorTwo.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(DoorTwo);
+export default withStyles(styles)(ThirdDoor);
