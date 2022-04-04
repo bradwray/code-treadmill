@@ -19,7 +19,6 @@ const evalCode = (code, solveFor, pseudo) => {
       var wholeEval = new Function(code + '\n' + 'return ' + solveFor);
       return wholeEval().toString();
    } catch (error) {
-      console.log(error.toString());
       return error.toString();
    }
 };

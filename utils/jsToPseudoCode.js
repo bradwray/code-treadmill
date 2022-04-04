@@ -64,7 +64,7 @@ const invertConditions = (conditions) => {
 
 const makePseudoArray = (code) => {
    let newCodeString = code;
-
+   // console.log('making psedudo array');
    while (
       newCodeString.indexOf('.getElem') >= 0 ||
       newCodeString.indexOf('.LENGTH') >= 0 ||
@@ -83,33 +83,35 @@ const makePseudoArray = (code) => {
             '[' + makePseudoArray(val) + ']'
          );
       }
-      //names.LENGTH(names
-      //names[names.LENGTH(names])
-      console.log(newCodeString);
+
       let listNameIndex = Math.max(
          newCodeString.indexOf('.LENGTH'),
          newCodeString.indexOf('.INSERT'),
          newCodeString.indexOf('.APPEND'),
          newCodeString.indexOf('.REMOVE')
       );
-      console.log(listNameIndex);
+
       let listNameDot;
-      if (listNameIndex >= 0 && newCodeString.includes('.LENGTH')) {
-         // grabs the list name from the the param inside LENGTH
-         listNameDot =
-            newCodeString.substring(listNameIndex + 8, newCodeString.indexOf(')', listNameIndex)) +
-            '.';
+      if (newCodeString.includes('.LENGTH')) {
+         // grabs the list name and puts it inside LENGTH as a parameter
+         let spot = newCodeString.indexOf('.LENGTH');
+         listNameDot = newCodeString.substring(spot + 8, newCodeString.indexOf(')', spot)) + '.';
       } else {
          // grabs the list name from the INSERT, APPEND, REMOVE by grabbing the first parameter
          listNameDot =
             newCodeString.substring(listNameIndex + 8, newCodeString.indexOf(',', listNameIndex)) +
             '.';
       }
-      console.log(listNameDot);
       newCodeString = newCodeString.replace(listNameDot, '');
    }
    return newCodeString;
 };
+
+function sleep(miliseconds) {
+   var currentTime = new Date().getTime();
+
+   while (currentTime + miliseconds >= new Date().getTime()) {}
+}
 
 const convert = (code) => {
    //switches the assignment operator so the inverted conditions work
@@ -121,9 +123,6 @@ const convert = (code) => {
             let whileStart = line.indexOf('while');
             let conditions = line.substring(whileStart + 5, line.length - 1);
             let indent = line.substring(0, whileStart);
-            console.log(conditions);
-            conditions = invertConditions(conditions);
-            console.log(conditions);
             return indent + 'REPEAT UNTIL' + conditions;
          } else if (line.includes('for')) {
             let forStart = line.indexOf('for');

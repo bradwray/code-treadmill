@@ -53,9 +53,17 @@ const randomPick = (list) => {
    return list[Math.floor(Math.random() * list.length)];
 };
 
-export default function showFeedBack({ answered, correct, error, gotIt, code, solveFor }) {
+export default function showFeedBack({
+   answered,
+   correct,
+   error,
+   gotIt,
+   code,
+   solveFor,
+   isPseudo,
+}) {
    if (answered) {
-      const answer = evalCode(code, solveFor);
+      const answer = evalCode(code, solveFor, isPseudo);
       if (correct) {
          return (
             <FeedBackRight>
