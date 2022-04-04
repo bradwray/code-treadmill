@@ -55,6 +55,7 @@ function Slide({ slide, offsetRadius, index, animationConfig, moveSlide }) {
       translateY -= translateYoffset;
    }
    // console.log(offsetRadius);
+   console.count('Slide');
    return (
       <Spring
          to={{
@@ -75,6 +76,7 @@ function Slide({ slide, offsetRadius, index, animationConfig, moveSlide }) {
                <SlideCard>
                   {slide.type === 'read' ? (
                      <CodeRead
+                        key={index}
                         questionData={slide}
                         moveSlide={moveSlide}
                         offsetFromMiddle={offsetFromMiddle}

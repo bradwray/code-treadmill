@@ -30,8 +30,7 @@ export function AppContext(props) {
    initStore = store;
    useEffect(() => {
       const { route, raceID, uName } = props;
-      console.log('route props');
-      console.log(route, raceID, uName);
+
       //the linter told me to import dynamic routes this way
       async function importWorkout() {
          const workoutExercises = await import('../workouts/' + route);

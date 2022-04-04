@@ -96,19 +96,21 @@ export default function TreadMill({ updateStats }) {
          ) : (
             <div />
          )}
-         <Wrapper key={store.workout}>
-            {getPresentableSlides().map((slide, presentableIndex) => {
-               return (
-                  <Slide
-                     key={slide.key}
-                     slide={slide}
-                     offsetRadius={clampOffsetRadius(offsetRadius)}
-                     index={presentableIndex}
-                     animationConfig={animationConfig}
-                  />
-               );
-            })}
-         </Wrapper>
+         {store.workout ? (
+            <Wrapper key={store.workout}>
+               {getPresentableSlides().map((slide, presentableIndex) => {
+                  return (
+                     <Slide
+                        key={slide.key}
+                        slide={slide}
+                        offsetRadius={clampOffsetRadius(offsetRadius)}
+                        index={presentableIndex}
+                        animationConfig={animationConfig}
+                     />
+                  );
+               })}
+            </Wrapper>
+         ) : null}
       </React.Fragment>
    );
 }
