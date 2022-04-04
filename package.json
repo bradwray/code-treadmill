@@ -26,7 +26,9 @@
     "socket.io": "^4.4.0",
     "socket.io-client": "^4.4.0",
     "styled-components": "^5.3.3",
-    "theme-cobalt2": "^2.1.6"
+    "theme-cobalt2": "^2.1.6",
+    "classnames": "latest",
+    "@material-ui/core": "latest"
   },
   "devDependencies": {
     "@babel/parser": "^7.16.4",
