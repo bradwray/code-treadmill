@@ -10,7 +10,8 @@ export default [
       names.REMOVE(names, names.LENGTH(names))
       names.INSERT(names, 1, "Jane")
   var name = names.getElem(1)
+  names.setElem(1, 5)
        `,
-      solveFor: 'name',
+      solveFor: 'names.getElem(1)',
    },
 ];

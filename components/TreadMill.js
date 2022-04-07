@@ -96,7 +96,7 @@ export default function TreadMill({ updateStats }) {
          ) : (
             <div />
          )}
-         {store.workout ? (
+         {store.slides ? (
             <Wrapper key={store.workout}>
                {getPresentableSlides().map((slide, presentableIndex) => {
                   return (

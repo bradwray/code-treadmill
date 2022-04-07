@@ -1,8 +1,9 @@
 const jsToPseudoCode = (jsCode) => {
    let pseudoCode = bracketIndent(jsCode);
    pseudoCode = convert(pseudoCode);
-   pseudoCode = simpleConversions(pseudoCode);
+
    pseudoCode = makePseudoArray(pseudoCode);
+   pseudoCode = simpleConversions(pseudoCode);
    return pseudoCode;
 };
 
@@ -82,6 +83,18 @@ const makePseudoArray = (code) => {
             newCodeString.substring(getStart, getClosingParenthesis + 1),
             '[' + makePseudoArray(val) + ']'
          );
+      }
+      if (newCodeString.indexOf('.setElem') >= 0) {
+         let getStart = newCodeString.indexOf('.setElem(');
+         let getEnd = newCodeString.indexOf(');', getStart) + 2;
+         let setElemLine = newCodeString.substring(getStart, getEnd);
+         console.log(setElemLine);
+         setElemLine = setElemLine.replace('.setElem(', '[');
+         setElemLine = setElemLine.replace(',', '] ←');
+         setElemLine = setElemLine.replace(');', '');
+
+         newCodeString =
+            newCodeString.substring(0, getStart) + setElemLine + newCodeString.substring(getEnd);
       }
 
       let listNameIndex = Math.max(

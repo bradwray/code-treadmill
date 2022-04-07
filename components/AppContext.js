@@ -40,7 +40,7 @@ export function AppContext(props) {
          const newTheme = (await import('../themes/' + options[themeNum].name + '.cjs.js')).default;
          setStore({
             ...store,
-            workout: route,
+            workout: route ? route : '',
             raceID: raceID,
             raceWorkout: raceID ? route : '',
             userName: uName,
