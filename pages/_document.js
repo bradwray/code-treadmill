@@ -38,6 +38,21 @@ export default class MyDocument extends Document {
                   type='text/css'
                   href='//fonts.googleapis.com/css?family=Orbitron'
                />
+
+               {/* Global site tag (gtag.js) - Google Analytics */}
+               <script async src={`https://www.googletagmanager.com/gtag/js?id=G-FCRXD9SM0E`} />
+               <script
+                  dangerouslySetInnerHTML={{
+                     __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FCRXD9SM0E', {
+              page_path: window.location.pathname,
+            });
+          `,
+                  }}
+               />
             </Head>
             <body>
                <Main />
