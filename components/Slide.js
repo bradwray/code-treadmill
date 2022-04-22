@@ -9,7 +9,8 @@ import styled from 'styled-components';
 const SlideContainer = styled.div`
    border: 1px solid ${(props) => props.theme.plain.color + '99'};
    position: absolute;
-   height: 70%;
+   min-height: 65%;
+   padding-top: 30px;
    width: 90%;
    color: ${(props) => props.theme.styles[5].style.color};
    background: ${(props) => props.theme.plain.backgroundColor};

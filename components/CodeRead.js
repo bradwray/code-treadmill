@@ -42,6 +42,7 @@ const BottomContainer = styled.div`
    display: flex;
    flex-direction: column;
    justify-content: center;
+   padding-bottom: 60px;
 `;
 
 const SolvingFor = styled.span`

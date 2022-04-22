@@ -1,87 +1,98 @@
 /* eslint-disable import/no-anonymous-default-export */
 
 export default [
-   {
-      content: `  var widgets = ##;
-   var gadgets = ##;
-   
-   if(widgets > gadgets){
-     widgets = widgets - gadgets;
-   }`,
-      solveFor: 'widgets',
-   },
-   {
-      content: `  var count = ##;
-   var howMany = "a few";
- 
-   if(count >= ##){
-     howMany = "So many!"
-   }`,
-      solveFor: 'howMany',
-   },
-   {
-      content: `   var age = ##;
-     var canVote;
- 
-     if(age >= 18){
-       canVote = true;
-     }
-     else{
-       canVote = false;
-     }`,
-      solveFor: 'canVote',
-   },
-   {
-      content: `    var inchesOfSnow = ##;
-     var schoolStatus;
- 
-     if(inchesOfSnow >= 5){
-       schoolStatus = "Cancel";
-     }
-     else if(inchesOfSnow >= 1){
-       schoolStatus = "Delay";
-     }
-     else{
-       schoolStatus = "Open";
-     }`,
-      solveFor: 'schoolStatus',
-   },
-   {
-      content: `    var inchesOfSnow = ##;
-     var schoolStatus;
- 
-     if(inchesOfSnow < 1){
-       schoolStatus = "Open";
-     }
-     else if(inchesOfSnow < 5){
-       schoolStatus = "Delay";
-     }
-     else{
-       schoolStatus = "Cancel";
-     }`,
-      solveFor: 'schoolStatus',
-   },
-   {
-      content: `    var inchesOfSnow = ##;
-     var iceAmount = #.# //fraction of inch ice
-     var schoolStatus;
- 
-     if(inchesOfSnow >= 5){
-       schoolStatus = "Snow - Cancel";
-     }
-     else if(inchesOfSnow >= 1){
-       if(iceAmount > 0.4){
-         schoolStatus = "Ice - Cancel";
-       }
-       else{
-         schoolStatus = "Delay";
-       }
-     }
-     else{
-       schoolStatus = "Open";
-     }`,
-      solveFor: 'schoolStatus',
-   },
+   //  {
+   //     content: `  var widgets = ##;
+   //   var gadgets = ##;
+
+   //   if(widgets > gadgets){
+   //     widgets = widgets - gadgets;
+   //   }`,
+   //     solveFor: 'widgets',
+   //  },
+   //  {
+   //     content: `  var price = 5
+   //  var howMany = ##;
+   //  var total = 0;
+   //  if(price >= ##){
+   //    total = price * howMany;
+   //  }`,
+   //     solveFor: 'total',
+   //  },
+   //  {
+   //     content: `   var age = #-# + ## + ##;
+   //     var canVote;
+
+   //     if(age >= 18){
+   //       canVote = true;
+   //     }
+   //     else{
+   //       canVote = false;
+   //     }`,
+   //     solveFor: 'canVote',
+   //  },
+   //  {
+   //     content: `   var name = ^^;
+
+   //      if(name.length <= ##){
+   //        shortName = false;
+   //      }
+   //      else{
+   //        shortName = true;
+   //      }`,
+   //     solveFor: 'shortName',
+   //  },
+   //  {
+   //     content: `    var inchesOfSnow = ##;
+   //    var schoolStatus
+
+   //    if(inchesOfSnow >= 5){
+   //      schoolStatus = "Cancel";
+   //    }
+   //    else if(inchesOfSnow >= 1){
+   //      schoolStatus = "Delay";
+   //    }
+   //    else{
+   //      schoolStatus = "Open";
+   //    }`,
+   //     solveFor: 'schoolStatus',
+   //  },
+   //  {
+   //     content: `    var inchesOfSnow = ##;
+   //     var schoolStatus;
+
+   //     if(inchesOfSnow < 1){
+   //       schoolStatus = "Open";
+   //     }
+   //     else if(inchesOfSnow < 5){
+   //       schoolStatus = "Delay";
+   //     }
+   //     else{
+   //       schoolStatus = "Cancel";
+   //     }`,
+   //     solveFor: 'schoolStatus',
+   //  },
+   //  {
+   //     content: `    var inchesOfSnow = ##;
+   //    var iceAmount = #.# //fraction of inch ice
+   //    var schoolStatus;
+
+   //    if(inchesOfSnow >= 5){
+   //      schoolStatus = "Snow - Cancel";
+   //    }
+   //    else if(inchesOfSnow >= 1){
+   //      if(iceAmount > 0.4){
+   //        schoolStatus = "Ice - Cancel";
+   //      }
+   //      else{
+   //        schoolStatus = "Delay";
+   //      }
+   //    }
+   //    else{
+   //      schoolStatus = "Open";
+   //    }`,
+   //     solveFor: 'schoolStatus',
+   //  },
    {
       content: `    var inchesOfSnow = ##;
      var iceAmount = #.# //fraction of inch ice

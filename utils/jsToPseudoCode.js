@@ -22,9 +22,9 @@ const simpleConversions = (code) => {
       .replace(/ &&/g, ' AND')
       .replace(/ [|][|]/g, ' OR')
       .replace(/;/g, '')
-      .replace(/if /g, 'IF')
+      .replace(/else if/g, '\nELSE IF')
+      .replace(/if /g, 'IF ')
       .replace(/else /g, 'ELSE')
-      .replace(/else if /g, 'ELSE IF')
       .replace(/function/g, 'PROCEDURE');
 };
 
@@ -38,6 +38,15 @@ const bracketIndent = (code) => {
             let indent = line.substring(0, codeStart);
 
             line = line.replace(/[)] {/g, ') \n' + indent + '{');
+            return line;
+         }
+         if (line.includes('} else {')) {
+            let codeStart = line.lastIndexOf('  }');
+            codeStart = codeStart === -1 ? 0 : codeStart + 2;
+            let indent = line.substring(0, codeStart);
+
+            line = line.replace(/{/g, '\n' + indent + '{');
+            line = line.replace(/else/g, '\n' + indent + 'else');
             return line;
          } else {
             return line;
