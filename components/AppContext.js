@@ -36,7 +36,7 @@ export function AppContext(props) {
          const workoutExercises = await import('../workouts/' + route);
          //get the theme on a route change
          console.log('import workout');
-         let themeNum = window.localStorage.getItem('theme');
+         let themeNum = window.localStorage.getItem('theme') || 0;
          const newTheme = (await import('../themes/' + options[themeNum].name + '.cjs.js')).default;
          setStore({
             ...store,

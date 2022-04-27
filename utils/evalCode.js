@@ -6,9 +6,9 @@ const evalCode = (code, solveFor, pseudo) => {
       var startIndex = code.includes('for(') ? code.indexOf('for(') : code.indexOf('while(');
       var insertHere = code.indexOf('{', startIndex) + 1;
       code =
-         'var counter = 0;' +
+         'var infiniteLoopCounter = 0;' +
          code.substring(0, insertHere) +
-         'if(++counter > 10000){throw "No infinite loops please!";}  ' +
+         'if(++infiniteLoopCounter > 10000){throw "No infinite loops please!";}  ' +
          code.substring(insertHere, code.length);
    }
    // seems like a good idea to disallow some things

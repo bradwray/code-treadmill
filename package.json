@@ -2,7 +2,7 @@
    "name": "code-rpm",
    "private": true,
    "scripts": {
-      "dev": "NODE_OPTIONS='--inspect' next dev",
+      "dev": "next dev",
       "build": "next build",
       "start": "next start -p $PORT",
       "lint": "next lint"

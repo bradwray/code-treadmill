@@ -58,8 +58,8 @@ const bracketIndent = (code) => {
 const invertConditions = (conditions) => {
    //uses De Morgan's Law to invert the conditions
    return conditions
-      .replace(/ == /g, '≠')
-      .replace(/ === /g, '≠')
+      .replace(/ == /g, ' ≠ ')
+      .replace(/ === /g, ' ≠ ')
       .replace(/ < /g, ' ≥ ')
       .replace(/ > /g, ' ≤ ')
       .replace(/ >= /g, ' < ')
@@ -144,6 +144,7 @@ const convert = (code) => {
          if (line.includes('while')) {
             let whileStart = line.indexOf('while');
             let conditions = line.substring(whileStart + 5, line.length - 1);
+            conditions = invertConditions(conditions)
             let indent = line.substring(0, whileStart);
             return indent + 'REPEAT UNTIL' + conditions;
          } else if (line.includes('for')) {
@@ -155,7 +156,7 @@ const convert = (code) => {
                forLine.indexOf('<') + 2,
                forLine.indexOf(';', forLine.indexOf('<'))
             );
-            count = simpleCoversions(count);
+            count = simpleConversions(count);
             return indent + 'REPEAT ' + count + ' TIMES ';
          } else if (line.includes('return')) {
             return line.replace('return ', 'RETURN(').replace(';', ')');
