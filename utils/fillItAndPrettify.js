@@ -10,7 +10,24 @@ import parserBabel from "prettier/parser-babel";
 import prettier from "prettier";
 
 const fillItAndPrettify = (codeString, dontPrettify) => {
-  var newCodeString = codeString;
+  var newCodeString = fillIt(codeString);
+  
+
+  if (dontPrettify) {
+    return newCodeString;
+  } else {
+    return prettier.format(newCodeString, {
+      semi: true,
+      parser: "babel",
+      plugins: [parserBabel],
+    });
+  }
+};
+
+export default fillItAndPrettify;
+
+const fillIt = (codeString) =>{
+  let newCodeString = codeString
   while (
     newCodeString.indexOf("##") >= 0 ||
     newCodeString.indexOf("#-#") >= 0 ||
@@ -20,8 +37,13 @@ const fillItAndPrettify = (codeString, dontPrettify) => {
     newCodeString.indexOf("**") >= 0 ||
     newCodeString.indexOf("$$") >= 0 ||
     newCodeString.indexOf("~~") >= 0 ||
+    newCodeString.indexOf("[[") >= 0 ||
     newCodeString.indexOf("!!") >= 0
   ) {
+    newCodeString = newCodeString.replace(
+      "[[",
+      randomArray(newCodeString.split('[[')[1].substring(0,2))
+    );
     newCodeString = newCodeString.replace(
       "#-#",
       Math.floor(Math.random() * 9) + 8
@@ -41,16 +63,14 @@ const fillItAndPrettify = (codeString, dontPrettify) => {
     newCodeString = newCodeString.replace("~~", `"${randomChar()}"`);
     newCodeString = newCodeString.replace("!!", `"${randomSentence()}"`);
   }
+  return newCodeString
+}
 
-  if (dontPrettify) {
-    return newCodeString;
-  } else {
-    return prettier.format(newCodeString, {
-      semi: true,
-      parser: "babel",
-      plugins: [parserBabel],
-    });
+const randomArray = (type) => {
+  let arrString = ''
+  let num = Math.ceil(Math.random()*7)
+  for(let i = 0; i < num; i++){
+    arrString += type + ","
   }
-};
-
-export default fillItAndPrettify;
+  return '['+arrString+']'
+}
