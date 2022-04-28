@@ -10,6 +10,7 @@ const workouts = [
    { lang: 'pseudo', workout: 'procedures' },
    { lang: 'pseudo', workout: 'lists' },
    { lang: 'pseudo', workout: 'loops' },
+   { lang: 'pseudo', workout: 'traversals' },
 ];
 
 export default workouts;

@@ -144,11 +144,11 @@ const convert = (code) => {
          if (line.includes('while')) {
             let whileStart = line.indexOf('while');
             let conditions = line.substring(whileStart + 5, line.length - 1);
-            conditions = invertConditions(conditions)
+            conditions = invertConditions(conditions);
             let indent = line.substring(0, whileStart);
             return indent + 'REPEAT UNTIL' + conditions;
-         } else if (line.includes('for')) {
-            let forStart = line.indexOf('for');
+         } else if (line.includes('for (')) {
+            let forStart = line.indexOf('for (');
             let forLine = line.substring(forStart, line.indexOf(')', forStart));
             let indent = line.substring(0, forStart);
 

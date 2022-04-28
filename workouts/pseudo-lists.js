@@ -2,21 +2,21 @@
 export default [
    {
       content: `
-      var nums = new PseudoArray([##,##,##])
+      var nums = new PseudoArray([(##)])
 
        `,
       solveFor: 'nums.getElem(2)',
    },
    {
       content: `
-      var nums = new PseudoArray([##,##,##])
+      var nums = new PseudoArray([(##)])
 
        `,
       solveFor: 'nums.getElem(1)',
    },
    {
       content: `
-      var nums = new PseudoArray([##,##,##])
+      var nums = new PseudoArray([(##)])
       nums.setElem(1, ##)
        `,
       solveFor: 'nums.getElem(1)',
@@ -39,7 +39,7 @@ export default [
    },
    {
       content: `
-      var names = new PseudoArray([^^,^^,^^,^^,^^,^^,^^])
+      var names = new PseudoArray([(^^)])
 
        `,
       solveFor: 'names.LENGTH(names)',
@@ -53,28 +53,28 @@ export default [
    },
    {
       content: `
-      var names = new PseudoArray([^^,^^,^^,^^,^^,^^,^^])
+      var names = new PseudoArray([(^^)])
       names.REMOVE(names, names.LENGTH(names))
        `,
       solveFor: 'names.LENGTH(names)',
    },
    {
       content: `
-      var animals = new PseudoArray([@@, @@, @@, @@])
+      var animals = new PseudoArray([(@@)])
       animals.REMOVE(animals, 1)
        `,
       solveFor: 'animals.getElem(1)',
    },
    {
       content: `
-      var animals = new PseudoArray([@@, @@, @@, @@])
-      animals.REMOVE(animals, 3)
+      var animals = new PseudoArray([(@@)])
+      animals.REMOVE(animals, 2)
        `,
-      solveFor: 'animals.getElem(3)',
+      solveFor: 'animals.getElem(2)',
    },
    {
       content: `
-      var animals = new PseudoArray([@@, @@, @@, @@])
+      var animals = new PseudoArray([(@@)])
       animals.APPEND(animals, @@)
        `,
       solveFor: 'animals.LENGTH(animals)',
@@ -89,7 +89,7 @@ export default [
    },
    {
       content: `
-      var animals = new PseudoArray([@@])
+      var animals = new PseudoArray([(@@)])
       animals.APPEND(animals, @@)
       animals.REMOVE(animals, 1)
       animals.APPEND(animals, @@)
