@@ -33,7 +33,8 @@ const ListItem = styled.div`
 const WorkoutsMenu = ({ end }) => {
    const [store, setStore] = useContext(Context);
    const router = useRouter();
-   const { id } = router.query;
+   let { id } = router.query;
+   id = id ? id : '';
    const handleClick = (workout) => {
       setStore({
          ...store,
