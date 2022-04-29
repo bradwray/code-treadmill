@@ -158,6 +158,22 @@ const convert = (code) => {
             );
             count = simpleConversions(count);
             return indent + 'REPEAT ' + count + ' TIMES ';
+         } else if (line.includes('forEach')) {
+            let forEachStart = line.indexOf('forEach');
+            let indent = line.substring(0, forEachStart - 1);
+            let listNameDot = line.substring(0, forEachStart - 1).trim();
+            indent = indent.replace(listNameDot, '');
+            let forEachLine = line
+               .replace('.', '')
+               .replace('=>', 'IN ' + listNameDot)
+               .replace('((', ' ')
+               .replace(')', '')
+               .replace('forEach', 'FOR EACH')
+               .replace('{', '\n' + indent + '{');
+            return indent + forEachLine.substring(forEachStart - 1);
+         } else if (line.includes('})')) {
+            let indent = line.substring(0, line.indexOf('})'));
+            return indent + '}';
          } else if (line.includes('return')) {
             return line.replace('return ', 'RETURN(').replace(';', ')');
          } else if (line.includes('new PseudoArray(')) {

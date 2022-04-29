@@ -40,6 +40,8 @@ const fillIt = (codeString) => {
       newCodeString.indexOf('!!') >= 0
    ) {
       newCodeString = newCodeString.replace('[(##)]', randomArray('##'));
+      newCodeString = newCodeString.replace('[(#.#)]', randomArray('#.#'));
+      newCodeString = newCodeString.replace('[(#-#)]', randomArray('#-#'));
       newCodeString = newCodeString.replace('[(@@)]', randomArray('@@'));
       newCodeString = newCodeString.replace('[(~~)]', randomArray('~~'));
       newCodeString = newCodeString.replace('[(^^)]', randomArray('^^'));

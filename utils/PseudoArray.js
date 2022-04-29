@@ -30,6 +30,10 @@ const PseudoArray = `class PseudoArray {
    REMOVE(filler, i) {
       this.arr.splice(i - 1, 1);
    }
+
+   forEach(func) {
+      this.arr.forEach(func);
+   }
 }`;
 
 export default PseudoArray;

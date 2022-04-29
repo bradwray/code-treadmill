@@ -33,7 +33,7 @@ const ListItem = styled.div`
 const WorkoutsMenu = ({ end }) => {
    const [store, setStore] = useContext(Context);
    const router = useRouter();
-
+   const { id } = router.query;
    const handleClick = (workout) => {
       setStore({
          ...store,
@@ -49,7 +49,10 @@ const WorkoutsMenu = ({ end }) => {
       <div>
          {end ? (
             <div>
-               <div>Great work! </div> <div>Now try one of these workouts</div>
+               <div>Great work! </div>{' '}
+               <div>
+                  Now try one of these other {id.includes('pseudo') ? 'PseudoCode' : ''} workouts
+               </div>
             </div>
          ) : (
             <div>
@@ -57,13 +60,23 @@ const WorkoutsMenu = ({ end }) => {
             </div>
          )}
 
-         {workouts.map(({ workout }, key) => (
-            <ListItem key={key} onClick={() => handleClick(workout)}>
-               <a href={'/' + workout} styled={{ color: 'white' }}>
-                  {workout}
-               </a>
-            </ListItem>
-         ))}
+         {id.includes('pseudo')
+            ? workouts
+                 .filter(({ lang }) => lang.includes('pseudo'))
+                 .map(({ workout }, key) => (
+                    <ListItem key={key} onClick={() => handleClick(workout)}>
+                       <a href={'/pseudo-' + workout} styled={{ color: 'white' }}>
+                          {workout}
+                       </a>
+                    </ListItem>
+                 ))
+            : workouts.map(({ workout }, key) => (
+                 <ListItem key={key} onClick={() => handleClick(workout)}>
+                    <a href={'/js-' + workout} styled={{ color: 'white' }}>
+                       {workout}
+                    </a>
+                 </ListItem>
+              ))}
       </div>
    );
 };
