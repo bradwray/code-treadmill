@@ -35,6 +35,7 @@ const ioHandler = (req, res) => {
       socket.on("raceEnd", (raceID, endTime) => {
         races[raceID].ended = endTime;
         socket.broadcast.emit(raceID + "-raceEnded", endTime);
+        //delete the raceID property here
       });
 
       socket.on("joinRace", (raceID, userName) => {
