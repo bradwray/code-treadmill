@@ -1,4 +1,4 @@
-[WayToCode.dev](https://www.waytocode.dev/) is a fitness themed programming game that provides "workouts" containing a series of randomized code snippets for the user to solve. The users speed and progress at solving these challenges is recorded and displayed throughout a workout. Each workout can also be turned into a multiplayer race that can be played across the web via web sockets. 
+[WayToCode.dev](https://www.waytocode.dev/) is a fitness-themed programming game that provides "workouts" containing a series of randomized code snippets for the user to solve. The user's speed and progress at solving these challenges is recorded and displayed throughout a workout. Each workout can also be turned into a multiplayer race that can be played across the web via web sockets. 
 
 ## Contributing
 
