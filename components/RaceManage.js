@@ -137,8 +137,12 @@ function RaceManage() {
           <div>
             <InstructionsContainer>
               Participants should go to{" "}
-              <Link ownLine target="_blank" href="https://www.waytocode.dev/">
-                https://www.waytocode.dev/
+              <Link
+                ownLine
+                target="_blank"
+                href="https://www.code-treadmill.com/"
+              >
+                https://www.code-treadmill.com/
               </Link>
               {`click "Wanna race?" and enter this race code`}
             </InstructionsContainer>
@@ -154,8 +158,12 @@ function RaceManage() {
           <InstructionsContainer>
             Choose a workout for the race. A workout is like the race-course.
             Not sure which one? Try them out at...
-            <Link ownLine target="_blank" href="https://www.waytocode.dev/">
-              https://www.waytocode.dev/
+            <Link
+              ownLine
+              target="_blank"
+              href="https://www.code-treadmill.com/"
+            >
+              https://www.code-treadmill.com/
             </Link>
           </InstructionsContainer>
         )}
