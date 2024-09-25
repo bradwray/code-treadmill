@@ -2,7 +2,23 @@
 
 ## Contributing
 
-Pull requests are welcome, especially ones that address open issues. Don't hesitate to contact me @bradwray if you have any ideas/questions.
+Pull requests are welcome, especially ones that address open issues. If you'de like to contribute workouts, you'll see that the content property of each workout exercise is an encoded template to ensure test-retest randomness. Here are the meanings of the codes. When writing code for a workout's content, place them wherever you would place a value. 
+
+| Placeholder | Description                            |
+|-------------|----------------------------------------|
+| ##          | Random integer between 1 and 7         |
+| #-#         | Random integer between 8 and 16        |
+| #.#         | Random float with two decimal places   |
+| @@          | Random animal name                    |
+| ^^          | Random human name                     |
+| **          | Random boolean (true or false)        |
+| $$          | Random adjective                      |
+| ~~          | Random single character               |
+| !!          | Random sentence                       |
+
+Don't hesitate to contact me @bradwray if you have any ideas/questions.
+
+
 
 ## Getting Started
 
