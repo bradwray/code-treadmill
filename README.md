@@ -2,7 +2,7 @@
 
 ## Contributing
 
-Pull requests are welcome, especially ones that address open issues. If you'de like to contribute workouts, you'll see that the content property of each workout exercise is an encoded template to ensure test-retest randomness. Here are the meanings of the codes. When writing code for a workout's content, place them wherever you would place a value. 
+Pull requests are welcome, especially ones that address open issues. If you'de like to contribute [workouts](https://github.com/bradwray/code-treadmill/tree/main/workouts), you'll see that the content property of each workout exercise is an encoded template to ensure test-retest randomness. Here are the meanings of the codes. When writing code for a workout's content, place them wherever you would place a value. 
 
 | Placeholder | Description                            |
 |-------------|----------------------------------------|
