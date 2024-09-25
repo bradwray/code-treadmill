@@ -28,7 +28,7 @@ const RaceManager = ({}) => {
   return (
     <AppContext>
       <Head>
-        <title>Way To Code!</title>
+        <title>Code Treadmill</title>
         {/* <meta name='viewport' content='initial-scale=1.0, width=device-width maximum-scale=1' /> */}
       </Head>
       <Toptions>
