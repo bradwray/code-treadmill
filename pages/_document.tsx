@@ -1,0 +1,65 @@
+import Document, {
+  DocumentContext,
+  DocumentInitialProps,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
+import React from 'react';
+import { ServerStyleSheet } from 'styled-components';
+
+export default class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
+    const sheet = new ServerStyleSheet();
+    const originalRenderPage = ctx.renderPage;
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        });
+
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <React.Fragment>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </React.Fragment>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
+  }
+
+  render(): React.ReactElement {
+    return (
+      <Html>
+        <Head>
+          <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Orbitron" />
+
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=G-FCRXD9SM0E`} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FCRXD9SM0E', {
+              page_path: window.location.pathname,
+            });
+          `,
+            }}
+          />
+        </Head>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
+      </Html>
+    );
+  }
+}
